@@ -1,0 +1,48 @@
+{{- if .Values.enabled -}}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "frostweb.fullname" . }}-cfg
+  namespace: {{ .Release.Namespace | quote }}
+  labels:
+    {{- include "frostweb.labels" . | nindent 4 }}
+    app.kubernetes.io/part-of: tum-gis-iot-stack-k8s
+    app.kubernetes.io/component: {{ .Values.component }}
+data:
+
+  # http settings
+  http_cors_enable: {{ .Values.http.cors.enabled | quote }}
+  http_cors_allowed_origins: {{ .Values.http.cors.allowed_origins | quote }}
+
+  # General settings
+  serviceRootUrl: {{ include "frostweb.http.serviceRootUrl" . | quote }}
+  alwaysOrderbyId: {{ .Values.alwaysOrderbyId | quote }}
+  maxTop: {{ .Values.maxTop | quote }}
+  defaultTop: {{ .Values.defaultTop | quote }}
+  maxDataSize: {{ .Values.maxDataSize | quote }}
+
+  # Persistence settings
+  persistence_db_driver: {{ .Values.persistence.db.driver | quote }}
+  persistence_db_url: {{ include "frostweb.db.url" . | quote }}
+  persistence_autoUpdateDatabase: {{ .Values.persistence.autoUpdateDatabase | quote }}
+  persistence_queryTimeout: {{ .Values.persistence.queryTimeout | quote }}
+  persistence_countMode: {{ .Values.persistence.countMode | quote }}
+  persistence_countEstimateThreshold: {{ .Values.persistence.countEstimateThreshold | quote }}
+  persistence_idGenerationMode: {{ .Values.persistence.idGenerationMode | quote }}
+  persistence_slowQueryThreshold: {{ .Values.persistence.slowQueryThreshold | quote }}
+
+  # MQTT settings
+  mqtt_enabled: {{ .Values.mqtt.enabled | quote }}
+  mqtt_host: {{ .Values.global.fqdn | default .Values.http.domain | default .Values.mqtt.host | quote }}
+  mqtt_QoS: {{ .Values.mqtt.qos | quote }}
+
+  # Auth settings
+  {{ if .Values.auth.enabled -}}
+  auth_realmName: {{ .Values.auth.realmName | quote }}
+  auth_provider: {{ .Values.auth.provider | quote }}
+  auth_db_driver: {{ .Values.auth.db.driver | quote }}
+  auth_db_url: {{ include "frostweb.auth.db.url" . | quote }}
+  auth_autoUpdateDatabase: {{ .Values.auth.autoUpdateDatabase | quote }}
+  auth_allowAnonymousRead: {{ .Values.auth.allowAnonymousRead | quote }}
+  {{- end }}
+{{- end -}}

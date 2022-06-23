@@ -1,0 +1,36 @@
+{{- if .Values.enabled -}}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ include "grafana.fullname" . }}-ing
+  namespace: {{ .Release.Namespace | quote }}
+  labels:
+    {{- include "grafana.labels" . | nindent 4 }}
+    app.kubernetes.io/part-of: tum-gis-iot-stack-k8s
+    app.kubernetes.io/component: {{ .Values.component }}
+  annotations:
+    cert-manager.io/issuer: {{ .Values.global.ingress.certManager.issuer |
+      default .Values.ingress.certManager.issuer | quote }}
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    {{ if .Values.http.subpath -}}
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      rewrite ^/{{ .Values.http.subpath }}$ /{{ .Values.http.subpath }}/ redirect;
+    {{- end }}
+spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+    - {{ .Values.global.fqdn }}
+    secretName: "{{ .Values.global.fqdn }}-cert"
+  rules:
+  - host: {{ .Values.global.fqdn }}
+    http:
+      paths:
+      - path:  /{{ .Values.http.subpath }}(/|$)(.*)
+        pathType: Prefix
+        backend:
+          service:
+            name: {{ .Chart.Name }}-svc
+            port:
+              number: 3000
+{{- end -}}

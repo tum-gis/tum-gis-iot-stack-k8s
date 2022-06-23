@@ -1,0 +1,6 @@
+apiVersion: v2
+name: frostweb
+description: FROST-Server HTTP and MQTT service
+type: application
+version: 0.2.1
+appVersion: "2.0.3"

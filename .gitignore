@@ -1,0 +1,11 @@
+# Debugging files
+/*.sh
+full.yml
+
+# Local files
+myvalues.yml
+plan.json
+
+# Archives
+*.tgz
+*.lock

@@ -1,0 +1,29 @@
+# If empty, use the chart name as common base name for any Kubernetes component
+name: tumgis-iot-stack
+
+global:
+  fqdn: www.example.de
+  ingress:
+    certManager:
+      issuer: letsencrypt-staging
+  ssl:
+    adminEMail: user@example.de
+  db:
+    host: frostdb-svc
+    port: 5432
+    dbname: frost
+    auth:
+      username: postgres
+      password: changeMe
+
+frostdb:
+  enabled: true
+
+grafana7:
+  enabled: false
+
+cert-manager:
+  enabled: false
+
+ingress-nginx:
+  enabled: false

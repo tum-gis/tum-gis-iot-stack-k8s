@@ -1,0 +1,40 @@
+# {{- if .Values.enabled -}}
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   name: {{ .Chart.Name }}-psql
+# spec:
+#   replicas: 1
+#   selector:
+#     matchLabels:
+#       app: psql
+#   template:
+#     metadata:
+#       labels:
+#         stack: tum-gi-iot-stack
+#         app: psql
+#     spec:
+#       containers:
+#         - name: postgres
+#           image: postgres:14
+#           imagePullPolicy: {{ .Values.image.pullPolicy }}
+#           env:
+#             - name: PGDATABASE
+#               valueFrom:
+#                 configMapKeyRef:
+#                   name: {{ .Chart.Name }}-config
+#                   key: POSTGRES_DB
+#             - name: PGUSER
+#               valueFrom:
+#                 secretKeyRef:
+#                   name: {{ .Chart.Name }}-secret
+#                   key: POSTGRES_USER
+#             - name: PGPASSWORD
+#               valueFrom:
+#                 secretKeyRef:
+#                   name: {{ .Chart.Name }}-secret
+#                   key: POSTGRES_PASSWORD
+#           envFrom:
+#             - secretRef:
+#                 name: {{ .Chart.Name }}-secret
+# {{- end -}}

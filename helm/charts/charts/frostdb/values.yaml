@@ -1,0 +1,45 @@
+# Enable/Disable this chart
+enabled: true
+
+# Specifies the component
+component: database
+
+# Create a LoadBalancer service for external Database access
+loadBalancer:
+  enabled: false
+
+replicaCount: 1
+
+image:
+  registry: postgis
+  repository: postgis
+  tag: 14-3.2-alpine
+  pullPolicy: IfNotPresent
+
+host: frostdb-service
+port: 5432
+dbname: frost
+
+auth:
+  username: postgres
+  password: changeMe
+
+persistence:
+  # Ommit trailing / !
+  mountPath: /mydata
+  pgdataSubPath: /pgdata
+  accessModes:
+    - ReadWriteOnce
+  capacity: 10Gi
+
+resources:
+  limits:
+    cpu: 4000m
+    memory: 8Gi
+  requests:
+    cpu: 2000m
+    memory: 4Gi
+
+nodeSelector: {}
+tolerations: []
+affinity: {}

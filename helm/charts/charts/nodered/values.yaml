@@ -1,0 +1,48 @@
+enabled: true
+component: backend
+replicaCount: 1
+
+image:
+  registry: nodered
+  repository: node-red
+  tag: 3.0.2
+  pullPolicy: IfNotPresent
+
+http:
+  # Do not append or prepend :// or /
+  protocol: https
+  domain:
+  subpath: nodered
+  windowTitle: myNodeRed
+
+settings:
+  tz: "Europe/Berlin"
+  enableProjects: true
+
+security:
+  adminUsername: "admin"
+  adminPassword: "$2b$08$2UedHI9nnjDY/LANnfT/ruzyWa.ZGzW46r7xBAvsh8GmlZS70k2e."
+  credentialsSecret: "changeMe"
+
+ingress:
+  certManager:
+    issuer: letsencrypt-staging
+
+persistence:
+  data:
+    mountPath: /data
+    accessModes:
+      - ReadWriteOnce
+    capacity: 4Gi
+
+resources:
+  limits:
+    cpu: 1000m
+    memory: 1Gi
+  requests:
+    cpu: 500m
+    memory: 512Mi
+
+nodeSelector: {}
+tolerations: []
+affinity: {}

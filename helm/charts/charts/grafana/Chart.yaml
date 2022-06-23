@@ -1,0 +1,6 @@
+apiVersion: v2
+name: grafana
+description: Grafana instance
+type: application
+version: 0.2.2
+appVersion: "9.1.0"

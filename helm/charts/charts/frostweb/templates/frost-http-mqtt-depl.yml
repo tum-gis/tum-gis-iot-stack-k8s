@@ -1,0 +1,67 @@
+{{- if .Values.enabled -}}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "frostweb.fullname" . }}-{{ .Values.component }}
+  namespace: {{ .Release.Namespace | quote }}
+  labels:
+    {{- include "frostweb.labels" . | nindent 4 }}
+    app.kubernetes.io/part-of: tum-gis-iot-stack-k8s
+    app.kubernetes.io/component: {{ .Values.component }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "frostweb.selectorLabels" . | nindent 6 }}
+      app.kubernetes.io/component: {{ .Values.component }}
+  template:
+    metadata:
+      labels:
+        {{- include "frostweb.selectorLabels" . | nindent 8 }}
+        app.kubernetes.io/component: {{ .Values.component }}
+    spec:
+      containers:
+        - name: frost-http-mqtt
+          image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - containerPort: 8080
+            - containerPort: 1883
+
+          envFrom:
+            - configMapRef:
+                name: {{ include "frostweb.fullname" . }}-cfg
+            - secretRef:
+                name: {{ include "frostweb.fullname" . }}-sct
+
+          livenessProbe:
+            initialDelaySeconds: 30
+            periodSeconds: 5
+            timeoutSeconds: 1
+            successThreshold: 1
+            failureThreshold: 5
+            exec:
+              command: [ bash, -c, 'curl -f -s --show-error "http://127.0.0.1:8080/FROST-Server/"' ]
+          readinessProbe:
+            initialDelaySeconds: 5
+            timeoutSeconds: 1
+            periodSeconds: 5
+            exec:
+              command: [ bash, -c, 'curl -f -s --show-error "http://127.0.0.1:8080/FROST-Server/"' ]
+
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+
+{{- end -}}

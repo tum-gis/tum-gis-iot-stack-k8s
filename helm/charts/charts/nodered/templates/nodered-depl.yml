@@ -1,0 +1,90 @@
+{{- if .Values.enabled -}}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "nodered.fullname" . }}-{{ .Values.component }}
+  namespace: {{ .Release.Namespace | quote }}
+  labels:
+    {{- include "nodered.labels" . | nindent 4 }}
+    app.kubernetes.io/part-of: tum-gis-iot-stack-k8s
+    app.kubernetes.io/component: {{ .Values.component }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "nodered.selectorLabels" . | nindent 6 }}
+      app.kubernetes.io/component: {{ .Values.component }}
+  template:
+    metadata:
+      labels:
+        {{- include "nodered.selectorLabels" . | nindent 8 }}
+        app.kubernetes.io/component: {{ .Values.component }}
+    spec:
+      securityContext:
+        runAsUser: 1000
+        fsGroup: 1000
+      containers:
+        - name: nodered
+          image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - containerPort: 1880
+
+          command: [ "node-red" ]
+          args:
+            - "-s"
+            - "/settings/settings.js"
+            - "-u"
+            - {{ .Values.persistence.data.mountPath | quote }}
+
+          envFrom:
+            - configMapRef:
+                name: {{ include "nodered.fullname" . }}-cfg
+            - secretRef:
+                name: {{ include "nodered.fullname" . }}-sct
+
+          livenessProbe:
+            initialDelaySeconds: 30
+            periodSeconds: 15
+            timeoutSeconds: 1
+            successThreshold: 1
+            failureThreshold: 5
+            exec:
+              command: [ bash, -c, 'curl http://localhost:1880/ || exit 1' ]
+          readinessProbe:
+            initialDelaySeconds: 5
+            timeoutSeconds: 1
+            periodSeconds: 15
+            exec:
+              command: [ bash, -c, 'curl http://localhost:1880/ || exit 1' ]
+
+          volumeMounts:
+            - name: data
+              mountPath: {{ .Values.persistence.data.mountPath }}
+            - name: settings
+              mountPath: "/settings"
+              readOnly: true
+
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: {{ include "nodered.fullname" . }}-pvc
+        - name: settings
+          configMap:
+            name: {{ include "nodered.fullname" . }}-cfg-settings
+{{- end -}}

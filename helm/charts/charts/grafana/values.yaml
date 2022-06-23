@@ -1,0 +1,71 @@
+component: frontend
+enabled: true
+replicaCount: 1
+
+image:
+  registry: grafana
+  repository: grafana-oss
+  tag: 9.1.0
+  pullPolicy: IfNotPresent
+
+install:
+  plugins: "grafana-clock-panel,grafana-simple-json-datasource,
+      grafana-worldmap-panel,marcusolsson-json-datasource,
+      snuids-trafficlights-panel,citilogics-geoloop-panel,
+      iosb-sensorthings-datasource,
+      https://github.com/briangann/grafana-gauge-panel/releases/download/v0.0.9/briangann-gauge-panel-0.0.9.zip;briangann-gauge-panel"
+
+http:
+  # Do not append or prepend :// or /
+  protocol: https
+  domain:
+  subpath: grafana
+  serveFromSubPath: true
+  enableGzip: true
+
+security:
+  adminUsername: "admin"
+  adminPassword: "changeMe"
+  allowEmbedding: true
+
+dateFormats:
+  fullDate: "dd, DD.MM.YYYY HH:mm:ss"
+  interval:
+    month: "YYYY.MM"
+    day: "dd, DD.MM"
+    hour: "dd, DD.MM HH:mm"
+    minute: "dd, HH:mm"
+
+ingress:
+  certManager:
+    issuer: letsencrypt-staging
+
+persistence:
+  data:
+    mountPath: /var/lib/grafana
+    accessModes:
+      - ReadWriteOnce
+    capacity: 2Gi
+
+database:
+  enabled: false
+  sslmode: disable
+  type: postgres
+  host: localhost
+  port: 5432
+  dbname: grafana
+  auth:
+    username: postgres
+    password: changeMe
+
+resources:
+  limits:
+    cpu: 2000m
+    memory: 1Gi
+  requests:
+    cpu: 500m
+    memory: 512Mi
+
+nodeSelector: {}
+tolerations: []
+affinity: {}

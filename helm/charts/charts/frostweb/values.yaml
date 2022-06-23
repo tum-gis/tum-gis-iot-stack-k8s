@@ -1,0 +1,86 @@
+enabled: true
+component: webapp
+replicaCount: 1
+
+# HTTP settings
+# https://fraunhoferiosb.github.io/FROST-Server/settings/settings.html#http-settings
+http:
+  # Do not append or prepend :// or /
+  protocol: https
+  domain:
+  subpath: frost
+  cors:
+    enabled: true
+    allowed_origins: "*"
+
+image:
+  registry: fraunhoferiosb
+  repository: frost-server
+  tag: 2.0.3
+  pullPolicy: IfNotPresent
+
+# Persistence settings
+# https://fraunhoferiosb.github.io/FROST-Server/settings/settings.html#persistence-settings
+persistence:
+  db:
+    driver: org.postgresql.Driver
+    host: frostdb-svc
+    port: 5432
+    dbname: frost
+    auth:
+      username: postgres
+      password: changeMe
+  autoUpdateDatabase: true
+  queryTimeout: 0
+  countMode: "LIMIT_SAMPLE"
+  countEstimateThreshold: 10000
+  idGenerationMode: ServerAndClientGenerated
+  slowQueryThreshold: 200
+
+# General settings
+# https://fraunhoferiosb.github.io/FROST-Server/settings/settings.html#general-settings
+alwaysOrderbyId: true
+maxTop: 10000
+defaultTop: 100
+defaultCount: false
+maxDataSize: 25000000
+
+# MQTT settings
+# https://fraunhoferiosb.github.io/FROST-Server/settings/settings.html#mqtt-settings
+mqtt:
+  enabled: true
+  host:
+  qos: 2
+
+ingress:
+  certManager:
+    issuer: letsencrypt-staging
+
+# Auth settings
+# https://fraunhoferiosb.github.io/FROST-Server/settings/auth.html
+auth:
+  enabled: false
+  realmName: FROST-Server
+  autoUpdateDatabase: true
+  allowAnonymousRead: false
+  provider: de.fraunhofer.iosb.ilt.frostserver.auth.basic.BasicAuthProvider
+  db:
+    driver: org.postgresql.Driver
+    host: frostdb-svc
+    port: 5432
+    dbname: frost
+    auth:
+      username: postgres
+      password: changeMe
+
+resources:
+  limits:
+    cpu: 2000m
+    memory: 4Gi
+  requests:
+    cpu: 1000m
+    memory: 2Gi
+
+nodeSelector: {}
+tolerations: []
+affinity: {}

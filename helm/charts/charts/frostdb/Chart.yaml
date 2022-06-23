@@ -1,0 +1,6 @@
+apiVersion: v2
+name: frostdb
+description: PostGIS database in a local volume for FROST-Server.
+type: application
+version: 0.2.1
+appVersion: "14-3.2-alpine"
