@@ -43,7 +43,7 @@ alwaysOrderbyId: true
 maxTop: 10000
 defaultTop: 100
 defaultCount: false
-maxDataSize: 25000000
+maxDataSize: "25000000"
 
 # MQTT settings
 # https://fraunhoferiosb.github.io/FROST-Server/settings/settings.html#mqtt-settings
