@@ -20,14 +20,67 @@
 
 ## :rocket: Usage
 
-1. Add Helm repo `helm repo add iot-stack https://tum-gis.github.io/tum-gis-iot-stack-k8s`
-2. Update Helm repo `helm repo update`
-3. Adapt settings according to you needs e.g. in [values.yml](helm/charts/values.yaml)
-4. Install stack
+1. Add and update Helm repo
+
+   ```console
+   helm repo add iot-stack https://tum-gis.github.io/tum-gis-iot-stack-k8s
+   helm repo update
+   ```
+
+2. Adapt settings according to you needs e.g. in [values.yml](helm/charts/values.yaml) or create
+   a local `values.yml` to overwrite settings. A basic configuration assuming
+   Nginx Ingress and Cert-Manager are already installed and properly configured could look like this:
+   `my-values.yml:`
+
+   ```yaml
+   name: iot-stack
+
+   cert-manager:
+     enabled: false
+
+   ingress-nginx:
+     enabled: false
+
+   frostdb:
+     enabled: true
+     persistence:
+       capacity: 4Gi
+
+   frostweb:
+     enabled: true
+     replicaCount: 1
+
+
+   global:
+     fqdn: www.example.de
+     ingress:
+       certManager:
+         issuer: letsencrypt-staging
+     ssl:
+       adminEMail: user@example.de
+
+   grafana:
+     replicaCount: 1
+
+   grafana7:
+     enabled: true
+     nodeSelector:
+     replicaCount: 1
+
+   nodered:
+     enabled: true
+     replicaCount: 1
+     persistence:
+       enabled: true
+   ```
+
+3. Install stack
 
    ```console
    helm install my-iot-stack iot-stack/tum-gis-iot-stack-k8s \
-     -n iot-stack --create-namespace --atomic
+     -n iot-stack --create-namespace \
+     --atomic --wait \
+     --values my-values.yml
    ```
 
 ## :inbox_tray: Datasets
