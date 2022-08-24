@@ -20,6 +20,7 @@ settings:
 
 security:
   adminUsername: "admin"
+  # changeMe = $2b$08$2UedHI9nnjDY/LANnfT/ruzyWa.ZGzW46r7xBAvsh8GmlZS70k2e.
   adminPassword: "$2b$08$2UedHI9nnjDY/LANnfT/ruzyWa.ZGzW46r7xBAvsh8GmlZS70k2e."
   credentialsSecret: "changeMe"
 

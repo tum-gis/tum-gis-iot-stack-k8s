@@ -19,6 +19,9 @@ global:
 frostdb:
   enabled: true
 
+grafana:
+  enabled: true
+
 grafana7:
   enabled: false
 

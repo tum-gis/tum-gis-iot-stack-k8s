@@ -1,14 +1,10 @@
-# Enable/Disable this chart
 enabled: true
-
-# Specifies the component
 component: database
+replicaCount: 1
 
 # Create a LoadBalancer service for external Database access
 loadBalancer:
   enabled: false
-
-replicaCount: 1
 
 image:
   registry: postgis
@@ -16,6 +12,7 @@ image:
   tag: 14-3.2-alpine
   pullPolicy: IfNotPresent
 
+# Database settings
 port: 5432
 dbname: frost
 
@@ -23,13 +20,14 @@ auth:
   username: postgres
   password: changeMe
 
+# Persistence settings
 persistence:
   # Ommit trailing / !
   mountPath: /mydata
   pgdataSubPath: /pgdata
   accessModes:
     - ReadWriteOnce
-  capacity: 10Gi
+  capacity: 4Gi
 
 resources:
   limits:
