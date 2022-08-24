@@ -1,7 +1,7 @@
 {{- if .Values.enabled -}}
-{{- if not .Values.persistence.enabled -}}
+{{- if .Values.persistence.enabled -}}
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: {{ include "nodered.fullname" . }}-{{ .Values.component }}
   namespace: {{ .Release.Namespace | quote }}
@@ -30,6 +30,14 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - containerPort: 1880
+
+          command: [ "node-red" ]
+          args:
+            - "-s"
+            - "/settings/settings.js"
+            - "-u"
+            - {{ .Values.persistence.data.mountPath | quote }}
+
           envFrom:
             - configMapRef:
                 name: {{ include "nodered.fullname" . }}-cfg
@@ -52,8 +60,10 @@ spec:
               command: [ bash, -c, 'curl http://localhost:1880/ || exit 1' ]
 
           volumeMounts:
+            - name: data
+              mountPath: {{ .Values.persistence.data.mountPath }}
             - name: settings
-              mountPath: "/data/settings.js"
+              mountPath: "/settings"
               readOnly: true
 
           resources:
@@ -72,6 +82,9 @@ spec:
       {{- end }}
 
       volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: {{ include "nodered.fullname" . }}-pvc
         - name: settings
           configMap:
             name: {{ include "nodered.fullname" . }}-cfg-settings
