@@ -3,6 +3,51 @@ entries:
   tum-gis-iot-stack-k8s:
   - apiVersion: v2
     appVersion: 0.0.1
+    created: "2022-08-24T08:15:43.895359905Z"
+    dependencies:
+    - condition: frostweb.enabled
+      name: frostweb
+      repository: ""
+      version: '*'
+    - condition: frostdb.enabled
+      name: frostdb
+      repository: ""
+      version: '*'
+    - condition: grafana.enabled
+      name: grafana
+      repository: ""
+      version: '*'
+    - condition: grafana7.enabled
+      name: grafana7
+      repository: ""
+      version: '*'
+    - condition: nodered.enabled
+      name: nodered
+      repository: ""
+      version: '*'
+    - condition: certIssuer.enabled
+      name: certIssuer
+      repository: ""
+      version: '*'
+    - alias: ingress-nginx
+      condition: ingress-nginx.enabled
+      name: ingress-nginx
+      repository: https://kubernetes.github.io/ingress-nginx
+      version: ~4.2.0
+    - alias: cert-manager
+      condition: cert-manager.enabled
+      name: cert-manager
+      repository: https://charts.jetstack.io
+      version: ~1.9.0
+    description: Helm Chart for the TUM-GI IoT stack.
+    digest: e0e2ca1e76ac5f69698238033c3cff3ad0a873a9a402a06b1b41cc6cf812b1f1
+    name: tum-gis-iot-stack-k8s
+    type: application
+    urls:
+    - https://github.com/tum-gis/tum-gis-iot-stack-k8s/releases/download/tum-gis-iot-stack-k8s-0.1.4/tum-gis-iot-stack-k8s-0.1.4.tgz
+    version: 0.1.4
+  - apiVersion: v2
+    appVersion: 0.0.1
     created: "2022-08-23T15:30:22.022084453Z"
     dependencies:
     - condition: frostweb.enabled
@@ -136,4 +181,4 @@ entries:
     urls:
     - https://github.com/tum-gis/tum-gis-iot-stack-k8s/releases/download/tum-gis-iot-stack-k8s-0.1.0/tum-gis-iot-stack-k8s-0.1.0.tgz
     version: 0.1.0
-generated: "2022-08-23T15:30:22.022103255Z"
+generated: "2022-08-24T08:15:43.895386807Z"
