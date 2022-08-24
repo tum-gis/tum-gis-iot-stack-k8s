@@ -16,7 +16,6 @@ image:
   tag: 14-3.2-alpine
   pullPolicy: IfNotPresent
 
-host: frostdb-service
 port: 5432
 dbname: frost
 
