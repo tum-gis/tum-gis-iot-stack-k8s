@@ -13,7 +13,6 @@ http:
   protocol: https
   domain:
   subpath: nodered
-  windowTitle: myNodeRed
 
 settings:
   tz: "Europe/Berlin"
