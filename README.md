@@ -1,7 +1,7 @@
-<h1 align="center">IoT Stack for Kubernetes</h1>
+<h1 align="center">TUM-GIS IoT Stack for Kubernetes</h1>
 
 <p align="center">
-    <em>an application stack for managing sensor data with open standards and tools using <br/><a title="Open Geospatial Consortium Homepage" href="https://www.ogc.org/standards/sensorthings">OGC SensorThingsAPI Standard</a></em>
+    <em>an application stack for managing and visualizing sensor data with open standards and tools using <br/><a title="Open Geospatial Consortium Homepage" href="https://www.ogc.org/standards/sensorthings">OGC SensorThingsAPI</a> in a Kubernetes cluster</em>
     <br />
     <br />
     <a href="https://github.com/tum-gis/tum-gis-iot-stack-k8s/issues">Report Bug</a>
@@ -14,20 +14,39 @@
   </a>
 </p>
 
+**Warning**:
+> This repository is an early stage of development. Use it at your own risk!
 
-> This repository is an early stage of development.
 
+## :inbox_tray: Components
+
+* [Fraunhofer IOSB FROST-Server](https://github.com/FraunhoferIOSB/FROST-Server)
+  * Server implementation of the OGC SensorThings API
+* [Grafana](https://grafana.com/)
+  * Dashboards for your data
+  * For compatibility a Grafana v7 instance can optionally be enabled
+* [Node-RED](https://nodered.org/)
+  * Wiring together hardware devices, APIs and online services
+* [NGINX Ingress Controller](https://docs.nginx.com/nginx-ingress-controller/)
+  * Route traffic to the applications of the stack
+  * Optional dependency, usually not required.
+* [cert-manager](https://cert-manager.io/docs/)
+  * Automatic SSL certificate issuing from e.g. Let's Encrypt
+  * Optional dependency, usually not required.
 
 ## :rocket: Usage
 
-1. Add and update Helm repo
+1. Get a fully-qualified domain name (FQDN) and configure it to point to the public IP address of
+   the LoadBalancer service of your Nginx ingress controller.
+
+2. Add and update Helm repo
 
    ```console
    helm repo add iot-stack https://tum-gis.github.io/tum-gis-iot-stack-k8s
    helm repo update
    ```
 
-2. Adapt settings according to you needs e.g. in [values.yml](helm/charts/values.yaml) or create
+3. Adapt settings according to you needs e.g. in [values.yml](helm/charts/values.yaml) or create
    a local `values.yml` to overwrite settings. A basic configuration assuming
    Nginx Ingress and Cert-Manager are already installed and properly configured could look like this:
    `my-values.yml:`
@@ -74,7 +93,7 @@
        enabled: true
    ```
 
-3. Install stack
+4. Install stack
 
    ```console
    helm install my-iot-stack iot-stack/tum-gis-iot-stack-k8s \
@@ -82,8 +101,6 @@
      --atomic --wait \
      --values my-values.yml
    ```
-
-## :inbox_tray: Datasets
 
 ## :construction_worker: Building
 
