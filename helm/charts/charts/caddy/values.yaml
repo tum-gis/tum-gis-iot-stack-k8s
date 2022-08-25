@@ -1,0 +1,45 @@
+enabled: true
+component: frontend
+replicaCount: 1
+
+http:
+  # Do not append or prepend :// or /
+  protocol: https
+  domain:
+  subpath:
+
+image:
+  registry: caddy
+  repository: caddy
+  tag: 2.5.2-alpine
+  pullPolicy: IfNotPresent
+
+ingress:
+  certManager:
+    issuer: letsencrypt-staging
+
+persistence:
+  enabled: false
+  storageClassName: azurefile-csi
+  data:
+    mountPath: /usr/share/caddy
+    accessModes:
+      - ReadOnlyMany
+    capacity: 4Gi
+
+resources:
+  limits:
+    cpu: 500m
+    memory: 500Mi
+  requests:
+    cpu: 100m
+    memory: 250Mi
+
+nodeSelector: {}
+tolerations: []
+affinity: {}
+
+caddyfile: |-
+  :80 {
+    file_server
+  }
