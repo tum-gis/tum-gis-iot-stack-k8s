@@ -1,6 +1,6 @@
 apiVersion: v2
 name: caddy
-description: A Helm chart for Kubernetes
+description: Caddy webserver
 type: application
 version: 0.1.0
-appVersion: "1.16.0"
+appVersion: "2.5.2-alpine"
