@@ -8,6 +8,8 @@ metadata:
     {{- include "caddy.labels" . | nindent 4 }}
     app.kubernetes.io/part-of: tum-gis-iot-stack-k8s
     app.kubernetes.io/component: {{ .Values.component }}
+  annotations:
+    checksum/config: {{ include (print $.Template.BasePath "/caddy-configMap.yml") . | sha256sum }}
 spec:
   serviceName: {{ .Chart.Name }}-svc-headless
   replicas: {{ .Values.replicaCount }}

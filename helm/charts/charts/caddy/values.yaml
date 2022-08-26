@@ -19,7 +19,6 @@ ingress:
     issuer: letsencrypt-staging
 
 persistence:
-  enabled: true
   storageClassName: azurefile-csi
   data:
     mountPath: /usr/share/caddy
@@ -41,5 +40,5 @@ affinity: {}
 
 caddyfile: |-
   :80 {
-    file_server
+  	file_server
   }
