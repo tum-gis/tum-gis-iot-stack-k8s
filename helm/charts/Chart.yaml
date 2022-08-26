@@ -2,7 +2,7 @@ apiVersion: v2
 name: tum-gis-iot-stack-k8s
 description: Helm Chart for the TUM-GI IoT stack.
 type: application
-version: 0.1.9
+version: 0.2.0
 appVersion: "0.0.1"
 
 dependencies:

@@ -1,5 +1,4 @@
 {{- if .Values.enabled -}}
-{{- if .Values.persistence.enabled -}}
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
@@ -39,7 +38,7 @@ spec:
 
           volumeMounts:
             - name: html
-              mountPath: /html
+              mountPath: {{ .Values.persistence.data.mountPath }}
             - name: settings
               mountPath: "/etc/caddy"
               readOnly: true
@@ -65,6 +64,4 @@ spec:
         - name: settings
           configMap:
             name: {{ include "caddy.fullname" . }}-cfg-settings
-
-{{- end -}}
 {{- end -}}
