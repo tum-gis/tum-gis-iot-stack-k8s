@@ -1,5 +1,5 @@
 {{- if .Values.enabled -}}
-{{- if .Values.persistence.enable -}}
+{{- if .Values.persistence.enabled -}}
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
@@ -59,7 +59,7 @@ spec:
       {{- end }}
 
       volumes:
-        - name: data
+        - name: html
           persistentVolumeClaim:
             claimName: {{ include "caddy.fullname" . }}-pvc
         - name: settings

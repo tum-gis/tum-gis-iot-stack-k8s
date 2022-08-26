@@ -9,6 +9,6 @@ metadata:
     app.kubernetes.io/part-of: tum-gis-iot-stack-k8s
     app.kubernetes.io/component: {{ .Values.component }}
 data:
-  caddyfile: {{- .Values.caddyfile | toYaml | indent 1 }}
+  Caddyfile: {{- .Values.caddyfile | toYaml | indent 1 }}
 
 {{- end -}}

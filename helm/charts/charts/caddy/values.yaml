@@ -19,7 +19,7 @@ ingress:
     issuer: letsencrypt-staging
 
 persistence:
-  enabled: false
+  enabled: true
   storageClassName: azurefile-csi
   data:
     mountPath: /usr/share/caddy
