@@ -3,7 +3,7 @@
 full.yml
 
 # Local files
-myvalues.yml
+/*.yml
 plan.json
 
 # Archives
