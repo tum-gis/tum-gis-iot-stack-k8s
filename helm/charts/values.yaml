@@ -16,14 +16,26 @@ global:
       username: postgres
       password: changeMe
 
+caddy:
+  enabled: false
+
 frostdb:
   enabled: true
+
+frostweb:
+  enabled: true
+
+nodered:
+  enabled: false
 
 grafana:
   enabled: true
 
 grafana7:
   enabled: false
+
+certIssuer:
+  enabled: true
 
 cert-manager:
   enabled: false

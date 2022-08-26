@@ -1,0 +1,23 @@
+{{- if .Values.enabled -}}
+{{- if .Values.persistence.enabled -}}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ include "caddy.fullname" . }}-pvc
+  namespace: {{ .Release.Namespace | quote }}
+  labels:
+    {{- include "caddy.labels" . | nindent 4 }}
+    app.kubernetes.io/part-of: tum-gis-iot-stack-k8s
+    app.kubernetes.io/component: {{ .Values.component }}
+spec:
+  storageClassName: {{ .Values.persistence.storageClassName }}
+  accessModes:
+  {{- range .Values.persistence.data.accessModes }}
+    - {{ . }}
+  {{- end }}
+  resources:
+    requests:
+      storage: {{ .Values.persistence.data.capacity }}
+
+{{- end -}}
+{{- end -}}

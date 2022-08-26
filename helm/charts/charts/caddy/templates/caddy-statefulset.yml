@@ -1,0 +1,70 @@
+{{- if .Values.enabled -}}
+{{- if .Values.persistence.enabled -}}
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ include "caddy.fullname" . }}-{{ .Values.component }}
+  namespace: {{ .Release.Namespace | quote }}
+  labels:
+    {{- include "caddy.labels" . | nindent 4 }}
+    app.kubernetes.io/part-of: tum-gis-iot-stack-k8s
+    app.kubernetes.io/component: {{ .Values.component }}
+spec:
+  serviceName: {{ .Chart.Name }}-svc-headless
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "caddy.selectorLabels" . | nindent 6 }}
+      app.kubernetes.io/component: {{ .Values.component }}
+  template:
+    metadata:
+      labels:
+        {{- include "caddy.selectorLabels" . | nindent 8 }}
+        app.kubernetes.io/component: {{ .Values.component }}
+    spec:
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: caddy-pvc
+        - name: settings
+          configMap:
+            name: caddy-cfg-settings
+      containers:
+        - name: caddy
+          image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: web
+              containerPort: 80
+
+          volumeMounts:
+            - name: html
+              mountPath: /html
+            - name: settings
+              mountPath: "/etc/caddy"
+              readOnly: true
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+
+      volumes:
+        - name: html
+          persistentVolumeClaim:
+            claimName: {{ include "caddy.fullname" . }}-pvc
+        - name: settings
+          configMap:
+            name: {{ include "caddy.fullname" . }}-cfg-settings
+
+{{- end -}}
+{{- end -}}

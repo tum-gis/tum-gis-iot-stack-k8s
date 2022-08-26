@@ -2,7 +2,7 @@ apiVersion: v2
 name: tum-gis-iot-stack-k8s
 description: Helm Chart for the TUM-GI IoT stack.
 type: application
-version: 0.1.7
+version: 0.1.9
 appVersion: "0.0.1"
 
 dependencies:
@@ -24,6 +24,9 @@ dependencies:
   - name: certIssuer
     version: "*"
     condition: certIssuer.enabled
+  - name: caddy
+    version: "*"
+    condition: caddy.enabled
   - name: ingress-nginx
     alias: ingress-nginx
     condition: ingress-nginx.enabled
