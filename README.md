@@ -46,7 +46,7 @@
    helm repo update
    ```
 
-3. Adapt settings according to you needs e.g. in [values.yml](helm/charts/values.yaml) or create
+3. Adapt settings according to your needs e.g. in [values.yml](helm/charts/values.yaml) or create
    a local `values.yml` to overwrite settings. A basic configuration assuming
    Nginx Ingress and Cert-Manager are already installed and properly configured could look like this:
    `my-values.yml:`
