@@ -1,10 +1,10 @@
 # Create Azure k8s service ----------------------------------------------------
 resource "azurerm_kubernetes_cluster" "this" {
-  name                      = var.k8s_service_name
+  name                      = local.k8s_service_name
   location                  = local.location
   resource_group_name       = azurerm_resource_group.this.name
   node_resource_group       = local.resource_group_nodes_name
-  dns_prefix                = var.k8s_service_name
+  dns_prefix                = local.k8s_service_name
   automatic_channel_upgrade = "stable"
 
   tags = local.tags

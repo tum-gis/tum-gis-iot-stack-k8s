@@ -13,12 +13,6 @@ variable "resource_group_name" {
 }
 
 # k8s -------------------------------------------------------------------------
-variable "k8s_service_name" {
-  type        = string
-  default     = "sta-k8s"
-  description = "Name of the Azure k8s service."
-}
-
 variable "k8s_default_node_count" {
   type        = number
   default     = 1
