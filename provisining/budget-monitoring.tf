@@ -28,9 +28,9 @@ resource "azurerm_consumption_budget_resource_group" "sta-k8s" {
 
 # K8S cluster ressources
 resource "azurerm_consumption_budget_resource_group" "sta-k8s-cluster" {
-  name              = local.budget_name
+  name              = local.budget_name_nodes
   resource_group_id = data.azurerm_resource_group.k8s-node.id
-  amount     = 250
+  amount     = 300
   time_grain = "Monthly"
 
   time_period {

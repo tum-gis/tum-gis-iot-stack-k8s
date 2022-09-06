@@ -8,6 +8,7 @@ locals {
 
   # Budget name
   budget_name = format("%s-budget", var.resource_group_name)
+  budget_name_nodes = format("%s-budget-nodes", var.resource_group_name)
 
   # K8s service name
   k8s_service_name = var.resource_group_name
