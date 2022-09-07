@@ -1,0 +1,68 @@
+# Global settings -------------------------------------------------------------
+name: iot-stack
+
+global:
+  fqdn: myhost.info
+  db:
+    auth:
+      password: changeMe
+      username: postgres
+  # Only required if testing cert-manager (see below)
+  # ingress:
+  #   certManager:
+  #     issuer: selfsigned
+  # ssl:
+  #   adminEMail: user@example.de
+
+# cert-manager configuration --------------------------------------------------
+# Disable cert-manager and certIssuer for local testing, they are not required.
+
+# If you want to try out cert-manager locally, make sure install CRDs BEFORE
+# you install the chart. Make sure to enable certIssuer too and set
+# (see here: https://cert-manager.io/docs/installation/helm/#3-install-customresourcedefinitions )
+cert-manager:
+  enabled: false
+
+certIssuer:
+  enabled: false
+
+# Nginx ingress configuration -------------------------------------------------
+# This needs to be enabled, ONLY if you don't have nginx-ingress already installed
+# in your cluster.
+ingress-nginx:
+  enabled: false
+
+# FROST-Server PostGIS database configuration ---------------------------------
+frostdb:
+  enabled: true
+
+# FROST-Webserver PostGIS database configuration ------------------------------
+frostweb:
+  enabled: true
+  replicaCount: 2
+
+# Grafana v9 configuration ----------------------------------------------------
+grafana:
+  enabled: true
+  replicaCount: 2
+  database:
+    enabled: false
+
+# Grafana v7 configuration ----------------------------------------------------
+grafana7:
+  enabled: true
+  replicaCount: 2
+  database:
+    enabled: false
+
+# Node-RED configuration ------------------------------------------------------
+nodered:
+  enabled: true
+  replicaCount: 1
+  persistence:
+    enabled: true
+
+# Caddy configuration ---------------------------------------------------------
+# The caddy webserver is not required.
+caddy:
+  enabled: false

@@ -1,5 +1,5 @@
 # List of examples
 
-* [Basic example for a local single node cluster](local):
+* [Basic example for a local single node cluster](docker-desktop):
   This example is for testing the stack on a local single node cluster,
   as for instance provided by [Docker Desktop for Windows](https://docs.docker.com/desktop/kubernetes/).
