@@ -26,12 +26,15 @@
   * For compatibility a Grafana v7 instance can optionally be enabled
 * [Node-RED](https://nodered.org/)
   * Wiring together hardware devices, APIs and online services
+* [caddy](https://caddyserver.com/)
+  * Caddy webserver for hosting web content like documentations or landing pages for the stack.
 * [NGINX Ingress Controller](https://docs.nginx.com/nginx-ingress-controller/)
   * Route traffic to the applications of the stack
   * Optional dependency, usually not required.
 * [cert-manager](https://cert-manager.io/docs/)
   * Automatic SSL certificate issuing from e.g. Let's Encrypt
   * Optional dependency, usually not required.
+
 
 ## :question: Getting started
 
