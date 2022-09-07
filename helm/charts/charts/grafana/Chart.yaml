@@ -3,4 +3,4 @@ name: grafana
 description: Grafana instance
 type: application
 version: 0.1.2
-appVersion: "9.1.0"
+appVersion: "9.1.3"

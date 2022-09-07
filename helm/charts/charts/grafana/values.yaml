@@ -5,7 +5,7 @@ replicaCount: 1
 image:
   registry: grafana
   repository: grafana-oss
-  tag: 9.1.0
+  tag: 9.1.3
   pullPolicy: IfNotPresent
 
 install:
