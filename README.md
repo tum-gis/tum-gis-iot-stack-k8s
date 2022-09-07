@@ -17,7 +17,6 @@
 **Warning**:
 > This repository is an early stage of development. Use it at your own risk!
 
-
 ## :inbox_tray: Components
 
 * [Fraunhofer IOSB FROST-Server](https://github.com/FraunhoferIOSB/FROST-Server)
@@ -33,6 +32,12 @@
 * [cert-manager](https://cert-manager.io/docs/)
   * Automatic SSL certificate issuing from e.g. Let's Encrypt
   * Optional dependency, usually not required.
+
+## :question: Getting started
+
+To get this up an running in seconds, check out the [examples](examples). You will find examples for:
+
+* [Basic example for a local single node cluster](examples/local/README.md)
 
 ## :rocket: Usage
 
