@@ -1,6 +1,6 @@
 # Local cluster example
 
-This example installs the stack on a local cluster.
+This example installs the stack on a local cluster. This is especially useful for testing, developing, and for educational purposes. 
 
 > **Note:** This example has only been tested with Kubernetes single node cluster provided by
 > [Docker Desktop](https://www.docker.com/products/docker-desktop/) on Windows 10.
