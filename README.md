@@ -115,6 +115,12 @@ To get this up an running in seconds, check out the [examples](examples). You wi
 
 Bug fixes, issue reports and contributions are greatly appreciated.
 
+## Contributors
+
+<a href="https://github.com/tum-gis/tum-gis-iot-stack-k8s/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=tum-gis/tum-gis-iot-stack-k8s" />
+</a>
+
 ## :mortar_board: Research
 
 ## :memo: License
