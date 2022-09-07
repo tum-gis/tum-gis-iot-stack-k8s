@@ -35,7 +35,6 @@
   * Automatic SSL certificate issuing from e.g. Let's Encrypt
   * Optional dependency, usually not required.
 
-
 ## :question: Getting started
 
 To get this up an running in seconds, check out the [examples](examples). You will find examples for:
