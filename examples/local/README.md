@@ -29,7 +29,7 @@ This example installs the stack on a local cluster.
     helm repo update
     ```
 
-2. Install the chart with the default configuration listed below:
+2. Install the chart with the default configuration specified in [values-local.yml](values-local.yml):
 
     ```bash
     helm install iot-stack iot-stack/tum-gis-iot-stack-k8s \
@@ -49,10 +49,7 @@ All services can be accessed with the username `admin` and password `changeMe`.
 
 ## :hammer_and_wrench: Customization
 
-If your want to change the default configuration, download a copy of [values-local.yml](values-local.yml):
-
-<a id="raw-url" href="https://raw.githubusercontent.com/tum-gis/tum-gis-iot-stack-k8s/main/examples/local/values-local.yml"> :file_folder: Click to download</a>
-
+If your want to change the default configuration, download a copy of [values-local.yml](values-local.yml).
 Edit the file locally and install the chart using your local configuration:
 
 ```bash
@@ -61,5 +58,3 @@ helm install iot-stack iot-stack/tum-gis-iot-stack-k8s \
   --atomic --wait \
   --values my-local-values.yml
 ```
-
-## :clipboard: Default configuration
