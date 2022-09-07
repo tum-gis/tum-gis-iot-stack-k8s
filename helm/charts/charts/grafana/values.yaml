@@ -41,6 +41,7 @@ ingress:
     issuer: letsencrypt-staging
 
 persistence:
+  storageClassName:
   data:
     mountPath: /var/lib/grafana
     accessModes:

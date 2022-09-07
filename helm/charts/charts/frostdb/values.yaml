@@ -22,6 +22,7 @@ auth:
 
 # Persistence settings
 persistence:
+  storageClassName:
   # Ommit trailing / !
   mountPath: /mydata
   pgdataSubPath: /pgdata

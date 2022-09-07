@@ -20,7 +20,7 @@ ingress:
 
 persistence:
   enabled: true
-  storageClassName: azurefile-csi
+  storageClassName:
   data:
     mountPath: /usr/share/caddy
     accessModes:

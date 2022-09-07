@@ -10,6 +10,9 @@ metadata:
     app.kubernetes.io/part-of: tum-gis-iot-stack-k8s
     app.kubernetes.io/component: {{ .Values.component }}
 spec:
+  {{ if .Values.persistence.storageClassName }}
+  storageClassName: {{ .Values.persistence.storageClassName }}
+  {{ end }}
   accessModes:
   {{- range .Values.persistence.accessModes }}
     - {{ . }}

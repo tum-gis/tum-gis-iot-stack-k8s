@@ -30,6 +30,7 @@ ingress:
 
 persistence:
   enabled: false
+  storageClassName:
   data:
     mountPath: /data
     accessModes:
