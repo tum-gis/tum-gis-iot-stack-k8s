@@ -49,7 +49,8 @@ All services can be accessed with the username `admin` and password `changeMe`.
 
 ## :hammer_and_wrench: Customization
 
-If your want to change the default configuration, download a copy of [values-local.yml](values-local.yml).
+If you want to change the default configuration (which is highly recommended to change the default password), 
+download a copy of [values-local.yml](values-local.yml).
 Edit the file locally and install the chart using your local configuration:
 
 ```bash
