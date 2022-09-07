@@ -40,7 +40,7 @@
 
 To get this up an running in seconds, check out the [examples](examples). You will find examples for:
 
-* [Basic example for a local single node cluster](examples/local/README.md)
+* [Basic example for a local cluster](examples/local/README.md)
 
 ## :rocket: Usage
 
