@@ -1,4 +1,4 @@
-resource "azurerm_consumption_budget_resource_group" "sta-k8s" {
+resource "azurerm_consumption_budget_resource_group" "budget-k8s" {
   name              = local.budget_name
   resource_group_id = azurerm_resource_group.this.id
 
@@ -27,7 +27,7 @@ resource "azurerm_consumption_budget_resource_group" "sta-k8s" {
 }
 
 # K8S cluster ressources
-resource "azurerm_consumption_budget_resource_group" "sta-k8s-cluster" {
+resource "azurerm_consumption_budget_resource_group" "budget-k8s-nodes" {
   name              = local.budget_name_nodes
   resource_group_id = data.azurerm_resource_group.k8s-node.id
   amount     = 300
