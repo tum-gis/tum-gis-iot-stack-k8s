@@ -1,6 +1,6 @@
-# Local cluster example
+# Local cluster example using Docker Desktop
 
-This example installs the stack on a local cluster. This is especially useful for testing, developing, and for educational purposes. 
+This example installs the stack on a local cluster. This is especially useful for testing, developing, and for educational purposes.
 
 > **Note:** This example has only been tested with Kubernetes single node cluster provided by
 > [Docker Desktop](https://www.docker.com/products/docker-desktop/) on Windows 10.
@@ -49,7 +49,7 @@ All services can be accessed with the username `admin` and password `changeMe`.
 
 ## :hammer_and_wrench: Customization
 
-If you want to change the default configuration (which is highly recommended to change the default password), 
+If you want to change the default configuration (which is highly recommended to change the default password),
 download a copy of [values-local.yml](values-local.yml).
 Edit the file locally and install the chart using your local configuration:
 
