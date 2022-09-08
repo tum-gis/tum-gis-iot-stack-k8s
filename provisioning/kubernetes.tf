@@ -23,7 +23,7 @@ resource "azurerm_kubernetes_cluster" "this" {
   # default pool
   default_node_pool {
     name       = "default"
-    vm_size    = "Standard_A2_v2"
+    vm_size    = var.k8s_default_node_type
     node_count = var.k8s_default_node_count
     # pod_subnet_id = module.network.vnet_subnets[1]
     # enable_auto_scaling = true
@@ -52,7 +52,7 @@ data "azurerm_resource_group" "k8s-node" {
 resource "azurerm_kubernetes_cluster_node_pool" "k8s-nodes-db" {
   name                  = "database"
   kubernetes_cluster_id = azurerm_kubernetes_cluster.this.id
-  vm_size               = "Standard_D4s_v3"
+  vm_size               = var.k8s_database_node_type
   node_count            = var.k8s_database_node_count
 
   tags = local.tags
