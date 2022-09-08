@@ -39,7 +39,8 @@
 
 To get this up an running in seconds, check out the [examples](examples). You will find examples for:
 
-* [Basic example for a local cluster using Docker Desktop](examples/docker-desktop/README.md)
+* [Basic example for a local cluster using Docker Desktop](examples/docker-desktop/)
+* [Basic example for a local cluster using `minikube`](examples/minikube/)
 
 ## :rocket: Usage
 

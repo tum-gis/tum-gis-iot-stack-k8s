@@ -1,9 +1,8 @@
 # Local cluster example using Minikube
 
 This example installs the stack on a local cluster. This is especially useful for testing, developing, and for educational purposes.
-
-> **Note:** This example has only been tested with Kubernetes single node cluster provided by
-> [Docker Desktop](https://www.docker.com/products/docker-desktop/) on Windows 10.
+This example has only tested with a Kubernetes single node cluster on
+[`minikube`](https://minikube.sigs.k8s.io) using the Docker deployment method.
 
 ## :eye_speech_bubble: Requirements
 
@@ -25,9 +24,6 @@ This example installs the stack on a local cluster. This is especially useful fo
 
     ```bash
     helm repo add iot-stack https://tum-gis.github.io/tum-gis-iot-stack-k8s
-
-    # Optional, comment out if nginx-ingress controller is already installed in your cluster
-    helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
 
     # Optional: Uncomment, if you want to test cert-manager as certificate issuer
     # helm repo add jetstack https://charts.jetstack.io
@@ -60,7 +56,8 @@ This example installs the stack on a local cluster. This is especially useful fo
     iot-stack-nodered-ing-ui   nginx   myhost.info   192.168.49.2   80, 443   7s
     ```
 
-   Edit `/etc/hosts` file with your favorite text editor and add the mapping from above at the end of the file.
+   Add the IP -> hostname mapping to `/etc/hosts` file with your favorite text editor or the code below,
+   based on the output of the last step.
 
     ```console
      $ sudo bash -c 'echo "192.168.49.2 myhost.info" >> /etc/hosts && cat /etc/hosts'
@@ -89,7 +86,7 @@ All services can be accessed with the username `admin` and password `changeMe`.
 ## :hammer_and_wrench: Customization
 
 If you want to change the default configuration (which is highly recommended to change the default password),
-download a copy of [values-local.yml](values-minikube.yml).
+download a copy of [values-minikube.yml](values-minikube.yml).
 Edit the file locally and install the chart using your local configuration:
 
 ```bash
