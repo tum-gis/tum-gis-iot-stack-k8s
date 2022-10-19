@@ -2,5 +2,5 @@ apiVersion: v2
 name: caddy
 description: Caddy webserver
 type: application
-version: 0.1.4
-appVersion: "2.5.2-alpine"
+version: 0.1.5
+appVersion: "2.6.2-alpine"
