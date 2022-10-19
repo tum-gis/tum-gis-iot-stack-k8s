@@ -9,7 +9,7 @@ loadBalancer:
 image:
   registry: postgis
   repository: postgis
-  tag: 14-3.2-alpine
+  tag: 14-3.3-alpine
   pullPolicy: IfNotPresent
 
 # Database settings
