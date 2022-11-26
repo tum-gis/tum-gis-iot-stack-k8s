@@ -4,7 +4,9 @@ name: tumgis-iot-stack
 global:
   fqdn: www.example.de
   ingress:
+    ingressClassName: nginx
     certManager:
+      type: cluster
       issuer: letsencrypt-staging
   ssl:
     adminEMail: user@example.de
@@ -26,7 +28,7 @@ frostweb:
   enabled: true
 
 nodered:
-  enabled: false
+  enabled: true
 
 grafana:
   enabled: true

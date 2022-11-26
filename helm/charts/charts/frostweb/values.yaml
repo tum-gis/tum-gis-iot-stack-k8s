@@ -52,9 +52,12 @@ mqtt:
   host:
   qos: 2
 
+# Ingress configuration
 ingress:
+  ingressClassName:
   certManager:
-    issuer: letsencrypt-staging
+    type:
+    issuer:
 
 # Auth settings
 # https://fraunhoferiosb.github.io/FROST-Server/settings/auth.html

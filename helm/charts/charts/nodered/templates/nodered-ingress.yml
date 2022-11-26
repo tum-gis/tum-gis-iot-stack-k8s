@@ -9,8 +9,14 @@ metadata:
     app.kubernetes.io/part-of: tum-gis-iot-stack-k8s
     app.kubernetes.io/component: {{ .Values.component }}
   annotations:
-    cert-manager.io/issuer: {{ .Values.global.ingress.certManager.issuer |
-      default .Values.ingress.certManager.issuer | quote }}
+    {{- if (and (not (empty (coalesce .Values.global.ingress.certManager.issuer .Values.ingress.certManager.issuer )))
+    (eq (coalesce .Values.global.ingress.certManager.type .Values.ingress.certManager.type) "cluster")) }}
+    certmanager.k8s.io/cluster-issuer: {{ .Values.global.ingress.certManager.issuer | default .Values.ingress.certManager.issuer | quote }}
+    {{- end }}
+    {{- if (and (not (empty (coalesce .Values.global.ingress.certManager.issuer .Values.ingress.certManager.issuer )))
+    (eq (coalesce .Values.global.ingress.certManager.type .Values.ingress.certManager.type) "namespace")) }}
+    certmanager.k8s.io/issuer: {{ .Values.global.ingress.certManager.issuer | default .Values.ingress.certManager.issuer | quote }}
+    {{- end }}
     nginx.ingress.kubernetes.io/ssl-redirect: "true"
     nginx.ingress.kubernetes.io/rewrite-target: "/$2"
     {{ if .Values.http.subpath -}}
@@ -18,7 +24,12 @@ metadata:
       rewrite ^/{{ .Values.http.subpath }}$ /{{ .Values.http.subpath }}/ redirect;
     {{- end }}
 spec:
-  ingressClassName: nginx
+  ingressClassName: {{ .Values.global.ingress.ingressClassName | default .Values.ingress.ingressClassName }}
+
+
+
+
+
   tls:
   - hosts:
     - {{ .Values.global.fqdn }}

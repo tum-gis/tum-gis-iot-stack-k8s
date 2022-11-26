@@ -24,9 +24,12 @@ security:
   adminPassword: "$2b$08$2UedHI9nnjDY/LANnfT/ruzyWa.ZGzW46r7xBAvsh8GmlZS70k2e."
   credentialsSecret: "changeMe"
 
+# Ingress configuration
 ingress:
+  ingressClassName:
   certManager:
-    issuer: letsencrypt-staging
+    type:
+    issuer:
 
 persistence:
   enabled: false

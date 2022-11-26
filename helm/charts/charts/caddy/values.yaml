@@ -14,9 +14,12 @@ image:
   tag: 2.6.2-alpine
   pullPolicy: IfNotPresent
 
+# Ingress configuration
 ingress:
+  ingressClassName:
   certManager:
-    issuer: letsencrypt-staging
+    type:
+    issuer:
 
 persistence:
   enabled: true

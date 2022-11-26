@@ -36,9 +36,12 @@ dateFormats:
     hour: "dd, DD.MM HH:mm"
     minute: "dd, HH:mm"
 
+# Ingress configuration
 ingress:
+  ingressClassName:
   certManager:
-    issuer: letsencrypt-staging
+    type:
+    issuer:
 
 persistence:
   storageClassName:
