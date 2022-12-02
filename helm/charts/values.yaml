@@ -1,47 +1,73 @@
-# If empty, use the chart name as common base name for any Kubernetes component
-name: tumgis-iot-stack
 # -- Base name for Kubernetes components. If empty, Chart.Name is used instead.
+name: tumgis-iot-stack
 
 global:
-  fqdn: www.example.de
+  # -- Fully qualified domain name, used for all Ingress routes.
+  # Use localhost for local testing deployments.
+  fqdn: localhost
   ingress:
+    # -- Name of the [IngressClass](https://kubernetes.io/docs/concepts/services-networking/ingress/#ingress-class)
+    # to use in Ingress routes.
     ingressClassName: nginx
     certManager:
-      type: cluster
+      # -- eMail address for ACME registration with Let's Encrypt. Only used for type = namespace.
+      adminEmail: me@example.com
+      # -- Type of [cert-manager](https://cert-manager.io/docs/) Issuer: Use either "namespace" or "cluster".
+      type: namespace
+      # -- Name of the Issuer to use. For certManager.type = namespace
+      # `letsencrypt-staging`, `letsencrypt-prod` and `self-signed` are available.
       issuer: letsencrypt-staging
-  ssl:
-    adminEMail: user@example.de
   db:
+    # -- Database host, allows using external databases. Use DNS name of the `frostdb` service
+    # when hosting the database inside the cluster.
     host: frostdb-svc
+    # -- Database port
     port: 5432
+    # -- Database name
     dbname: frost
     auth:
+      # -- Database username
       username: postgres
+      # -- Database password
       password: changeMe
 
 caddy:
+  # -- Enable/disable Caddy webserver
   enabled: false
 
 frostdb:
+  # -- Enable/disable PostGIS Database. Disable if an external database is used.
   enabled: true
 
 frostweb:
+  # -- Enable/disable FROST-Server web interface.
   enabled: true
 
 nodered:
+  # -- Enable/disable Node-RED.
   enabled: true
 
 grafana:
+  # -- Enable/disable Grafana.
   enabled: true
 
 grafana7:
+  # -- Enable/disable Grafana 7 instance. Only required when usage of
+  # [LinkSmart SensorThings Datasource](https://grafana.com/grafana/plugins/linksmart-sensorthings-datasource/)
+  # is required.
   enabled: false
 
 certIssuer:
-  enabled: true
+  # -- Enable/disable [cert-manager](https://cert-manager.io/docs/) namespace Issuers.
+  # Set according to other `ingress.XXX` settings. Disable if a `ClusterIssuer` is used.
+  enabled: false
 
 cert-manager:
+  # -- Enable/disable [cert-manager](https://cert-manager.io/docs/). Only enable this if
+  # [cert-manager](https://cert-manager.io/docs/) is not available in the cluster.
   enabled: false
 
 ingress-nginx:
+  # -- Enable/disable [NGINX-Ingress](https://github.com/kubernetes/ingress-nginx).
+  # This is only required, if there is no IncressController available in your cluster.
   enabled: false
