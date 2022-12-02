@@ -55,51 +55,11 @@ To get this up an running in seconds, check out the [examples](examples). You wi
    ```
 
 3. Adapt settings according to your needs e.g. in [values.yml](helm/charts/values.yaml) or create
-   a local `values.yml` to overwrite settings. A basic configuration assuming
-   Nginx Ingress and Cert-Manager are already installed and properly configured could look like this:
-   `my-values.yml:`
-
-   ```yaml
-   name: iot-stack
-
-   cert-manager:
-     enabled: false
-
-   ingress-nginx:
-     enabled: false
-
-   frostdb:
-     enabled: true
-     persistence:
-       capacity: 4Gi
-
-   frostweb:
-     enabled: true
-     replicaCount: 1
+   a local `values.yml` to overwrite settings. Examples e.g. for a local testing deplayment are
+   are available in [examples](examples). [values.yml](helm/charts/values.yaml) is documented in
+   [helm/charts](helm/charts).
 
 
-   global:
-     fqdn: www.example.de
-     ingress:
-       certManager:
-         issuer: letsencrypt-staging
-     ssl:
-       adminEMail: user@example.de
-
-   grafana:
-     replicaCount: 1
-
-   grafana7:
-     enabled: true
-     nodeSelector:
-     replicaCount: 1
-
-   nodered:
-     enabled: true
-     replicaCount: 1
-     persistence:
-       enabled: true
-   ```
 
 4. Install stack
 
