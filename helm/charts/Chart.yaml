@@ -2,42 +2,10 @@ apiVersion: v2
 name: tum-gis-iot-stack-k8s
 description: Helm Chart for the TUM-GI IoT stack.
 type: application
-version: 0.5.2
-appVersion: "0.0.1"
 
 maintainers:
   - email: b.willenborg@tum.de
     name: Bruno Willenborg
 
-dependencies:
-  - name: frostweb
-    version: "*"
-    condition: frostweb.enabled
-  - name: frostdb
-    version: "*"
-    condition: frostdb.enabled
-  - name: grafana
-    version: "*"
-    condition: grafana.enabled
-  - name: grafana7
-    version: "*"
-    condition: grafana7.enabled
-  - name: nodered
-    version: "*"
-    condition: nodered.enabled
-  - name: certIssuer
-    version: "*"
-    condition: certIssuer.enabled
-  - name: caddy
-    version: "*"
-    condition: caddy.enabled
-  - name: ingress-nginx
-    alias: ingress-nginx
-    condition: ingress-nginx.enabled
-    version: "~4.3.0"
-    repository: https://kubernetes.github.io/ingress-nginx
-  - name: cert-manager
-    alias: cert-manager
-    condition: cert-manager.enabled
-    version: "~1.10.0"
-    repository: https://charts.jetstack.io
+version: 0.5.3
+appVersion: "0.0.1"
