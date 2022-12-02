@@ -1,6 +1,6 @@
-enabled: true
   # -- enable or disable namespace issuer
-admineMail: example@email.com
+enabled: true
   # -- eMail address for registration with Let's Encrypt account
-ingressClassName: nginx
+admineMail: example@email.com
   # -- Name of the [IngressClass](https://kubernetes.io/docs/concepts/services-networking/ingress/#ingress-class)
+ingressClassName: nginx
