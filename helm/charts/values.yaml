@@ -1,5 +1,6 @@
 # If empty, use the chart name as common base name for any Kubernetes component
 name: tumgis-iot-stack
+# -- Base name for Kubernetes components. If empty, Chart.Name is used instead.
 
 global:
   fqdn: www.example.de
