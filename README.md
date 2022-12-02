@@ -112,6 +112,16 @@ To get this up an running in seconds, check out the [examples](examples). You wi
 
 ## :construction_worker: Building
 
+### Build Chart documentation
+
+To generate a markdown documentation for this chart
+using [norwoodj/helm-docs](https://github.com/norwoodj/helm-docs)
+run this from the repo root.
+
+```shell
+docker run --rm --volume "$PWD/helm/charts:/helm-docs" -u $(id -u) jnorwood/helm-docs:latest
+```
+
 ## :hammer_and_wrench: Contributing
 
 Bug fixes, issue reports and contributions are greatly appreciated.
