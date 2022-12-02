@@ -6,10 +6,9 @@ type: application
 
 home: https://github.com/tum-gis/tum-gis-iot-stack-k8s
 sources:
-  - https://github.com/FraunhoferIOSB/FROST-Server
   - https://github.com/tum-gis/tum-gis-iot-stack-k8s
 
-kubeVersion: "~1.25.0"
+kubeVersion: ">= 1.22.0"
 
 maintainers:
   - email: b.willenborg@tum.de
