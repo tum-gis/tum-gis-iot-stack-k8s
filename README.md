@@ -42,6 +42,8 @@ To get this up an running in seconds, check out the [examples](examples). You wi
 * [Basic example for a local cluster using Docker Desktop](examples/docker-desktop/)
 * [Basic example for a local cluster using `minikube`](examples/minikube/)
 
+The documentation for this helm chart is available in [helm/charts](helm/charts).
+
 ## :rocket: Usage
 
 1. Get a fully-qualified domain name (FQDN) and configure it to point to the public IP address of
@@ -58,8 +60,6 @@ To get this up an running in seconds, check out the [examples](examples). You wi
    a local `values.yml` to overwrite settings. Examples e.g. for a local testing deplayment are
    are available in [examples](examples). [values.yml](helm/charts/values.yaml) is documented in
    [helm/charts](helm/charts).
-
-
 
 4. Install stack
 
