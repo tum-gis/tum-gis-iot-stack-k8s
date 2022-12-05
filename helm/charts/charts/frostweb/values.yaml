@@ -59,6 +59,9 @@ ingress:
     type:
     issuer:
 
+# -- Extra environment variables
+extraEnv: {}
+
 # Auth settings
 # https://fraunhoferiosb.github.io/FROST-Server/settings/auth.html
 auth:

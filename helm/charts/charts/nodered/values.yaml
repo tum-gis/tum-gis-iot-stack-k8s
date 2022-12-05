@@ -31,6 +31,9 @@ ingress:
     type:
     issuer:
 
+# -- Extra environment variables
+extraEnv: {}
+
 persistence:
   enabled: false
   storageClassName:

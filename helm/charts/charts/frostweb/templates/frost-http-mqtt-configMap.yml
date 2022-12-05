@@ -9,7 +9,6 @@ metadata:
     app.kubernetes.io/part-of: tum-gis-iot-stack-k8s
     app.kubernetes.io/component: {{ .Values.component }}
 data:
-
   # http settings
   http_cors_enable: {{ .Values.http.cors.enabled | quote }}
   http_cors_allowed_origins: {{ .Values.http.cors.allowed_origins | quote }}
@@ -45,4 +44,7 @@ data:
   auth_autoUpdateDatabase: {{ .Values.auth.autoUpdateDatabase | quote }}
   auth_allowAnonymousRead: {{ .Values.auth.allowAnonymousRead | quote }}
   {{- end }}
+  {{- if .Values.extraEnv -}}
+  {{ toYaml .Values.extraEnv }}
+  {{ end }}
 {{- end -}}
