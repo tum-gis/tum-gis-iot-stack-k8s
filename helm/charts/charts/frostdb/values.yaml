@@ -1,3 +1,6 @@
+# --override Chart.Name
+nameOverride:
+
 enabled: true
 component: database
 replicaCount: 1
