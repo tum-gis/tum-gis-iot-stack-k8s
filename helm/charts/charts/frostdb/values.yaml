@@ -1,45 +1,79 @@
-# --override Chart.Name
-nameOverride:
-
 enabled: true
 component: database
-replicaCount: 1
 
-# Create a LoadBalancer service for external Database access
+# -- Override name
+nameOverride:
+# -- Override fullname
+fullnameOverride: frostdb
+
 loadBalancer:
+  # -- Enable/disable a LoadBalancer service for external Database access
   enabled: false
 
 image:
-  registry: postgis
-  repository: postgis
-  tag: 14-3.3-alpine
+  # -- Image repository
+  repository: postgis/postgis
+  # -- Image pull policy
   pullPolicy: IfNotPresent
+   # -- Overrides the image tag whose default is the chart appVersion.
+  tag: ""
 
-# Database settings
+# -- [Image pull secrets](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/)
+imagePullSecrets: []
+
+# -- Additional pod annotations
+podAnnotations: {}
+
+serviceAccount:
+  # -- Specifies whether a service account should be created
+  create: false
+  # -- Annotations to add to the service account
+  annotations: {}
+  # -- The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+# -- Database port
 port: 5432
+# -- Database name
 dbname: frost
-
 auth:
+  # -- Database user
   username: postgres
+  # -- Database password
   password: changeMe
 
 # -- Extra environment variables
 extraEnv: {}
 
-# Persistence settings
 persistence:
+  # -- StorageClass to use, leave empty to use default StorageClass.
   storageClassName:
-  # Ommit trailing / !
+  # -- Mount path of the storage. Omit trailing `/` !
   mountPath: /mydata
+  # -- Subpath inside `mountPath` for the postgres data folder
   pgdataSubPath: /pgdata
+  # -- Storage [access modes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes)
   accessModes:
     - ReadWriteOnce
+  # -- Storage [capacity](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#capacity)
   capacity: 4Gi
 
 resources:
   limits:
     cpu: 2000m
-    memory: 8Gi
+    memory: 4Gi
   requests:
     cpu: 1000m
     memory: 1Gi

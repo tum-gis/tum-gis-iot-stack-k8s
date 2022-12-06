@@ -1,34 +1,133 @@
 enabled: true
 component: frontend
-replicaCount: 1
 
-http:
-  # Do not append or prepend :// or /
-  protocol: https
-  domain:
-  subpath:
+# -- Override name
+nameOverride:
+# -- Override fullname
+fullnameOverride: caddy
 
 image:
-  registry: caddy
+  # -- Image repository
   repository: caddy
-  tag: 2.6.2-alpine
+  # [Image pull policy](https://kubernetes.io/docs/concepts/containers/images/#image-pull-policy)
   pullPolicy: IfNotPresent
+   # -- Overrides the image tag whose default is the chart appVersion.
+  tag: ""
 
-# Ingress configuration
+# -- [Image pull secrets](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/)
+imagePullSecrets: []
+
+# -- Additional pod annotations
+podAnnotations: {}
+
+serviceAccount:
+  # -- Specifies whether a service account should be created
+  create: false
+  # -- Annotations to add to the service account
+  annotations: {}
+  # -- The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+service:
+  # -- Type of service
+  type: ClusterIP
+  # -- Service port
+  port: 80
+
+# -- Number of replicas. Only used if autoscaling.enabled = false
+replicaCount: 1
+autoscaling:
+  # -- Enable/disable pod autoscaling, if disabled `replicaCount` is used to set number of pods.
+  enabled: false
+  # -- Minimum number of replicas
+  minReplicas: 1
+  # -- Maximum number of replicas
+  maxReplicas: 5
+  targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80
+
+# -- Ingress configuration
 ingress:
-  ingressClassName:
+  # -- Enable/disable ingress
+  enabled: true
+  # -- Name of the [IngressClass](https://kubernetes.io/docs/concepts/services-networking/ingress/#ingress-class)
+  # to use in Ingress routes.
+  className: nginx
+  # -- List of [FQDNs](https://de.wikipedia.org/wiki/Fully-Qualified_Host_Name) for this Ingress.
+  # Note: All FQDNs will be used for Ingress hosts and TLS certificate.
+  domains: []
+  # -- Additional Ingress annotations
+  annotations:
+  # -- Make Caddy available at a subpath. By default Caddy will be available from [DOMAIN]/
+  # Don't append or prepend :// or /
+  subpath:
   certManager:
-    type:
-    issuer:
+    # -- eMail address for ACME registration with Let's Encrypt. Only used for issuerType = namespace.
+    issuerEmail: me@example.com
+    # -- Type of [cert-manager](https://cert-manager.io/docs/) Issuer: Use either "namespace" or "cluster".
+    issuerType: namespace
+    # -- Name of the Issuer to use. For certManager.type = namespace
+    # `letsencrypt-staging`, `letsencrypt-prod` and `self-signed` are available.
+    issuerName: letsencrypt-staging
 
 persistence:
+  # -- Enable/disable serving data from a PVC
   enabled: true
+  # -- StorageClass to use, leave empty to use default StorageClass.
   storageClassName:
   data:
+    # -- Mount path of the storage
     mountPath: /usr/share/caddy
+    # -- Storage [access modes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes)
     accessModes:
       - ReadOnlyMany
+    # -- Storage [capacity](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#capacity)
     capacity: 4Gi
+
+# -- [Caddyfile](https://caddyserver.com/docs/caddyfile) to configure caddy
+caddyfile: |-
+  :80 {
+    root * /usr/share/caddy
+    file_server
+  }
+
+# -- [Liveness probe](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes)
+# See the [API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#Probe) for details.
+livenessProbe:
+  initialDelaySeconds: 10
+  periodSeconds: 5
+  timeoutSeconds: 1
+  successThreshold: 1
+  failureThreshold: 5
+  httpGet:
+    path: /
+    port: http
+    scheme: HTTP
+
+# -- [Readiness probe](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes)
+# See the [API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#Probe) for details.
+readinessProbe:
+  initialDelaySeconds: 10
+  periodSeconds: 5
+  timeoutSeconds: 1
+  successThreshold: 1
+  failureThreshold: 5
+  httpGet:
+    path: /
+    port: http
+    scheme: HTTP
 
 resources:
   limits:
@@ -41,9 +140,3 @@ resources:
 nodeSelector: {}
 tolerations: []
 affinity: {}
-
-caddyfile: |-
-  :80 {
-    root * /usr/share/caddy
-    file_server
-  }

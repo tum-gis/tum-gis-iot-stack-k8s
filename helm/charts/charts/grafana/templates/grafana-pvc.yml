@@ -3,7 +3,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: {{ include "grafana.fullname" . }}-pvc
+  name: {{ include "grafana.fullname" . }}
   namespace: {{ .Release.Namespace | quote }}
   labels:
     {{- include "grafana.labels" . | nindent 4 }}

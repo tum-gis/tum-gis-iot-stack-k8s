@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ include "caddy.fullname" . }}-cfg-settings
+  name: {{ include "caddy.fullname" . }}-caddyfile
   namespace: {{ .Release.Namespace | quote }}
   labels:
     {{- include "caddy.labels" . | nindent 4 }}
@@ -10,5 +10,4 @@ metadata:
     app.kubernetes.io/component: {{ .Values.component }}
 data:
   Caddyfile: {{- .Values.caddyfile | toYaml | indent 1 }}
-
 {{- end -}}

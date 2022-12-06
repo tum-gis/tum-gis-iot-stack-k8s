@@ -65,7 +65,7 @@ Create the name of the service account to use
 Grafana service URL
 */}}
 {{- define "grafana.http.serviceRootUrl" -}}
-  {{- .Values.http.protocol -}}://
-  {{- .Values.global.fqdn | default .Values.http.domain -}}/
-  {{- .Values.http.subpath }}
+  https://
+  {{- (first .Values.global.ingress.domains) | default (first .Values.ingress.domains) -}}/
+  {{- .Values.ingress.subpath }}
 {{- end }}

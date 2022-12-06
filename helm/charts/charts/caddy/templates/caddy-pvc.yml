@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: {{ include "caddy.fullname" . }}-pvc
+  name: {{ include "caddy.fullname" . }}
   namespace: {{ .Release.Namespace | quote }}
   labels:
     {{- include "caddy.labels" . | nindent 4 }}

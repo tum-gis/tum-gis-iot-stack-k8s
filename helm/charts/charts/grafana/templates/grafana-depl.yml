@@ -2,62 +2,103 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "grafana.fullname" . }}-{{ .Values.component }}
+  name: {{ include "grafana.fullname" . }}
   namespace: {{ .Release.Namespace | quote }}
   labels:
     {{- include "grafana.labels" . | nindent 4 }}
     app.kubernetes.io/part-of: tum-gis-iot-stack-k8s
     app.kubernetes.io/component: {{ .Values.component }}
 spec:
+  {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
+  {{- end }}
   selector:
     matchLabels:
       {{- include "grafana.selectorLabels" . | nindent 6 }}
       app.kubernetes.io/component: {{ .Values.component }}
   template:
     metadata:
+      annotations:
+      {{- with .Values.podAnnotations }}
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+        checksum/configmap: {{ include (print $.Template.BasePath "/grafana-configMap.yml") . | sha256sum }}
+        checksum/secret: {{ include (print $.Template.BasePath "/grafana-secret.yml") . | sha256sum }}
       labels:
         {{- include "grafana.selectorLabels" . | nindent 8 }}
         app.kubernetes.io/component: {{ .Values.component }}
-      annotations:
-        checksum/configmap: {{ include (print $.Template.BasePath "/grafana-configMap.yml") . | sha256sum }}
     spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "grafana.serviceAccountName" . }}
       securityContext:
-        runAsUser: 472
-        fsGroup: 0
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
 
       {{- if not .Values.database.enabled }}
       volumes:
         - name: data
           persistentVolumeClaim:
-            claimName: {{ include "grafana.fullname" . }}-pvc
+            claimName: {{ include "grafana.fullname" . }}
       {{ end }}
 
       {{- if .Values.database.enabled }}
       initContainers:
-        - name: wait-for-psql
-          image: bwibo/wait-for-psql
+        - name: pg-ready
+          image: bwibo/k8s-init-container
+          command:
+            - pg_isready
+          env:
+            - name: PGHOST
+              value: {{ .Values.database.host | quote }}
+            - name: PGPORT
+              value: {{ .Values.database.port | quote }}
+            - name: PGUSER
+              value: {{ .Values.database.auth.username | quote }}
+            - name: PGPASSWORD
+              value: {{ .Values.database.auth.password | quote }}
+        - name: create-database
+          image: bwibo/k8s-init-container
           args:
-            - "60"
-            - {{ .Values.database.host | quote }}
-            - {{ .Values.database.port | quote }}
-            - {{ .Values.database.dbname | quote }}
-            - {{ .Values.database.auth.username | quote }}
-            - {{ .Values.database.auth.password | squote }}
+            - psql -tc "SELECT 1 FROM pg_database WHERE datname = '{{ .Values.database.dbname }}'" | grep -q 1 || psql -c "CREATE DATABASE {{ .Values.database.dbname }};"
+          env:
+            - name: PGHOST
+              value: {{ .Values.database.host | quote }}
+            - name: PGPORT
+              value: {{ .Values.database.port | quote }}
+            - name: PGUSER
+              value: {{ .Values.database.auth.username | quote }}
+            - name: PGPASSWORD
+              value: {{ .Values.database.auth.password | quote }}
+
+      #   - name: wait-for-psql
+      #     image: bwibo/wait-for-psql
+      #     args:
+      #       - "60"
+      #       - {{ .Values.database.host | quote }}
+      #       - {{ .Values.database.port | quote }}
+      #       - {{ .Values.database.dbname | quote }}
+      #       - {{ .Values.database.auth.username | quote }}
+      #       - {{ .Values.database.auth.password | squote }}
       {{ end }}
 
       containers:
-        - name: grafana
-          image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
-            - containerPort: 3000
+            - name: http
+              containerPort: 3000
+              protocol: TCP
 
           envFrom:
             - configMapRef:
-                name: {{ include "grafana.fullname" . }}-cfg
+                name: {{ include "grafana.fullname" . }}
             - secretRef:
-                name: {{ include "grafana.fullname" . }}-sct
+                name: {{ include "grafana.fullname" . }}
 
           livenessProbe:
             initialDelaySeconds: 30

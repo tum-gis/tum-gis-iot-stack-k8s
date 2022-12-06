@@ -1,6 +1,6 @@
 # grafana
 
-![Version: 0.3.1](https://img.shields.io/badge/Version-0.3.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 9.2.5](https://img.shields.io/badge/AppVersion-9.2.5-informational?style=flat-square)
+![Version: 0.5.1](https://img.shields.io/badge/Version-0.5.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 9.3.2](https://img.shields.io/badge/AppVersion-9.3.2-informational?style=flat-square)
 
 Grafana instance
 
@@ -9,12 +9,16 @@ Grafana instance
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | affinity | object | `{}` |  |
+| autoscaling.enabled | bool | `false` | Enable/disable pod autoscaling, if disabled `replicaCount` is used to set number of pods. Note: If autoscaling is enabled, a database (`database.enable: true`) should be used as Grafana backend. |
+| autoscaling.maxReplicas | int | `5` | Maximum number of replicas |
+| autoscaling.minReplicas | int | `1` | Minimum number of replicas |
+| autoscaling.targetCPUUtilizationPercentage | int | `80` |  |
 | component | string | `"frontend"` |  |
 | database.auth.password | string | `"changeMe"` |  |
 | database.auth.username | string | `"postgres"` |  |
 | database.dbname | string | `"grafana"` |  |
-| database.enabled | bool | `false` |  |
-| database.host | string | `"localhost"` |  |
+| database.enabled | bool | `false` | Enable/disable [Grafana database](https://grafana.com/docs/grafana/latest/setup-grafana/configure-grafana/#database). If database is enabled, the persistence settings are disabled, as no SQLite DB is needed. |
+| database.host | string | `"frostdb"` |  |
 | database.port | int | `5432` |  |
 | database.sslmode | string | `"disable"` |  |
 | database.type | string | `"postgres"` |  |
@@ -25,32 +29,43 @@ Grafana instance
 | dateFormats.interval.month | string | `"YYYY.MM"` |  |
 | enabled | bool | `true` |  |
 | extraEnv | object | `{}` | Extra environment variables |
-| http.domain | string | `nil` |  |
+| fullnameOverride | string | `"grafana"` | Override fullname |
 | http.enableGzip | bool | `true` |  |
-| http.protocol | string | `"https"` |  |
-| http.serveFromSubPath | bool | `true` |  |
-| http.subpath | string | `"grafana"` |  |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
-| image.registry | string | `"grafana"` |  |
-| image.repository | string | `"grafana-oss"` |  |
-| image.tag | string | `"9.2.5"` |  |
-| ingress.certManager.issuer | string | `nil` |  |
-| ingress.certManager.type | string | `nil` |  |
-| ingress.ingressClassName | string | `nil` |  |
-| install.plugins | string | `"grafana-clock-panel,grafana-simple-json-datasource, grafana-worldmap-panel,marcusolsson-json-datasource, snuids-trafficlights-panel,citilogics-geoloop-panel, iosb-sensorthings-datasource, https://github.com/briangann/grafana-gauge-panel/releases/download/v0.0.9/briangann-gauge-panel-0.0.9.zip;briangann-gauge-panel"` |  |
+| image.repository | string | `"grafana/grafana-oss"` | Image repository |
+| image.tag | string | `""` | Overrides the image tag whose default is the chart appVersion. |
+| imagePullSecrets | list | `[]` | [Image pull secrets](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/) |
+| ingress | object | `{"annotations":null,"certManager":{"issuerEmail":"me@example.com","issuerName":"letsencrypt-staging","issuerType":"namespace"},"className":"nginx","domains":[],"enabled":true,"subpath":"grafana"}` | Ingress configuration |
+| ingress.annotations | string | `nil` | Additional Ingress annotations |
+| ingress.certManager.issuerEmail | string | `"me@example.com"` | eMail address for ACME registration with Let's Encrypt. Only used for issuerType = namespace. |
+| ingress.certManager.issuerName | string | `"letsencrypt-staging"` | Name of the Issuer to use. For certManager.type = namespace `letsencrypt-staging`, `letsencrypt-prod` and `self-signed` are available. |
+| ingress.certManager.issuerType | string | `"namespace"` | Type of [cert-manager](https://cert-manager.io/docs/) Issuer: Use either "namespace" or "cluster". |
+| ingress.className | string | `"nginx"` | Name of the [IngressClass](https://kubernetes.io/docs/concepts/services-networking/ingress/#ingress-class) to use in Ingress routes. |
+| ingress.domains | list | `[]` | List of [FQDNs](https://de.wikipedia.org/wiki/Fully-Qualified_Host_Name) for this Ingress. Note: All FQDNs will be used for Ingress hosts and TLS certificate. The global setting overwrites this setting. Note: The first domain in the list will be used as FROST-Server serviceRootURL and MQTT host. |
+| ingress.enabled | bool | `true` | Enable/disable ingress |
+| ingress.subpath | string | `"grafana"` | Make Grafana available at a subpath. By default Grafana will be available from [DOMAIN]/ Don't append or prepend :// or / |
+| install.plugins | string | `"grafana-clock-panel,grafana-simple-json-datasource, grafana-worldmap-panel,marcusolsson-json-datasource, snuids-trafficlights-panel,citilogics-geoloop-panel, iosb-sensorthings-datasource,yesoreyeram-boomtheme-panel, snuids-svg-panel, https://github.com/briangann/grafana-gauge-panel/releases/download/v0.0.9/briangann-gauge-panel-0.0.9.zip;briangann-gauge-panel"` | Grafana plugins to install |
+| nameOverride | string | `nil` | Override name |
 | nodeSelector | object | `{}` |  |
-| persistence.data.accessModes[0] | string | `"ReadWriteOnce"` |  |
-| persistence.data.capacity | string | `"2Gi"` |  |
-| persistence.data.mountPath | string | `"/var/lib/grafana"` |  |
-| persistence.storageClassName | string | `nil` |  |
-| replicaCount | int | `1` |  |
+| persistence.data.accessModes | list | `["ReadWriteOnce"]` | Storage [access modes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes) |
+| persistence.data.capacity | string | `"2Gi"` | Storage [capacity](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#capacity) |
+| persistence.data.mountPath | string | `"/var/lib/grafana"` | Mount path of the storage |
+| persistence.storageClassName | string | `nil` | StorageClass to use, leave empty to use default StorageClass. |
+| podAnnotations | object | `{}` | Additional pod annotations |
+| podSecurityContext.fsGroup | int | `0` |  |
+| podSecurityContext.runAsUser | int | `472` | Run as Grafana user |
+| replicaCount | int | `1` | Number of replicas. Only used if autoscaling.enabled = false |
 | resources.limits.cpu | string | `"1000m"` |  |
 | resources.limits.memory | string | `"1Gi"` |  |
 | resources.requests.cpu | string | `"250m"` |  |
 | resources.requests.memory | string | `"256Mi"` |  |
-| security.adminPassword | string | `"changeMe"` |  |
-| security.adminUsername | string | `"admin"` |  |
-| security.allowEmbedding | bool | `true` |  |
+| security | object | `{"adminPassword":"changeMe","adminUsername":"admin","allowEmbedding":true}` | Grafana security settings |
+| securityContext | object | `{}` |  |
+| service.port | int | `3000` | Service port for http |
+| service.type | string | `"ClusterIP"` | Type of service for http |
+| serviceAccount.annotations | object | `{}` | Annotations to add to the service account |
+| serviceAccount.create | bool | `false` | Specifies whether a service account should be created |
+| serviceAccount.name | string | `""` | The name of the service account to use. If not set and create is true, a name is generated using the fullname template |
 | tolerations | list | `[]` |  |
 
 ----------------------------------------------

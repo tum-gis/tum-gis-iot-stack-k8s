@@ -2,7 +2,7 @@
 apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
-  name: selfsigned
+  name: self-signed
   namespace: {{ .Release.Namespace | quote }}
   labels:
     {{- include "certIssuer.labels" . | nindent 4 }}

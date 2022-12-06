@@ -1,49 +1,78 @@
 {{- if .Values.enabled -}}
-{{- if not .Values.persistence.enabled -}}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "caddy.fullname" . }}-{{ .Values.component }}
+  name: {{ include "caddy.fullname" . }}
   namespace: {{ .Release.Namespace | quote }}
   labels:
     {{- include "caddy.labels" . | nindent 4 }}
-    app.kubernetes.io/part-of: tum-gis-iot-stack-k8s
     app.kubernetes.io/component: {{ .Values.component }}
+    app.kubernetes.io/part-of: tum-gis-iot-stack-k8s
 spec:
+  {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
+  {{- end }}
   selector:
     matchLabels:
       {{- include "caddy.selectorLabels" . | nindent 6 }}
       app.kubernetes.io/component: {{ .Values.component }}
   template:
     metadata:
+      annotations:
+      {{- with .Values.podAnnotations }}
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+        checksum/configmap: {{ include (print $.Template.BasePath "/caddy-configMap.yml") . | sha256sum }}
       labels:
         {{- include "caddy.selectorLabels" . | nindent 8 }}
         app.kubernetes.io/component: {{ .Values.component }}
-      annotations:
-        checksum/configmap: {{ include (print $.Template.BasePath "/caddy-configMap.yml") . | sha256sum }}
     spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "caddy.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
       volumes:
-        - name: data
+        {{ if .Values.persistence.enabled -}}
+        - name: html
           persistentVolumeClaim:
-            claimName: caddy-pvc
+            claimName: {{ include "caddy.fullname" . }}
+        {{- end }}
         - name: settings
           configMap:
-            name: caddy-cfg-settings
+            name: {{ include "caddy.fullname" . }}-caddyfile
       containers:
-        - name: caddy
-          image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
-            - name: web
+            - name: http
               containerPort: 80
+              protocol: TCP
 
           volumeMounts:
+            {{ if .Values.persistence.enabled -}}
             - name: html
               mountPath: {{ .Values.persistence.data.mountPath }}
+            {{- end }}
             - name: settings
               mountPath: "/etc/caddy"
               readOnly: true
+
+          {{- with .Values.livenessProbe }}
+          livenessProbe:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+
+          {{- with .Values.readinessProbe }}
+          readinessProbe:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
@@ -58,13 +87,4 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-
-      volumes:
-        - name: html
-          persistentVolumeClaim:
-            claimName: {{ include "caddy.fullname" . }}-pvc
-        - name: settings
-          configMap:
-            name: {{ include "caddy.fullname" . }}-cfg-settings
-{{- end -}}
 {{- end -}}

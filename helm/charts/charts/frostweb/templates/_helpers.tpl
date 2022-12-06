@@ -65,9 +65,9 @@ Create the name of the service account to use
 FROST Service URL
 */}}
 {{- define "frostweb.http.serviceRootUrl" -}}
-  {{- .Values.http.protocol -}}://
-  {{- .Values.global.fqdn | default .Values.http.domain -}}/
-  {{- .Values.http.subpath }}
+  https://
+  {{- (first .Values.global.ingress.domains) | default (first .Values.ingress.domains) -}}/
+  {{- .Values.ingress.subpath }}
 {{- end }}
 
 {{/*

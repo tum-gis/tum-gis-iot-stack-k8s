@@ -51,7 +51,6 @@ This example has only tested with a Kubernetes single node cluster on
     NAME                       CLASS   HOSTS         ADDRESS        PORTS     AGE
     iot-stack-frostweb-ing     nginx   myhost.info   192.168.49.2   80, 443   7s
     iot-stack-grafana-ing      nginx   myhost.info   192.168.49.2   80, 443   7s
-    iot-stack-grafana7-ing     nginx   myhost.info   192.168.49.2   80, 443   7s
     iot-stack-nodered-ing      nginx   myhost.info   192.168.49.2   80, 443   7s
     iot-stack-nodered-ing-ui   nginx   myhost.info   192.168.49.2   80, 443   7s
     ```
@@ -77,9 +76,8 @@ This example has only tested with a Kubernetes single node cluster on
 5. After that, the services are available here:
 
     * FROST-Server: https://myhost.info/frost
-    * Grafana v9: https://myhost.info/grafana
-    * Grafana v7: https://myhost.info/grafana7
-    * Node-Red: https://myhost.info/nodered
+    * Grafana 9: https://myhost.info/grafana
+    * Node-RED: https://myhost.info/nodered
 
 All services can be accessed with the username `admin` and password `changeMe`.
 

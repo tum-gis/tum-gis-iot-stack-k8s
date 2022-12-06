@@ -8,12 +8,43 @@ home: https://github.com/tum-gis/tum-gis-iot-stack-k8s
 sources:
   - https://github.com/tum-gis/tum-gis-iot-stack-k8s
 
-kubeVersion: ">= 1.22.0"
+kubeVersion: ">= 1.23.0"
 
 maintainers:
   - email: b.willenborg@tum.de
     name: Bruno Willenborg
     url: https://www.asg.ed.tum.de/en/gis/our-team/staff/bruno-willenborg/
 
-version: 0.6.6
+version: 0.7.0
 appVersion: "0.0.1"
+
+
+dependencies:
+  - name: frostweb
+    version: "*"
+    condition: frostweb.enabled
+  - name: frostdb
+    version: "*"
+    condition: frostdb.enabled
+  - name: grafana
+    version: "*"
+    condition: grafana.enabled
+  - name: nodered
+    version: "*"
+    condition: nodered.enabled
+  - name: certIssuer
+    version: "*"
+    condition: certIssuer.enabled
+  - name: caddy
+    version: "*"
+    condition: caddy.enabled
+  - name: ingress-nginx
+    alias: ingress-nginx
+    condition: ingress-nginx.enabled
+    version: "~4.3.0"
+    repository: https://kubernetes.github.io/ingress-nginx
+  - name: cert-manager
+    alias: cert-manager
+    condition: cert-manager.enabled
+    version: "~1.10.0"
+    repository: https://charts.jetstack.io

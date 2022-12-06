@@ -9,3 +9,6 @@ plan.json
 # Archives
 *.tgz
 *.lock
+
+# Temp
+/caddy

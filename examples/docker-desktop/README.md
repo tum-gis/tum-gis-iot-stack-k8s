@@ -20,7 +20,7 @@ This example installs the stack on a local cluster. This is especially useful fo
     helm repo add iot-stack https://tum-gis.github.io/tum-gis-iot-stack-k8s
 
     # Optional, comment out if nginx-ingress controller is already installed in your cluster
-    helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+    # helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
 
     # Optional: Uncomment, if you want to test cert-manager as certificate issuer
     # helm repo add jetstack https://charts.jetstack.io
@@ -41,8 +41,7 @@ This example installs the stack on a local cluster. This is especially useful fo
 3. After the chart has installed successfully, the services are available here:
 
     * FROST-Server: https://localhost/frost
-    * Grafana v9: https://localhost/grafana
-    * Grafana v7: https://localhost/grafana7
+    * Grafana: https://localhost/grafana
     * Node-Red: https://localhost/nodered
 
 All services can be accessed with the username `admin` and password `changeMe`.

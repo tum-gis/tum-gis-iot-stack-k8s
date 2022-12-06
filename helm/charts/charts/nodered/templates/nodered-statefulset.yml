@@ -3,14 +3,14 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: {{ include "nodered.fullname" . }}-{{ .Values.component }}
+  name: {{ include "nodered.fullname" . }}
   namespace: {{ .Release.Namespace | quote }}
   labels:
     {{- include "nodered.labels" . | nindent 4 }}
     app.kubernetes.io/part-of: tum-gis-iot-stack-k8s
     app.kubernetes.io/component: {{ .Values.component }}
 spec:
-  serviceName: {{ .Chart.Name }}-svc-headless
+  serviceName: {{ include "nodered.fullname" . }}-hl
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
@@ -18,19 +18,43 @@ spec:
       app.kubernetes.io/component: {{ .Values.component }}
   template:
     metadata:
+      annotations:
+      {{- with .Values.podAnnotations }}
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+        checksum/configmap-settings: {{ include (print $.Template.BasePath "/nodered-configMap-settings.yml") . | sha256sum }}
+        checksum/configmap: {{ include (print $.Template.BasePath "/nodered-configMap.yml") . | sha256sum }}
+        checksum/secret: {{ include (print $.Template.BasePath "/nodered-secret.yml") . | sha256sum }}
       labels:
         {{- include "nodered.selectorLabels" . | nindent 8 }}
         app.kubernetes.io/component: {{ .Values.component }}
     spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "nodered.serviceAccountName" . }}
       securityContext:
-        runAsUser: 1000
-        fsGroup: 1000
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: {{ include "nodered.fullname" . }}
+        - name: settings
+          configMap:
+            name: {{ include "nodered.fullname" . }}-settings
+
       containers:
-        - name: nodered
-          image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
-            - containerPort: 1880
+            - name: http
+              containerPort: 1880
+              protocol: TCP
 
           command: [ "node-red" ]
           args:
@@ -41,9 +65,9 @@ spec:
 
           envFrom:
             - configMapRef:
-                name: {{ include "nodered.fullname" . }}-cfg
+                name: {{ include "nodered.fullname" . }}
             - secretRef:
-                name: {{ include "nodered.fullname" . }}-sct
+                name: {{ include "nodered.fullname" . }}
 
           livenessProbe:
             initialDelaySeconds: 30
@@ -81,13 +105,5 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-
-      volumes:
-        - name: data
-          persistentVolumeClaim:
-            claimName: {{ include "nodered.fullname" . }}-pvc
-        - name: settings
-          configMap:
-            name: {{ include "nodered.fullname" . }}-cfg-settings
 {{- end -}}
 {{- end -}}

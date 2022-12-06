@@ -3,7 +3,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: {{ include "nodered.fullname" . }}-pvc
+  name: {{ include "nodered.fullname" . }}
   namespace: {{ .Release.Namespace | quote }}
   labels:
     {{- include "nodered.labels" . | nindent 4 }}

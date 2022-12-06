@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ include "frostweb.fullname" . }}-cfg
+  name: {{ include "frostweb.fullname" . }}
   namespace: {{ .Release.Namespace | quote }}
   labels:
     {{- include "frostweb.labels" . | nindent 4 }}
@@ -31,8 +31,8 @@ data:
   persistence_slowQueryThreshold: {{ .Values.persistence.slowQueryThreshold | quote }}
 
   # MQTT settings
-  mqtt_enabled: {{ .Values.mqtt.enabled | quote }}
-  mqtt_host: {{ .Values.global.fqdn | default .Values.http.domain | default .Values.mqtt.host | quote }}
+  mqtt_enabled: {{ .Values.mqtt.Enabled | quote }}
+  mqtt_Host: {{ .Values.mqtt.host | quote }}
   mqtt_QoS: {{ .Values.mqtt.qos | quote }}
 
   # Auth settings

@@ -1,47 +1,115 @@
 enabled: true
 component: backend
-replicaCount: 1
+
+# -- Override name
+nameOverride: ""
+# -- Override fullname
+fullnameOverride: nodered
 
 image:
-  registry: nodered
-  repository: node-red
-  tag: 3.0.2
+  # -- Image repository
+  repository: nodered/node-red
+  # [Image pull policy](https://kubernetes.io/docs/concepts/containers/images/#image-pull-policy)
   pullPolicy: IfNotPresent
+   # -- Overrides the image tag whose default is the chart appVersion.
+  tag: ""
 
-http:
-  # Do not append or prepend :// or /
-  protocol: https
-  domain:
+
+# -- [Image pull secrets](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/)
+imagePullSecrets: []
+
+# -- Additional pod annotations
+podAnnotations: {}
+
+serviceAccount:
+  # -- Specifies whether a service account should be created
+  create: false
+  # -- Annotations to add to the service account
+  annotations: {}
+  # -- The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+podSecurityContext:
+  # -- Run as Node-RED user
+  runAsUser: 1000
+  fsGroup: 1000
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+service:
+  # -- Type of service for http
+  type: ClusterIP
+  # -- Service port for http
+  port: 3000
+
+# -- Number of replicas.
+# Note: As of 2023-01  there is no easy way to scale Node-RED horizontally accross clsuters.
+# Leave this set to `1` unless you know what you are doing.
+replicaCount: 1
+
+# -- Ingress configuration
+ingress:
+  # -- Enable/disable ingress
+  enabled: true
+  # -- Name of the [IngressClass](https://kubernetes.io/docs/concepts/services-networking/ingress/#ingress-class)
+  # to use in Ingress routes.
+  className: nginx
+  # -- List of [FQDNs](https://de.wikipedia.org/wiki/Fully-Qualified_Host_Name) for this Ingress.
+  # Note: All FQDNs will be used for Ingress hosts and TLS certificate.
+  # The global setting overwrites this setting. Note: The first domain in the list will be used
+  # as FROST-Server serviceRootURL and MQTT host.
+  domains: []
+  # -- Additional Ingress annotations
+  annotations:
+  # -- Make Node-RED available at a subpath. By default Node-RED will be available from [DOMAIN]/
+  # Don't append or prepend :// or /
   subpath: nodered
+  certManager:
+    # -- eMail address for ACME registration with Let's Encrypt. Only used for issuerType = namespace.
+    issuerEmail: me@example.com
+    # -- Type of [cert-manager](https://cert-manager.io/docs/) Issuer: Use either "namespace" or "cluster".
+    issuerType: namespace
+    # -- Name of the Issuer to use. For certManager.type = namespace
+    # `letsencrypt-staging`, `letsencrypt-prod` and `self-signed` are available.
+    issuerName: letsencrypt-staging
 
 settings:
+  # -- Node-RED timezone settings
   tz: "Europe/Berlin"
+  # -- Enable/disable Node-RED projects
   enableProjects: true
 
 security:
+  # -- Node-RED admin username
   adminUsername: "admin"
-  # changeMe = $2b$08$2UedHI9nnjDY/LANnfT/ruzyWa.ZGzW46r7xBAvsh8GmlZS70k2e.
+  # -- Node-RED admin password. default = `changeMe`
   adminPassword: "$2b$08$2UedHI9nnjDY/LANnfT/ruzyWa.ZGzW46r7xBAvsh8GmlZS70k2e."
+  # -- Node-RED credentials secret
   credentialsSecret: "changeMe"
-
-# Ingress configuration
-ingress:
-  ingressClassName:
-  certManager:
-    type:
-    issuer:
 
 # -- Extra environment variables
 extraEnv: {}
 
 persistence:
+  # -- Enable/disable persistent storage of settings and flows
   enabled: false
+  # -- StorageClass to use, leave empty to use default StorageClass.
   storageClassName:
   data:
+    # -- Mount path of the storage
     mountPath: /data
+    # -- Storage [access modes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes)
     accessModes:
       - ReadWriteOnce
-    capacity: 4Gi
+    # -- Storage [capacity](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#capacity)
+    capacity: 2Gi
 
 resources:
   limits:

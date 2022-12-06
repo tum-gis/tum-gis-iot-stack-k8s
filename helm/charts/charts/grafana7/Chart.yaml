@@ -1,6 +1,0 @@
-apiVersion: v2
-name: grafana7
-description: Grafana 7 instance
-type: application
-version: 0.3.0
-appVersion: "7.5.10"

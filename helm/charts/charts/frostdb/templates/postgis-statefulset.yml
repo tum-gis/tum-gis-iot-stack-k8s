@@ -2,45 +2,58 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: {{ include "frostdb.fullname" . }}-{{ .Values.component }}
+  name: {{ include "frostdb.fullname" . }}
   namespace: {{ .Release.Namespace | quote }}
   labels:
     {{- include "frostdb.labels" . | nindent 4 }}
     app.kubernetes.io/part-of: tum-gis-iot-stack-k8s
     app.kubernetes.io/component: {{ .Values.component }}
 spec:
-  serviceName: {{ .Chart.Name }}-svc-headless
-  replicas: {{ .Values.replicaCount }}
+  serviceName: {{ include "frostdb.fullname" . }}-hl
   selector:
     matchLabels:
       {{- include "frostdb.selectorLabels" . | nindent 6 }}
       app.kubernetes.io/component: {{ .Values.component }}
   template:
     metadata:
+      annotations:
+      {{- with .Values.podAnnotations }}
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
       labels:
         {{- include "frostdb.selectorLabels" . | nindent 8 }}
         app.kubernetes.io/component: {{ .Values.component }}
     spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "frostdb.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
       volumes:
         - name: postgresdata
           persistentVolumeClaim:
-            claimName: {{ include "frostdb.fullname" . }}-pvc
+            claimName: {{ include "frostdb.fullname" . }}
         - name: dshm
           emptyDir:
             medium: Memory
-
       containers:
-        - name: postgis
-          image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
-            - containerPort: 5432
+            - name: psql
+              containerPort: 5432
+              protocol: TCP
 
           envFrom:
             - configMapRef:
-                name: {{ include "frostdb.fullname" . }}-cfg
+                name: {{ include "frostdb.fullname" . }}
             - secretRef:
-                name: {{ include "frostdb.fullname" . }}-sct
+                name: {{ include "frostdb.fullname" . }}
 
           volumeMounts:
             - mountPath: {{ .Values.persistence.mountPath }}
@@ -75,5 +88,4 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-
 {{- end -}}

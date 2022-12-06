@@ -1,6 +1,6 @@
 # frostdb
 
-![Version: 0.3.1](https://img.shields.io/badge/Version-0.3.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 14-3.3-alpine](https://img.shields.io/badge/AppVersion-14--3.3--alpine-informational?style=flat-square)
+![Version: 0.4.0](https://img.shields.io/badge/Version-0.4.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 14-3.3-alpine](https://img.shields.io/badge/AppVersion-14--3.3--alpine-informational?style=flat-square)
 
 PostGIS database in a local volume for FROST-Server.
 
@@ -9,30 +9,36 @@ PostGIS database in a local volume for FROST-Server.
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | affinity | object | `{}` |  |
-| auth.password | string | `"changeMe"` |  |
-| auth.username | string | `"postgres"` |  |
+| auth.password | string | `"changeMe"` | Database password |
+| auth.username | string | `"postgres"` | Database user |
 | component | string | `"database"` |  |
-| dbname | string | `"frost"` |  |
+| dbname | string | `"frost"` | Database name |
 | enabled | bool | `true` |  |
 | extraEnv | object | `{}` | Extra environment variables |
-| image.pullPolicy | string | `"IfNotPresent"` |  |
-| image.registry | string | `"postgis"` |  |
-| image.repository | string | `"postgis"` |  |
-| image.tag | string | `"14-3.3-alpine"` |  |
-| loadBalancer.enabled | bool | `false` |  |
-| nameOverride | string | `nil` | override Chart.Name |
+| fullnameOverride | string | `"frostdb"` | Override fullname |
+| image.pullPolicy | string | `"IfNotPresent"` | Image pull policy |
+| image.repository | string | `"postgis/postgis"` | Image repository |
+| image.tag | string | `""` | Overrides the image tag whose default is the chart appVersion. |
+| imagePullSecrets | list | `[]` | [Image pull secrets](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/) |
+| loadBalancer.enabled | bool | `false` | Enable/disable a LoadBalancer service for external Database access |
+| nameOverride | string | `nil` | Override name |
 | nodeSelector | object | `{}` |  |
-| persistence.accessModes[0] | string | `"ReadWriteOnce"` |  |
-| persistence.capacity | string | `"4Gi"` |  |
-| persistence.mountPath | string | `"/mydata"` |  |
-| persistence.pgdataSubPath | string | `"/pgdata"` |  |
-| persistence.storageClassName | string | `nil` |  |
-| port | int | `5432` |  |
-| replicaCount | int | `1` |  |
+| persistence.accessModes | list | `["ReadWriteOnce"]` | Storage [access modes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes) |
+| persistence.capacity | string | `"4Gi"` | Storage [capacity](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#capacity) |
+| persistence.mountPath | string | `"/mydata"` | Mount path of the storage. Omit trailing `/` ! |
+| persistence.pgdataSubPath | string | `"/pgdata"` | Subpath inside `mountPath` for the postgres data folder |
+| persistence.storageClassName | string | `nil` | StorageClass to use, leave empty to use default StorageClass. |
+| podAnnotations | object | `{}` | Additional pod annotations |
+| podSecurityContext | object | `{}` |  |
+| port | int | `5432` | Database port |
 | resources.limits.cpu | string | `"2000m"` |  |
-| resources.limits.memory | string | `"8Gi"` |  |
+| resources.limits.memory | string | `"4Gi"` |  |
 | resources.requests.cpu | string | `"1000m"` |  |
 | resources.requests.memory | string | `"1Gi"` |  |
+| securityContext | object | `{}` |  |
+| serviceAccount.annotations | object | `{}` | Annotations to add to the service account |
+| serviceAccount.create | bool | `false` | Specifies whether a service account should be created |
+| serviceAccount.name | string | `""` | The name of the service account to use. If not set and create is true, a name is generated using the fullname template |
 | tolerations | list | `[]` |  |
 
 ----------------------------------------------

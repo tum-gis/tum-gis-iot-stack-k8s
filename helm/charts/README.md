@@ -1,6 +1,6 @@
 # tum-gis-iot-stack-k8s
 
-![Version: 0.6.1](https://img.shields.io/badge/Version-0.6.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.0.1](https://img.shields.io/badge/AppVersion-0.0.1-informational?style=flat-square)
+![Version: 0.7.0](https://img.shields.io/badge/Version-0.7.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.0.1](https://img.shields.io/badge/AppVersion-0.0.1-informational?style=flat-square)
 
 Helm Chart for the TUM-GI IoT stack.
 
@@ -18,7 +18,18 @@ Helm Chart for the TUM-GI IoT stack.
 
 ## Requirements
 
-Kubernetes: `>= 1.22.0`
+Kubernetes: `>= 1.23.0`
+
+| Repository | Name | Version |
+|------------|------|---------|
+|  | caddy | * |
+|  | certIssuer | * |
+|  | frostdb | * |
+|  | frostweb | * |
+|  | grafana | * |
+|  | nodered | * |
+| https://charts.jetstack.io | cert-manager(cert-manager) | ~1.10.0 |
+| https://kubernetes.github.io/ingress-nginx | ingress-nginx(ingress-nginx) | ~4.3.0 |
 
 ## Values
 
@@ -29,20 +40,22 @@ Kubernetes: `>= 1.22.0`
 | certIssuer.enabled | bool | `false` | Enable/disable [cert-manager](https://cert-manager.io/docs/) namespace Issuers. Set according to other `ingress.XXX` settings. Disable if a `ClusterIssuer` is used. |
 | frostdb.enabled | bool | `true` | Enable/disable PostGIS Database. Disable if an external database is used. |
 | frostweb.enabled | bool | `true` | Enable/disable FROST-Server web interface. |
+| fullnameOverride | string | `""` | Override fullname |
 | global.db.auth.password | string | `"changeMe"` | Database password |
 | global.db.auth.username | string | `"postgres"` | Database username |
 | global.db.dbname | string | `"frost"` | Database name |
-| global.db.host | string | `"frostdb-svc"` | Database host, allows using external databases. Use DNS name of the `frostdb` service when hosting the database inside the cluster. |
+| global.db.host | string | `"frostdb"` | Database host, allows using external databases. Use DNS name of the `frostdb` service when using frostdb subchart. |
 | global.db.port | int | `5432` | Database port |
-| global.fqdn | string | `"localhost"` | Fully qualified domain name, used for all Ingress routes. Use localhost for local testing deployments. |
-| global.ingress.certManager.adminEmail | string | `"me@example.com"` | eMail address for ACME registration with Let's Encrypt. Only used for type = namespace. |
-| global.ingress.certManager.issuer | string | `"letsencrypt-staging"` | Name of the Issuer to use. For certManager.type = namespace `letsencrypt-staging`, `letsencrypt-prod` and `self-signed` are available. |
-| global.ingress.certManager.type | string | `"namespace"` | Type of [cert-manager](https://cert-manager.io/docs/) Issuer: Use either "namespace" or "cluster". |
-| global.ingress.ingressClassName | string | `"nginx"` | Name of the [IngressClass](https://kubernetes.io/docs/concepts/services-networking/ingress/#ingress-class) to use in Ingress routes. |
+| global.ingress | object | `{"annotations":{},"certManager":{"issuerEmail":"me@example.com","issuerName":"letsencrypt-staging","issuerType":"namespace"},"className":"nginx","domains":["localhost"]}` | Fully qualified domain name, used for all Ingress routes. Use localhost for local testing deployments. |
+| global.ingress.annotations | object | `{}` | Additional ingress annotations, that are set for all ingress routes of subcharts. |
+| global.ingress.certManager.issuerEmail | string | `"me@example.com"` | eMail address for ACME registration with Let's Encrypt. Only used for issuerType = namespace. |
+| global.ingress.certManager.issuerName | string | `"letsencrypt-staging"` | Name of the Issuer to use. For certManager.type = namespace `letsencrypt-staging`, `letsencrypt-production` and `self-signed` are available. |
+| global.ingress.certManager.issuerType | string | `"namespace"` | Type of [cert-manager](https://cert-manager.io/docs/) Issuer: Use either "namespace" or "cluster". |
+| global.ingress.className | string | `"nginx"` | Name of the [IngressClass](https://kubernetes.io/docs/concepts/services-networking/ingress/#ingress-class) to use in Ingress routes. |
+| global.ingress.domains | list | `["localhost"]` | List of [FQDNs](https://de.wikipedia.org/wiki/Fully-Qualified_Host_Name) for this Ingress. Note: All FQDNs will be used for Ingress hosts and TLS certificate. The global setting overwrites this setting in subcharts. |
 | grafana.enabled | bool | `true` | Enable/disable Grafana. |
-| grafana7.enabled | bool | `false` | Enable/disable Grafana 7 instance. Only required when usage of [LinkSmart SensorThings Datasource](https://grafana.com/grafana/plugins/linksmart-sensorthings-datasource/) is required. |
 | ingress-nginx.enabled | bool | `false` | Enable/disable [NGINX-Ingress](https://github.com/kubernetes/ingress-nginx). This is only required, if there is no IncressController available in your cluster. |
-| name | string | `"tumgis-iot-stack"` | Base name for Kubernetes components. If empty, Chart.Name is used instead. |
+| nameOverride | string | `""` | Override name |
 | nodered.enabled | bool | `true` | Enable/disable Node-RED. |
 
 ----------------------------------------------

@@ -2,37 +2,59 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "frostweb.fullname" . }}-{{ .Values.component }}
+  name: {{ include "frostweb.fullname" . }}
   namespace: {{ .Release.Namespace | quote }}
   labels:
     {{- include "frostweb.labels" . | nindent 4 }}
     app.kubernetes.io/part-of: tum-gis-iot-stack-k8s
     app.kubernetes.io/component: {{ .Values.component }}
 spec:
+  {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
+  {{- end }}
   selector:
     matchLabels:
       {{- include "frostweb.selectorLabels" . | nindent 6 }}
       app.kubernetes.io/component: {{ .Values.component }}
   template:
     metadata:
+      annotations:
+      {{- with .Values.podAnnotations }}
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+        checksum/configmap: {{ include (print $.Template.BasePath "/frost-http-mqtt-configMap.yml") . | sha256sum }}
+        checksum/secret: {{ include (print $.Template.BasePath "/frost-http-mqtt-secret.yml") . | sha256sum }}
       labels:
         {{- include "frostweb.selectorLabels" . | nindent 8 }}
         app.kubernetes.io/component: {{ .Values.component }}
     spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "frostweb.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+
       containers:
-        - name: frost-http-mqtt
-          image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
-            - containerPort: 8080
-            - containerPort: 1883
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+            - name: mqtt
+              containerPort: 1883
+              protocol: TCP
 
           envFrom:
             - configMapRef:
-                name: {{ include "frostweb.fullname" . }}-cfg
+                name: {{ include "frostweb.fullname" . }}
             - secretRef:
-                name: {{ include "frostweb.fullname" . }}-sct
+                name: {{ include "frostweb.fullname" . }}
 
           livenessProbe:
             initialDelaySeconds: 30
@@ -63,5 +85,4 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-
 {{- end -}}

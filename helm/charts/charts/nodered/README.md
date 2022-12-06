@@ -1,6 +1,6 @@
 # nodered
 
-![Version: 0.3.1](https://img.shields.io/badge/Version-0.3.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 3.0.2](https://img.shields.io/badge/AppVersion-3.0.2-informational?style=flat-square)
+![Version: 0.4.0](https://img.shields.io/badge/Version-0.4.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 3.0.2](https://img.shields.io/badge/AppVersion-3.0.2-informational?style=flat-square)
 
 Node-RED instance
 
@@ -12,32 +12,46 @@ Node-RED instance
 | component | string | `"backend"` |  |
 | enabled | bool | `true` |  |
 | extraEnv | object | `{}` | Extra environment variables |
-| http.domain | string | `nil` |  |
-| http.protocol | string | `"https"` |  |
-| http.subpath | string | `"nodered"` |  |
+| fullnameOverride | string | `"nodered"` | Override fullname |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
-| image.registry | string | `"nodered"` |  |
-| image.repository | string | `"node-red"` |  |
-| image.tag | string | `"3.0.2"` |  |
-| ingress.certManager.issuer | string | `nil` |  |
-| ingress.certManager.type | string | `nil` |  |
-| ingress.ingressClassName | string | `nil` |  |
+| image.repository | string | `"nodered/node-red"` | Image repository |
+| image.tag | string | `""` | Overrides the image tag whose default is the chart appVersion. |
+| imagePullSecrets | list | `[]` | [Image pull secrets](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/) |
+| ingress | object | `{"annotations":null,"certManager":{"issuerEmail":"me@example.com","issuerName":"letsencrypt-staging","issuerType":"namespace"},"className":"nginx","domains":[],"enabled":true,"subpath":"nodered"}` | Ingress configuration |
+| ingress.annotations | string | `nil` | Additional Ingress annotations |
+| ingress.certManager.issuerEmail | string | `"me@example.com"` | eMail address for ACME registration with Let's Encrypt. Only used for issuerType = namespace. |
+| ingress.certManager.issuerName | string | `"letsencrypt-staging"` | Name of the Issuer to use. For certManager.type = namespace `letsencrypt-staging`, `letsencrypt-prod` and `self-signed` are available. |
+| ingress.certManager.issuerType | string | `"namespace"` | Type of [cert-manager](https://cert-manager.io/docs/) Issuer: Use either "namespace" or "cluster". |
+| ingress.className | string | `"nginx"` | Name of the [IngressClass](https://kubernetes.io/docs/concepts/services-networking/ingress/#ingress-class) to use in Ingress routes. |
+| ingress.domains | list | `[]` | List of [FQDNs](https://de.wikipedia.org/wiki/Fully-Qualified_Host_Name) for this Ingress. Note: All FQDNs will be used for Ingress hosts and TLS certificate. The global setting overwrites this setting. Note: The first domain in the list will be used as FROST-Server serviceRootURL and MQTT host. |
+| ingress.enabled | bool | `true` | Enable/disable ingress |
+| ingress.subpath | string | `"nodered"` | Make Node-RED available at a subpath. By default Node-RED will be available from [DOMAIN]/ Don't append or prepend :// or / |
+| nameOverride | string | `""` | Override name |
 | nodeSelector | object | `{}` |  |
-| persistence.data.accessModes[0] | string | `"ReadWriteOnce"` |  |
-| persistence.data.capacity | string | `"4Gi"` |  |
-| persistence.data.mountPath | string | `"/data"` |  |
-| persistence.enabled | bool | `false` |  |
-| persistence.storageClassName | string | `nil` |  |
-| replicaCount | int | `1` |  |
+| persistence.data.accessModes | list | `["ReadWriteOnce"]` | Storage [access modes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes) |
+| persistence.data.capacity | string | `"2Gi"` | Storage [capacity](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#capacity) |
+| persistence.data.mountPath | string | `"/data"` | Mount path of the storage |
+| persistence.enabled | bool | `false` | Enable/disable persistent storage of settings and flows |
+| persistence.storageClassName | string | `nil` | StorageClass to use, leave empty to use default StorageClass. |
+| podAnnotations | object | `{}` | Additional pod annotations |
+| podSecurityContext.fsGroup | int | `1000` |  |
+| podSecurityContext.runAsUser | int | `1000` | Run as Node-RED user |
+| replicaCount | int | `1` | Number of replicas. Note: As of 2023-01  there is no easy way to scale Node-RED horizontally accross clsuters. Leave this set to `1` unless you know what you are doing. |
 | resources.limits.cpu | string | `"1000m"` |  |
 | resources.limits.memory | string | `"1Gi"` |  |
 | resources.requests.cpu | string | `"250m"` |  |
 | resources.requests.memory | string | `"250Mi"` |  |
-| security.adminPassword | string | `"$2b$08$2UedHI9nnjDY/LANnfT/ruzyWa.ZGzW46r7xBAvsh8GmlZS70k2e."` |  |
-| security.adminUsername | string | `"admin"` |  |
-| security.credentialsSecret | string | `"changeMe"` |  |
-| settings.enableProjects | bool | `true` |  |
-| settings.tz | string | `"Europe/Berlin"` |  |
+| security.adminPassword | string | `"$2b$08$2UedHI9nnjDY/LANnfT/ruzyWa.ZGzW46r7xBAvsh8GmlZS70k2e."` | Node-RED admin password. default = `changeMe` |
+| security.adminUsername | string | `"admin"` | Node-RED admin username |
+| security.credentialsSecret | string | `"changeMe"` | Node-RED credentials secret |
+| securityContext | object | `{}` |  |
+| service.port | int | `3000` | Service port for http |
+| service.type | string | `"ClusterIP"` | Type of service for http |
+| serviceAccount.annotations | object | `{}` | Annotations to add to the service account |
+| serviceAccount.create | bool | `false` | Specifies whether a service account should be created |
+| serviceAccount.name | string | `""` | The name of the service account to use. If not set and create is true, a name is generated using the fullname template |
+| settings.enableProjects | bool | `true` | Enable/disable Node-RED projects |
+| settings.tz | string | `"Europe/Berlin"` | Node-RED timezone settings |
 | tolerations | list | `[]` |  |
 
 ----------------------------------------------

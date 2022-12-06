@@ -1,21 +1,23 @@
 {{- if .Values.enabled -}}
+{{- if .Values.mqtt.enabled -}}
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "nodered.fullname" . }}
+  name: {{ include "frostweb.fullname" . }}-mqtt
   namespace: {{ .Release.Namespace | quote }}
   labels:
-    {{- include "nodered.labels" . | nindent 4 }}
+    {{- include "frostweb.labels" . | nindent 4 }}
     app.kubernetes.io/part-of: tum-gis-iot-stack-k8s
     app.kubernetes.io/component: {{ .Values.component }}
 spec:
-  type: {{ .Values.service.type }}
+  type: {{ .Values.mqttService.type }}
   selector:
-    {{- include "nodered.selectorLabels" . | nindent 4 }}
+    {{- include "frostweb.selectorLabels" . | nindent 4 }}
     app.kubernetes.io/component: {{ .Values.component }}
   ports:
-    - name: http
+    - name: mqtt
       protocol: TCP
-      port: {{ .Values.service.port }}
-      targetPort: 1880
+      port: {{ .Values.mqttService.port }}
+      targetPort: 1883
+{{- end -}}
 {{- end -}}

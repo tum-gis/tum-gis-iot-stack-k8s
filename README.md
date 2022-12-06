@@ -23,7 +23,6 @@
   * Server implementation of the OGC SensorThings API
 * [Grafana](https://grafana.com/)
   * Dashboards for your data
-  * For compatibility a Grafana v7 instance can optionally be enabled
 * [Node-RED](https://nodered.org/)
   * Wiring together hardware devices, APIs and online services
 * [caddy](https://caddyserver.com/)
