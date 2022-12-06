@@ -45,6 +45,6 @@ data:
   auth_allowAnonymousRead: {{ .Values.auth.allowAnonymousRead | quote }}
   {{- end }}
   {{- if .Values.extraEnv -}}
-  {{ toYaml .Values.extraEnv }}
-  {{ end }}
+  {{- toYaml .Values.extraEnv | nindent 2 }}
+  {{- end -}}
 {{- end -}}

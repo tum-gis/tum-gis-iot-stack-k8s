@@ -12,6 +12,6 @@ data:
   POSTGRES_DB: {{ .Values.global.db.dbname | default .Values.dbname | quote }}
   PGDATA: "{{ .Values.persistence.mountPath }}{{ .Values.persistence.pgdataSubPath }}"
   {{- if .Values.extraEnv -}}
-  {{ toYaml .Values.extraEnv }}
-  {{ end }}
+  {{- toYaml .Values.extraEnv | nindent 2 }}
+  {{- end -}}
 {{- end -}}
