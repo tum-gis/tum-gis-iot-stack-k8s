@@ -1,6 +1,6 @@
 # frostweb
 
-![Version: 0.1.3](https://img.shields.io/badge/Version-0.1.3-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2.0.4](https://img.shields.io/badge/AppVersion-2.0.4-informational?style=flat-square)
+![Version: 0.2.1](https://img.shields.io/badge/Version-0.2.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2.0.4](https://img.shields.io/badge/AppVersion-2.0.4-informational?style=flat-square)
 
 FROST-Server HTTP and MQTT service
 
@@ -25,6 +25,7 @@ FROST-Server HTTP and MQTT service
 | defaultCount | bool | `false` |  |
 | defaultTop | int | `100` |  |
 | enabled | bool | `true` |  |
+| extraEnv | object | `{}` | Extra environment variables |
 | http.cors.allowed_origins | string | `"*"` |  |
 | http.cors.enabled | bool | `true` |  |
 | http.domain | string | `nil` |  |

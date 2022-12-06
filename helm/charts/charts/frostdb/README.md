@@ -1,6 +1,6 @@
 # frostdb
 
-![Version: 0.2.1](https://img.shields.io/badge/Version-0.2.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 14-3.3-alpine](https://img.shields.io/badge/AppVersion-14--3.3--alpine-informational?style=flat-square)
+![Version: 0.3.1](https://img.shields.io/badge/Version-0.3.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 14-3.3-alpine](https://img.shields.io/badge/AppVersion-14--3.3--alpine-informational?style=flat-square)
 
 PostGIS database in a local volume for FROST-Server.
 
@@ -14,11 +14,13 @@ PostGIS database in a local volume for FROST-Server.
 | component | string | `"database"` |  |
 | dbname | string | `"frost"` |  |
 | enabled | bool | `true` |  |
+| extraEnv | object | `{}` | Extra environment variables |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.registry | string | `"postgis"` |  |
 | image.repository | string | `"postgis"` |  |
 | image.tag | string | `"14-3.3-alpine"` |  |
 | loadBalancer.enabled | bool | `false` |  |
+| nameOverride | string | `nil` | override Chart.Name |
 | nodeSelector | object | `{}` |  |
 | persistence.accessModes[0] | string | `"ReadWriteOnce"` |  |
 | persistence.capacity | string | `"4Gi"` |  |
