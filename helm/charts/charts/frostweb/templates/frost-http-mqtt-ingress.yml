@@ -11,11 +11,11 @@ metadata:
   annotations:
     {{- if (and (not (empty (coalesce .Values.global.ingress.certManager.issuer .Values.ingress.certManager.issuer )))
     (eq (coalesce .Values.global.ingress.certManager.type .Values.ingress.certManager.type) "cluster")) }}
-    certmanager.k8s.io/cluster-issuer: {{ .Values.global.ingress.certManager.issuer | default .Values.ingress.certManager.issuer | quote }}
+    cert-manager.io/cluster-issuer: {{ .Values.global.ingress.certManager.issuer | default .Values.ingress.certManager.issuer | quote }}
     {{- end }}
     {{- if (and (not (empty (coalesce .Values.global.ingress.certManager.issuer .Values.ingress.certManager.issuer )))
     (eq (coalesce .Values.global.ingress.certManager.type .Values.ingress.certManager.type) "namespace")) }}
-    certmanager.k8s.io/issuer: {{ .Values.global.ingress.certManager.issuer | default .Values.ingress.certManager.issuer | quote }}
+    cert-manager.io/issuer: {{ .Values.global.ingress.certManager.issuer | default .Values.ingress.certManager.issuer | quote }}
     {{- end }}
     nginx.ingress.kubernetes.io/ssl-redirect: "true"
     nginx.ingress.kubernetes.io/rewrite-target: "/FROST-Server/$2"
