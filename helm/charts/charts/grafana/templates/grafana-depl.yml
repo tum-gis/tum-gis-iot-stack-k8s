@@ -19,6 +19,8 @@ spec:
       labels:
         {{- include "grafana.selectorLabels" . | nindent 8 }}
         app.kubernetes.io/component: {{ .Values.component }}
+      annotations:
+        checksum/configmap: {{ include (print $.Template.BasePath "/grafana-configMap.yml") . | sha256sum }}
     spec:
       securityContext:
         runAsUser: 472
