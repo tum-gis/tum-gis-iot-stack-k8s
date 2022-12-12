@@ -12,7 +12,8 @@ install:
   plugins: "grafana-clock-panel,grafana-simple-json-datasource
       ,grafana-worldmap-panel,marcusolsson-json-datasource
       ,snuids-trafficlights-panel,citilogics-geoloop-panel
-      ,linksmart-sensorthings-datasource
+      ,linksmart-sensorthings-datasource,yesoreyeram-boomtheme-panel
+      ,nline-plotlyjs-panel,snuids-svg-panel
       ,https://github.com/briangann/grafana-gauge-panel/releases/download/v0.0.9/briangann-gauge-panel-0.0.9.zip;briangann-gauge-panel"
 
 http:
