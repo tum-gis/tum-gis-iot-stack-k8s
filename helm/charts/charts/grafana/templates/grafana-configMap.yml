@@ -25,7 +25,7 @@ data:
   GF_DATABASE_NAME: {{ .Values.database.dbname | quote }}
   GF_DATABASE_SSL_MODE: {{ .Values.database.sslmode | quote }}
   {{- end -}}
-  {{- if .Values.extraEnv -}}
-  {{- toYaml .Values.extraEnv | nindent 2 }}
-  {{- end -}}
+  {{- with .Values.extraEnv }}
+    {{- toYaml . | nindent 2 }}
+  {{- end }}
 {{- end -}}

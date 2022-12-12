@@ -11,7 +11,7 @@ metadata:
 data:
   TZ: {{ .Values.settings.tz | quote }}
   NODE_RED_ENABLE_PROJECTS: {{ .Values.settings.enableProjects | quote }}
-  {{- if .Values.extraEnv -}}
-  {{- toYaml .Values.extraEnv | nindent 2 }}
-  {{- end -}}
+  {{- with .Values.extraEnv }}
+    {{- toYaml . | nindent 2 }}
+  {{- end }}
 {{- end -}}

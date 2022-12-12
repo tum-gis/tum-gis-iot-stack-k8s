@@ -44,7 +44,7 @@ data:
   auth_autoUpdateDatabase: {{ .Values.auth.autoUpdateDatabase | quote }}
   auth_allowAnonymousRead: {{ .Values.auth.allowAnonymousRead | quote }}
   {{- end }}
-  {{- if .Values.extraEnv -}}
-  {{- toYaml .Values.extraEnv | nindent 2 }}
-  {{- end -}}
+  {{- with .Values.extraEnv }}
+    {{- toYaml . | nindent 2 }}
+  {{- end }}
 {{- end -}}
