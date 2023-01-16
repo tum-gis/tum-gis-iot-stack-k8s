@@ -28,8 +28,8 @@ Kubernetes: `>= 1.23.0`
 |  | frostweb | * |
 |  | grafana | * |
 |  | nodered | * |
-| https://charts.jetstack.io | cert-manager(cert-manager) | ~1.10.0 |
-| https://kubernetes.github.io/ingress-nginx | ingress-nginx(ingress-nginx) | ~4.3.0 |
+| https://charts.jetstack.io | cert-manager(cert-manager) | ~1.11.0 |
+| https://kubernetes.github.io/ingress-nginx | ingress-nginx(ingress-nginx) | ~4.4.0 |
 
 ## Values
 
