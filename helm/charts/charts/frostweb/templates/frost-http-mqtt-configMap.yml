@@ -31,7 +31,7 @@ data:
   persistence_slowQueryThreshold: {{ .Values.persistence.slowQueryThreshold | quote }}
 
   # MQTT settings
-  mqtt_enabled: {{ .Values.mqtt.Enabled | quote }}
+  mqtt_enabled: {{ .Values.mqtt.enabled | quote }}
   mqtt_Host: {{ .Values.mqtt.host | quote }}
   mqtt_QoS: {{ .Values.mqtt.qos | quote }}
 
