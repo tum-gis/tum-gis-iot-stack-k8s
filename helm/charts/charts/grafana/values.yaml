@@ -141,6 +141,55 @@ database:
     username: postgres
     password: changeMe
 
+
+# -- [Startup probe](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes)
+# See the [API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#Probe) for details.
+startupProbe:
+  # -- Enable/disable startup probe
+  enabled: true
+  initialDelaySeconds: 10
+  periodSeconds: 5
+  timeoutSeconds: 1
+  successThreshold: 1
+  failureThreshold: 20
+  terminationGracePeriodSeconds:
+  # -- Configure [startup probe](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/)
+  probe:
+    exec:
+      command: [ bash, -c, 'wget -S "http://127.0.0.1:3000/api/health" |& grep "200 OK"' ]
+
+# -- [Liveness probe](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes)
+# See the [API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#Probe) for details.
+livenessProbe:
+  # -- Enable/disable liveness probe
+  enabled: true
+  initialDelaySeconds: 10
+  periodSeconds: 5
+  timeoutSeconds: 1
+  successThreshold: 1
+  failureThreshold: 5
+  terminationGracePeriodSeconds:
+  # -- Configure [startup probe](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/)
+  probe:
+    exec:
+      command: [ bash, -c, 'wget -S "http://127.0.0.1:3000/api/health" |& grep "200 OK"' ]
+
+# -- [Readiness probe](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes)
+# See the [API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#Probe) for details.
+readinessProbe:
+  # -- Enable/disable readiness probe
+  enabled: true
+  initialDelaySeconds: 10
+  periodSeconds: 5
+  timeoutSeconds: 1
+  successThreshold: 1
+  failureThreshold: 5
+  terminationGracePeriodSeconds:
+  # -- Configure [startup probe](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/)
+  probe:
+    exec:
+      command: [ bash, -c, 'wget -S "http://127.0.0.1:3000/api/health" |& grep "200 OK"' ]
+
 resources:
   limits:
     cpu: 1000m

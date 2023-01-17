@@ -111,6 +111,54 @@ persistence:
     # -- Storage [capacity](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#capacity)
     capacity: 2Gi
 
+# -- [Startup probe](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes)
+# See the [API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#Probe) for details.
+startupProbe:
+  # -- Enable/disable startup probe
+  enabled: true
+  initialDelaySeconds: 10
+  periodSeconds: 5
+  timeoutSeconds: 1
+  successThreshold: 1
+  failureThreshold: 5
+  terminationGracePeriodSeconds:
+  # -- Configure [startup probe](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/)
+  probe:
+    exec:
+      command: [ bash, -c, 'curl http://localhost:1880/ || exit 1' ]
+
+# -- [Liveness probe](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes)
+# See the [API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#Probe) for details.
+livenessProbe:
+  # -- Enable/disable liveness probe
+  enabled: true
+  initialDelaySeconds: 10
+  periodSeconds: 5
+  timeoutSeconds: 1
+  successThreshold: 1
+  failureThreshold: 20
+  terminationGracePeriodSeconds:
+  # -- Configure [startup probe](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/)
+  probe:
+    exec:
+      command: [ bash, -c, 'curl http://localhost:1880/ || exit 1' ]
+
+# -- [Readiness probe](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes)
+# See the [API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#Probe) for details.
+readinessProbe:
+  # -- Enable/disable readiness probe
+  enabled: true
+  initialDelaySeconds: 10
+  periodSeconds: 5
+  timeoutSeconds: 1
+  successThreshold: 1
+  failureThreshold: 5
+  terminationGracePeriodSeconds:
+  # -- Configure [startup probe](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/)
+  probe:
+    exec:
+      command: [ bash, -c, 'curl http://localhost:1880/ || exit 1' ]
+
 resources:
   limits:
     cpu: 1000m

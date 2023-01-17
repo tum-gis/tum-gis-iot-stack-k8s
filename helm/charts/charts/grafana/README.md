@@ -1,6 +1,6 @@
 # grafana
 
-![Version: 0.5.1](https://img.shields.io/badge/Version-0.5.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 9.3.2](https://img.shields.io/badge/AppVersion-9.3.2-informational?style=flat-square)
+![Version: 0.6.0](https://img.shields.io/badge/Version-0.6.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 9.3.2](https://img.shields.io/badge/AppVersion-9.3.2-informational?style=flat-square)
 
 Grafana instance
 
@@ -45,6 +45,9 @@ Grafana instance
 | ingress.enabled | bool | `true` | Enable/disable ingress |
 | ingress.subpath | string | `"grafana"` | Make Grafana available at a subpath. By default Grafana will be available from [DOMAIN]/ Don't append or prepend :// or / |
 | install.plugins | string | `"grafana-clock-panel,grafana-simple-json-datasource, grafana-worldmap-panel,marcusolsson-json-datasource, snuids-trafficlights-panel,citilogics-geoloop-panel, iosb-sensorthings-datasource,yesoreyeram-boomtheme-panel, snuids-svg-panel, https://github.com/briangann/grafana-gauge-panel/releases/download/v0.0.9/briangann-gauge-panel-0.0.9.zip;briangann-gauge-panel"` | Grafana plugins to install |
+| livenessProbe | object | `{"enabled":true,"failureThreshold":5,"initialDelaySeconds":10,"periodSeconds":5,"probe":{"exec":{"command":["bash","-c","wget -S \"http://127.0.0.1:3000/api/health\" |& grep \"200 OK\""]}},"successThreshold":1,"terminationGracePeriodSeconds":null,"timeoutSeconds":1}` | [Liveness probe](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes) See the [API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#Probe) for details. |
+| livenessProbe.enabled | bool | `true` | Enable/disable liveness probe |
+| livenessProbe.probe | object | `{"exec":{"command":["bash","-c","wget -S \"http://127.0.0.1:3000/api/health\" |& grep \"200 OK\""]}}` | Configure [startup probe](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/) |
 | nameOverride | string | `nil` | Override name |
 | nodeSelector | object | `{}` |  |
 | persistence.data.accessModes | list | `["ReadWriteOnce"]` | Storage [access modes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes) |
@@ -54,6 +57,9 @@ Grafana instance
 | podAnnotations | object | `{}` | Additional pod annotations |
 | podSecurityContext.fsGroup | int | `0` |  |
 | podSecurityContext.runAsUser | int | `472` | Run as Grafana user |
+| readinessProbe | object | `{"enabled":true,"failureThreshold":5,"initialDelaySeconds":10,"periodSeconds":5,"probe":{"exec":{"command":["bash","-c","wget -S \"http://127.0.0.1:3000/api/health\" |& grep \"200 OK\""]}},"successThreshold":1,"terminationGracePeriodSeconds":null,"timeoutSeconds":1}` | [Readiness probe](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes) See the [API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#Probe) for details. |
+| readinessProbe.enabled | bool | `true` | Enable/disable readiness probe |
+| readinessProbe.probe | object | `{"exec":{"command":["bash","-c","wget -S \"http://127.0.0.1:3000/api/health\" |& grep \"200 OK\""]}}` | Configure [startup probe](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/) |
 | replicaCount | int | `1` | Number of replicas. Only used if autoscaling.enabled = false |
 | resources.limits.cpu | string | `"1000m"` |  |
 | resources.limits.memory | string | `"1Gi"` |  |
@@ -66,6 +72,9 @@ Grafana instance
 | serviceAccount.annotations | object | `{}` | Annotations to add to the service account |
 | serviceAccount.create | bool | `false` | Specifies whether a service account should be created |
 | serviceAccount.name | string | `""` | The name of the service account to use. If not set and create is true, a name is generated using the fullname template |
+| startupProbe | object | `{"enabled":true,"failureThreshold":20,"initialDelaySeconds":10,"periodSeconds":5,"probe":{"exec":{"command":["bash","-c","wget -S \"http://127.0.0.1:3000/api/health\" |& grep \"200 OK\""]}},"successThreshold":1,"terminationGracePeriodSeconds":null,"timeoutSeconds":1}` | [Startup probe](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes) See the [API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#Probe) for details. |
+| startupProbe.enabled | bool | `true` | Enable/disable startup probe |
+| startupProbe.probe | object | `{"exec":{"command":["bash","-c","wget -S \"http://127.0.0.1:3000/api/health\" |& grep \"200 OK\""]}}` | Configure [startup probe](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/) |
 | tolerations | list | `[]` |  |
 
 ----------------------------------------------

@@ -1,6 +1,6 @@
 # caddy
 
-![Version: 0.3.0](https://img.shields.io/badge/Version-0.3.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2.6.2-alpine](https://img.shields.io/badge/AppVersion-2.6.2--alpine-informational?style=flat-square)
+![Version: 0.4.0](https://img.shields.io/badge/Version-0.4.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2.6.2-alpine](https://img.shields.io/badge/AppVersion-2.6.2--alpine-informational?style=flat-square)
 
 Caddy webserver
 
@@ -43,7 +43,7 @@ Caddy webserver
 | podAnnotations | object | `{}` | Additional pod annotations |
 | podSecurityContext | object | `{}` |  |
 | readinessProbe | object | `{"enabled":false,"failureThreshold":5,"initialDelaySeconds":10,"periodSeconds":5,"probe":{"httpGet":{"path":"/","port":"http","scheme":"HTTP"}},"successThreshold":1,"terminationGracePeriodSeconds":null,"timeoutSeconds":1}` | [Readiness probe](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes) See the [API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#Probe) for details. |
-| readinessProbe.enabled | bool | `false` | Enable/disable readiness |
+| readinessProbe.enabled | bool | `false` | Enable/disable readiness probe |
 | readinessProbe.probe | object | `{"httpGet":{"path":"/","port":"http","scheme":"HTTP"}}` | Configure [startup probe](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/) |
 | replicaCount | int | `1` | Number of replicas. Only used if autoscaling.enabled = false |
 | resources.limits.cpu | string | `"500m"` |  |

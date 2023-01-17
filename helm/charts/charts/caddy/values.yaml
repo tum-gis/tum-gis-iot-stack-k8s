@@ -106,7 +106,7 @@ caddyfile: |-
 # -- [Startup probe](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes)
 # See the [API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#Probe) for details.
 startupProbe:
-# -- Enable/disable startup probe
+  # -- Enable/disable startup probe
   enabled: false
   initialDelaySeconds: 10
   periodSeconds: 5
@@ -142,7 +142,7 @@ livenessProbe:
 # -- [Readiness probe](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes)
 # See the [API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#Probe) for details.
 readinessProbe:
-# -- Enable/disable readiness
+  # -- Enable/disable readiness probe
   enabled: false
   initialDelaySeconds: 10
   periodSeconds: 5

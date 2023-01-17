@@ -100,20 +100,44 @@ spec:
             - secretRef:
                 name: {{ include "grafana.fullname" . }}
 
+          {{- if .Values.startupProbe.enabled }}
+          startupProbe:
+            initialDelaySeconds: {{ .Values.startupProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.startupProbe.periodSeconds }}
+            timeoutSeconds: {{ .Values.startupProbe.timeoutSeconds }}
+            successThreshold: {{ .Values.startupProbe.successThreshold }}
+            failureThreshold: {{ .Values.startupProbe.failureThreshold }}
+            terminationGracePeriodSeconds: {{ .Values.startupProbe.terminationGracePeriodSeconds }}
+            {{- with .Values.startupProbe.probe }}
+            {{- toYaml . | nindent 12 }}
+            {{- end }}
+          {{- end }}
+
+          {{- if .Values.livenessProbe.enabled }}
           livenessProbe:
-            initialDelaySeconds: 30
-            periodSeconds: 5
-            timeoutSeconds: 1
-            successThreshold: 1
-            failureThreshold: 5
-            exec:
-              command: [ bash, -c, 'wget -S "http://127.0.0.1:3000/api/health" |& grep "200 OK"' ]
+            initialDelaySeconds: {{ .Values.livenessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.livenessProbe.periodSeconds }}
+            timeoutSeconds: {{ .Values.livenessProbe.timeoutSeconds }}
+            successThreshold: {{ .Values.livenessProbe.successThreshold }}
+            failureThreshold: {{ .Values.livenessProbe.failureThreshold }}
+            terminationGracePeriodSeconds: {{ .Values.livenessProbe.terminationGracePeriodSeconds }}
+            {{- with .Values.livenessProbe.probe }}
+            {{- toYaml . | nindent 12 }}
+            {{- end }}
+          {{- end }}
+
+          {{- if .Values.readinessProbe.enabled }}
           readinessProbe:
-            initialDelaySeconds: 5
-            timeoutSeconds: 1
-            periodSeconds: 5
-            exec:
-              command: [ bash, -c, 'wget -S "http://127.0.0.1:3000/api/health" |& grep "200 OK"' ]
+            initialDelaySeconds: {{ .Values.readinessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.readinessProbe.periodSeconds }}
+            timeoutSeconds: {{ .Values.readinessProbe.timeoutSeconds }}
+            successThreshold: {{ .Values.readinessProbe.successThreshold }}
+            failureThreshold: {{ .Values.readinessProbe.failureThreshold }}
+            terminationGracePeriodSeconds: {{ .Values.readinessProbe.terminationGracePeriodSeconds }}
+            {{- with .Values.readinessProbe.probe }}
+            {{- toYaml . | nindent 12 }}
+            {{- end }}
+          {{- end }}
 
       {{- if not .Values.database.enabled }}
           volumeMounts:

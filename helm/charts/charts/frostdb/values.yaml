@@ -70,6 +70,54 @@ persistence:
   # -- Storage [capacity](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#capacity)
   capacity: 4Gi
 
+# -- [Startup probe](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes)
+# See the [API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#Probe) for details.
+startupProbe:
+  # -- Enable/disable startup probe
+  enabled: true
+  initialDelaySeconds: 20
+  periodSeconds: 5
+  timeoutSeconds: 1
+  successThreshold: 1
+  failureThreshold: 10
+  terminationGracePeriodSeconds:
+  # -- Configure [startup probe](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/)
+  probe:
+    exec:
+      command: [ sh, -c, "pg_isready -U $POSTGRES_USER -d $POSTGRES_DB" ]
+
+# -- [Liveness probe](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes)
+# See the [API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#Probe) for details.
+livenessProbe:
+  # -- Enable/disable liveness probe
+  enabled: true
+  initialDelaySeconds: 10
+  periodSeconds: 5
+  timeoutSeconds: 1
+  successThreshold: 1
+  failureThreshold: 5
+  terminationGracePeriodSeconds:
+  # -- Configure [startup probe](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/)
+  probe:
+    exec:
+      command: [ sh, -c, "pg_isready -U $POSTGRES_USER -d $POSTGRES_DB" ]
+
+# -- [Readiness probe](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes)
+# See the [API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#Probe) for details.
+readinessProbe:
+  # -- Enable/disable readiness probe
+  enabled: true
+  initialDelaySeconds: 10
+  periodSeconds: 5
+  timeoutSeconds: 1
+  successThreshold: 1
+  failureThreshold: 5
+  terminationGracePeriodSeconds:
+  # -- Configure [startup probe](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/)
+  probe:
+    exec:
+      command: [ sh, -c, "pg_isready -U $POSTGRES_USER -d $POSTGRES_DB" ]
+
 resources:
   limits:
     cpu: 2000m

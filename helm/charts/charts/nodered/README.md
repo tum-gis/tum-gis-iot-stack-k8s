@@ -1,6 +1,6 @@
 # nodered
 
-![Version: 0.4.0](https://img.shields.io/badge/Version-0.4.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 3.0.2](https://img.shields.io/badge/AppVersion-3.0.2-informational?style=flat-square)
+![Version: 0.5.0](https://img.shields.io/badge/Version-0.5.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 3.0.2](https://img.shields.io/badge/AppVersion-3.0.2-informational?style=flat-square)
 
 Node-RED instance
 
@@ -26,6 +26,9 @@ Node-RED instance
 | ingress.domains | list | `[]` | List of [FQDNs](https://de.wikipedia.org/wiki/Fully-Qualified_Host_Name) for this Ingress. Note: All FQDNs will be used for Ingress hosts and TLS certificate. The global setting overwrites this setting. Note: The first domain in the list will be used as FROST-Server serviceRootURL and MQTT host. |
 | ingress.enabled | bool | `true` | Enable/disable ingress |
 | ingress.subpath | string | `"nodered"` | Make Node-RED available at a subpath. By default Node-RED will be available from [DOMAIN]/ Don't append or prepend :// or / |
+| livenessProbe | object | `{"enabled":true,"failureThreshold":20,"initialDelaySeconds":10,"periodSeconds":5,"probe":{"exec":{"command":["bash","-c","curl http://localhost:1880/ || exit 1"]}},"successThreshold":1,"terminationGracePeriodSeconds":null,"timeoutSeconds":1}` | [Liveness probe](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes) See the [API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#Probe) for details. |
+| livenessProbe.enabled | bool | `true` | Enable/disable liveness probe |
+| livenessProbe.probe | object | `{"exec":{"command":["bash","-c","curl http://localhost:1880/ || exit 1"]}}` | Configure [startup probe](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/) |
 | nameOverride | string | `""` | Override name |
 | nodeSelector | object | `{}` |  |
 | persistence.data.accessModes | list | `["ReadWriteOnce"]` | Storage [access modes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes) |
@@ -36,6 +39,9 @@ Node-RED instance
 | podAnnotations | object | `{}` | Additional pod annotations |
 | podSecurityContext.fsGroup | int | `1000` |  |
 | podSecurityContext.runAsUser | int | `1000` | Run as Node-RED user |
+| readinessProbe | object | `{"enabled":true,"failureThreshold":5,"initialDelaySeconds":10,"periodSeconds":5,"probe":{"exec":{"command":["bash","-c","curl http://localhost:1880/ || exit 1"]}},"successThreshold":1,"terminationGracePeriodSeconds":null,"timeoutSeconds":1}` | [Readiness probe](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes) See the [API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#Probe) for details. |
+| readinessProbe.enabled | bool | `true` | Enable/disable readiness probe |
+| readinessProbe.probe | object | `{"exec":{"command":["bash","-c","curl http://localhost:1880/ || exit 1"]}}` | Configure [startup probe](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/) |
 | replicaCount | int | `1` | Number of replicas. Note: As of 2023-01  there is no easy way to scale Node-RED horizontally accross clsuters. Leave this set to `1` unless you know what you are doing. |
 | resources.limits.cpu | string | `"1000m"` |  |
 | resources.limits.memory | string | `"1Gi"` |  |
@@ -52,6 +58,9 @@ Node-RED instance
 | serviceAccount.name | string | `""` | The name of the service account to use. If not set and create is true, a name is generated using the fullname template |
 | settings.enableProjects | bool | `true` | Enable/disable Node-RED projects |
 | settings.tz | string | `"Europe/Berlin"` | Node-RED timezone settings |
+| startupProbe | object | `{"enabled":true,"failureThreshold":5,"initialDelaySeconds":10,"periodSeconds":5,"probe":{"exec":{"command":["bash","-c","curl http://localhost:1880/ || exit 1"]}},"successThreshold":1,"terminationGracePeriodSeconds":null,"timeoutSeconds":1}` | [Startup probe](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes) See the [API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#Probe) for details. |
+| startupProbe.enabled | bool | `true` | Enable/disable startup probe |
+| startupProbe.probe | object | `{"exec":{"command":["bash","-c","curl http://localhost:1880/ || exit 1"]}}` | Configure [startup probe](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/) |
 | tolerations | list | `[]` |  |
 
 ----------------------------------------------

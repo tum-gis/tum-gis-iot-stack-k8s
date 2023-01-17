@@ -61,18 +61,44 @@ spec:
             - mountPath: /dev/shm
               name: dshm
 
-          livenessProbe:
-            periodSeconds: 10
-            timeoutSeconds: 2
-            exec:
-              command: [ sh, -c, "pg_isready -U $POSTGRES_USER -d $POSTGRES_DB" ]
+          {{- if .Values.startupProbe.enabled }}
+          startupProbe:
+            initialDelaySeconds: {{ .Values.startupProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.startupProbe.periodSeconds }}
+            timeoutSeconds: {{ .Values.startupProbe.timeoutSeconds }}
+            successThreshold: {{ .Values.startupProbe.successThreshold }}
+            failureThreshold: {{ .Values.startupProbe.failureThreshold }}
+            terminationGracePeriodSeconds: {{ .Values.startupProbe.terminationGracePeriodSeconds }}
+            {{- with .Values.startupProbe.probe }}
+            {{- toYaml . | nindent 12 }}
+            {{- end }}
+          {{- end }}
 
+          {{- if .Values.livenessProbe.enabled }}
+          livenessProbe:
+            initialDelaySeconds: {{ .Values.livenessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.livenessProbe.periodSeconds }}
+            timeoutSeconds: {{ .Values.livenessProbe.timeoutSeconds }}
+            successThreshold: {{ .Values.livenessProbe.successThreshold }}
+            failureThreshold: {{ .Values.livenessProbe.failureThreshold }}
+            terminationGracePeriodSeconds: {{ .Values.livenessProbe.terminationGracePeriodSeconds }}
+            {{- with .Values.livenessProbe.probe }}
+            {{- toYaml . | nindent 12 }}
+            {{- end }}
+          {{- end }}
+
+          {{- if .Values.readinessProbe.enabled }}
           readinessProbe:
-            initialDelaySeconds: 15
-            periodSeconds: 10
-            timeoutSeconds: 2
-            exec:
-              command: [ sh, -c, "pg_isready -U $POSTGRES_USER -d $POSTGRES_DB" ]
+            initialDelaySeconds: {{ .Values.readinessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.readinessProbe.periodSeconds }}
+            timeoutSeconds: {{ .Values.readinessProbe.timeoutSeconds }}
+            successThreshold: {{ .Values.readinessProbe.successThreshold }}
+            failureThreshold: {{ .Values.readinessProbe.failureThreshold }}
+            terminationGracePeriodSeconds: {{ .Values.readinessProbe.terminationGracePeriodSeconds }}
+            {{- with .Values.readinessProbe.probe }}
+            {{- toYaml . | nindent 12 }}
+            {{- end }}
+          {{- end }}
 
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
