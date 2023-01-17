@@ -69,7 +69,9 @@ The documentation for this helm chart is available in [helm/charts](helm/charts)
      --values my-values.yml
    ```
 
-## :construction_worker: Building
+## :blue_book: Documentation
+
+The detailed documentation
 
 ### Build Chart documentation
 

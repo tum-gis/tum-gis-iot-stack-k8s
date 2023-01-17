@@ -1,3 +1,4 @@
+# -- Enable/disable FRSOT-Server
 enabled: true
 component: http-mqtt
 
@@ -58,7 +59,6 @@ autoscaling:
   targetCPUUtilizationPercentage: 80
   # targetMemoryUtilizationPercentage: 80
 
-# -- Ingress configuration
 ingress:
   # -- Enable/disable ingress
   enabled: true
@@ -84,14 +84,14 @@ ingress:
     # `letsencrypt-staging`, `letsencrypt-prod` and `self-signed` are available.
     issuerName: letsencrypt-staging
 
-# -- FROST-Server HTTP settings
+# FROST-Server HTTP settings
 # https://fraunhoferiosb.github.io/FROST-Server/settings/settings.html#http-settings
 http:
   cors:
     enabled: true
     allowed_origins: "*"
 
-# -- FROST-Server Persistence settings
+# FROST-Server Persistence settings
 # https://fraunhoferiosb.github.io/FROST-Server/settings/settings.html#persistence-settings
 persistence:
   db:
@@ -109,7 +109,7 @@ persistence:
   idGenerationMode: ServerAndClientGenerated
   slowQueryThreshold: 200
 
-# -- FROST-Server General settings
+# FROST-Server General settings
 # https://fraunhoferiosb.github.io/FROST-Server/settings/settings.html#general-settings
 alwaysOrderbyId: true
 maxTop: 10000
@@ -117,10 +117,10 @@ defaultTop: 100
 defaultCount: false
 maxDataSize: "25000000"
 
-# -- FROST-Server MQTT settings
+# FROST-Server MQTT settings
 # https://fraunhoferiosb.github.io/FROST-Server/settings/settings.html#mqtt-settings
 mqtt:
-  # -- Enable/disable MQTT
+  # Enable/disable MQTT
   enabled: true
   # MQTT server host
   host: 0.0.0.0
@@ -133,13 +133,13 @@ mqttService:
   # -- Service port for MQTT
   port: 1883
 
-# -- Extra environment variables. Values need to be quoted.
+# -- Extra environment variables. Watch out for unquoted strings!
 extraEnv: {}
 
-# -- FROST-Server Auth settings
-# https://fraunhoferiosb.github.io/FROST-Server/settings/auth.html
 auth:
-  # -- Enable/disable [FROST-Server Bash Authentication](https://fraunhoferiosb.github.io/FROST-Server/settings/auth.html)
+  # -- FROST-Server Auth settings
+  # https://fraunhoferiosb.github.io/FROST-Server/settings/auth.html
+  # Enable/disable [FROST-Server Bash Authentication](https://fraunhoferiosb.github.io/FROST-Server/settings/auth.html)
   enabled: false
   # -- The name of the realm that the browser displays when asking for username and password.
   realmName: FROST-Server
@@ -158,10 +158,12 @@ auth:
       username: postgres
       password: changeMe
 
-# -- [Startup probe](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes)
-# See the [API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#Probe) for details.
 startupProbe:
   # -- Enable/disable startup probe
+  # [Startup probe](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes)
+  # See the [API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#Probe) for details.
+  # Use `startup.probe: {}` to configure
+  # [startupProbe probe](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/)
   enabled: true
   initialDelaySeconds: 20
   periodSeconds: 5
@@ -169,15 +171,16 @@ startupProbe:
   successThreshold: 1
   failureThreshold: 5
   terminationGracePeriodSeconds:
-  # -- Configure [startup probe](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/)
   probe:
     exec:
       command: [ bash, -c, 'curl -f -s --show-error "http://127.0.0.1:8080/FROST-Server/"' ]
 
-# -- [Liveness probe](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes)
-# See the [API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#Probe) for details.
 livenessProbe:
   # -- Enable/disable liveness probe
+  # [Liveness probe](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes)
+  # See the [API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#Probe) for details.
+  # Use `livenessProbe.probe: {}` to configure
+  # [livenessProbe probe](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/)
   enabled: true
   initialDelaySeconds: 10
   periodSeconds: 5
@@ -185,15 +188,16 @@ livenessProbe:
   successThreshold: 1
   failureThreshold: 20
   terminationGracePeriodSeconds:
-  # -- Configure [startup probe](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/)
   probe:
     exec:
       command: [ bash, -c, 'curl -f -s --show-error "http://127.0.0.1:8080/FROST-Server/"' ]
 
-# -- [Readiness probe](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes)
-# See the [API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#Probe) for details.
 readinessProbe:
   # -- Enable/disable readiness probe
+  # [Readiness probe](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes)
+  # See the [API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#Probe) for details.
+  # Use `readinessProbe.probe: {}` to configure
+  # [readinessProbe probe](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/)
   enabled: true
   initialDelaySeconds: 10
   periodSeconds: 5
@@ -201,7 +205,6 @@ readinessProbe:
   successThreshold: 1
   failureThreshold: 5
   terminationGracePeriodSeconds:
-  # -- Configure [startup probe](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/)
   probe:
     exec:
       command: [ bash, -c, 'curl -f -s --show-error "http://127.0.0.1:8080/FROST-Server/"' ]

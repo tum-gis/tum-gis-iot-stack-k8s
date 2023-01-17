@@ -1,6 +1,6 @@
-  # -- enable or disable namespace [Issuer](https://cert-manager.io/docs/concepts/issuer/)
+  # -- enable or disable namespace [Issuer](https://cert-manager.io/docs/concepts/issuer/).
 enabled: true
-  # -- eMail address for registration with Let's Encrypt account
+  # -- eMail address for registration with Let's Encrypt account.
 issuerEmail: example@email.com
   # -- Name of the [IngressClass](https://kubernetes.io/docs/concepts/services-networking/ingress/#ingress-class)
   # to use.

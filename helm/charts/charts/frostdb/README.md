@@ -20,9 +20,16 @@ PostGIS database in a local volume for FROST-Server.
 | image.repository | string | `"postgis/postgis"` | Image repository |
 | image.tag | string | `""` | Overrides the image tag whose default is the chart appVersion. |
 | imagePullSecrets | list | `[]` | [Image pull secrets](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/) |
-| livenessProbe | object | `{"enabled":true,"failureThreshold":5,"initialDelaySeconds":10,"periodSeconds":5,"probe":{"exec":{"command":["sh","-c","pg_isready -U $POSTGRES_USER -d $POSTGRES_DB"]}},"successThreshold":1,"terminationGracePeriodSeconds":null,"timeoutSeconds":1}` | [Liveness probe](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes) See the [API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#Probe) for details. |
-| livenessProbe.enabled | bool | `true` | Enable/disable liveness probe |
-| livenessProbe.probe | object | `{"exec":{"command":["sh","-c","pg_isready -U $POSTGRES_USER -d $POSTGRES_DB"]}}` | Configure [startup probe](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/) |
+| livenessProbe.enabled | bool | `true` | Enable/disable liveness probe [Liveness probe](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes) See the [API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#Probe) for details. Use `livenessProbe.probe: {}` to configure [livenessProbe probe](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/) |
+| livenessProbe.failureThreshold | int | `5` |  |
+| livenessProbe.initialDelaySeconds | int | `10` |  |
+| livenessProbe.periodSeconds | int | `5` |  |
+| livenessProbe.probe.exec.command[0] | string | `"sh"` |  |
+| livenessProbe.probe.exec.command[1] | string | `"-c"` |  |
+| livenessProbe.probe.exec.command[2] | string | `"pg_isready -U $POSTGRES_USER -d $POSTGRES_DB"` |  |
+| livenessProbe.successThreshold | int | `1` |  |
+| livenessProbe.terminationGracePeriodSeconds | string | `nil` |  |
+| livenessProbe.timeoutSeconds | int | `1` |  |
 | loadBalancer.enabled | bool | `false` | Enable/disable a LoadBalancer service for external Database access |
 | nameOverride | string | `nil` | Override name |
 | nodeSelector | object | `{}` |  |
@@ -34,9 +41,16 @@ PostGIS database in a local volume for FROST-Server.
 | podAnnotations | object | `{}` | Additional pod annotations |
 | podSecurityContext | object | `{}` |  |
 | port | int | `5432` | Database port |
-| readinessProbe | object | `{"enabled":true,"failureThreshold":5,"initialDelaySeconds":10,"periodSeconds":5,"probe":{"exec":{"command":["sh","-c","pg_isready -U $POSTGRES_USER -d $POSTGRES_DB"]}},"successThreshold":1,"terminationGracePeriodSeconds":null,"timeoutSeconds":1}` | [Readiness probe](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes) See the [API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#Probe) for details. |
-| readinessProbe.enabled | bool | `true` | Enable/disable readiness probe |
-| readinessProbe.probe | object | `{"exec":{"command":["sh","-c","pg_isready -U $POSTGRES_USER -d $POSTGRES_DB"]}}` | Configure [startup probe](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/) |
+| readinessProbe.enabled | bool | `true` | Enable/disable readiness probe [Readiness probe](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes) See the [API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#Probe) for details. Use `readinessProbe.probe: {}` to configure [readinessProbe probe](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/) |
+| readinessProbe.failureThreshold | int | `5` |  |
+| readinessProbe.initialDelaySeconds | int | `10` |  |
+| readinessProbe.periodSeconds | int | `5` |  |
+| readinessProbe.probe.exec.command[0] | string | `"sh"` |  |
+| readinessProbe.probe.exec.command[1] | string | `"-c"` |  |
+| readinessProbe.probe.exec.command[2] | string | `"pg_isready -U $POSTGRES_USER -d $POSTGRES_DB"` |  |
+| readinessProbe.successThreshold | int | `1` |  |
+| readinessProbe.terminationGracePeriodSeconds | string | `nil` |  |
+| readinessProbe.timeoutSeconds | int | `1` |  |
 | resources.limits.cpu | string | `"2000m"` |  |
 | resources.limits.memory | string | `"4Gi"` |  |
 | resources.requests.cpu | string | `"1000m"` |  |
@@ -45,9 +59,16 @@ PostGIS database in a local volume for FROST-Server.
 | serviceAccount.annotations | object | `{}` | Annotations to add to the service account |
 | serviceAccount.create | bool | `false` | Specifies whether a service account should be created |
 | serviceAccount.name | string | `""` | The name of the service account to use. If not set and create is true, a name is generated using the fullname template |
-| startupProbe | object | `{"enabled":true,"failureThreshold":10,"initialDelaySeconds":20,"periodSeconds":5,"probe":{"exec":{"command":["sh","-c","pg_isready -U $POSTGRES_USER -d $POSTGRES_DB"]}},"successThreshold":1,"terminationGracePeriodSeconds":null,"timeoutSeconds":1}` | [Startup probe](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes) See the [API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#Probe) for details. |
-| startupProbe.enabled | bool | `true` | Enable/disable startup probe |
-| startupProbe.probe | object | `{"exec":{"command":["sh","-c","pg_isready -U $POSTGRES_USER -d $POSTGRES_DB"]}}` | Configure [startup probe](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/) |
+| startupProbe.enabled | bool | `true` | Enable/disable startup probe [Startup probe](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes) See the [API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#Probe) for details. Use `startup.probe: {}` to configure [startupProbe probe](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/) |
+| startupProbe.failureThreshold | int | `10` |  |
+| startupProbe.initialDelaySeconds | int | `20` |  |
+| startupProbe.periodSeconds | int | `5` |  |
+| startupProbe.probe.exec.command[0] | string | `"sh"` |  |
+| startupProbe.probe.exec.command[1] | string | `"-c"` |  |
+| startupProbe.probe.exec.command[2] | string | `"pg_isready -U $POSTGRES_USER -d $POSTGRES_DB"` |  |
+| startupProbe.successThreshold | int | `1` |  |
+| startupProbe.terminationGracePeriodSeconds | string | `nil` |  |
+| startupProbe.timeoutSeconds | int | `1` |  |
 | tolerations | list | `[]` |  |
 
 ----------------------------------------------

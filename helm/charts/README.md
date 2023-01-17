@@ -41,12 +41,11 @@ Kubernetes: `>= 1.23.0`
 | frostdb.enabled | bool | `true` | Enable/disable PostGIS Database. Disable if an external database is used. |
 | frostweb.enabled | bool | `true` | Enable/disable FROST-Server web interface. |
 | fullnameOverride | string | `""` | Override fullname |
-| global.db.auth.password | string | `"changeMe"` | Database password |
-| global.db.auth.username | string | `"postgres"` | Database username |
-| global.db.dbname | string | `"frost"` | Database name |
-| global.db.host | string | `"frostdb"` | Database host, allows using external databases. Use DNS name of the `frostdb` service when using frostdb subchart. |
-| global.db.port | int | `5432` | Database port |
-| global.ingress | object | `{"annotations":{},"certManager":{"issuerEmail":"me@example.com","issuerName":"letsencrypt-staging","issuerType":"namespace"},"className":"nginx","domains":["localhost"]}` | Fully qualified domain name, used for all Ingress routes. Use localhost for local testing deployments. |
+| global.db.auth.password | string | `"changeMe"` | Database password. Can be overwritten by values specified in subcharts. |
+| global.db.auth.username | string | `"postgres"` | Database username. Can be overwritten by values specified in subcharts. |
+| global.db.dbname | string | `"frost"` | Database name. Can be overwritten by values specified in subcharts. |
+| global.db.host | string | `"frostdb"` | Database host, allows using external databases. Use DNS name of the `frostdb` service when using frostdb subchart. Can be overwritten by values specified in subcharts. |
+| global.db.port | int | `5432` | Database port. Can be overwritten by values specified in subcharts. |
 | global.ingress.annotations | object | `{}` | Additional ingress annotations, that are set for all ingress routes of subcharts. |
 | global.ingress.certManager.issuerEmail | string | `"me@example.com"` | eMail address for ACME registration with Let's Encrypt. Only used for issuerType = namespace. |
 | global.ingress.certManager.issuerName | string | `"letsencrypt-staging"` | Name of the Issuer to use. For certManager.type = namespace `letsencrypt-staging`, `letsencrypt-production` and `self-signed` are available. |

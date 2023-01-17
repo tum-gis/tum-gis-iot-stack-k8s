@@ -58,7 +58,6 @@ autoscaling:
   targetCPUUtilizationPercentage: 80
   # targetMemoryUtilizationPercentage: 80
 
-# -- Ingress configuration
 ingress:
   # -- Enable/disable ingress
   enabled: true
@@ -103,10 +102,12 @@ caddyfile: |-
     file_server
   }
 
-# -- [Startup probe](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes)
-# See the [API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#Probe) for details.
 startupProbe:
   # -- Enable/disable startup probe
+  # [Startup probe](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes)
+  # See the [API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#Probe) for details.
+  # Use `startup.probe: {}` to configure
+  # [startupProbe probe](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/)
   enabled: false
   initialDelaySeconds: 10
   periodSeconds: 5
@@ -114,17 +115,18 @@ startupProbe:
   successThreshold: 1
   failureThreshold: 5
   terminationGracePeriodSeconds:
-  # -- Configure [startup probe](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/)
   probe:
     httpGet:
       path: /
       port: http
       scheme: HTTP
 
-# -- [Liveness probe](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes)
-# See the [API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#Probe) for details.
 livenessProbe:
   # -- Enable/disable liveness probe
+  # [Liveness probe](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes)
+  # See the [API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#Probe) for details.
+  # Use `livenessProbe.probe: {}` to configure
+  # [livenessProbe probe](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/)
   enabled: false
   initialDelaySeconds: 10
   periodSeconds: 5
@@ -132,17 +134,18 @@ livenessProbe:
   successThreshold: 1
   failureThreshold: 5
   terminationGracePeriodSeconds:
-  # -- Configure [startup probe](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/)
   probe:
     httpGet:
       path: /
       port: http
       scheme: HTTP
 
-# -- [Readiness probe](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes)
-# See the [API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#Probe) for details.
 readinessProbe:
   # -- Enable/disable readiness probe
+  # [Readiness probe](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes)
+  # See the [API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#Probe) for details.
+  # Use `readinessProbe.probe: {}` to configure
+  # [readinessProbe probe](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/)
   enabled: false
   initialDelaySeconds: 10
   periodSeconds: 5
@@ -150,7 +153,6 @@ readinessProbe:
   successThreshold: 1
   failureThreshold: 5
   terminationGracePeriodSeconds:
-  # -- Configure [startup probe](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/)
   probe:
     httpGet:
       path: /

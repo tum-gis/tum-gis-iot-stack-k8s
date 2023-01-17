@@ -9,11 +9,16 @@ FROST-Server HTTP and MQTT service
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | affinity | object | `{}` |  |
-| alwaysOrderbyId | bool | `true` | FROST-Server General settings https://fraunhoferiosb.github.io/FROST-Server/settings/settings.html#general-settings |
-| auth | object | `{"allowAnonymousRead":false,"autoUpdateDatabase":true,"db":{"auth":{"password":"changeMe","username":"postgres"},"dbname":"frost","driver":"org.postgresql.Driver","host":"frostdb","port":5432},"enabled":false,"provider":"de.fraunhofer.iosb.ilt.frostserver.auth.basic.BasicAuthProvider","realmName":"FROST-Server"}` | FROST-Server Auth settings https://fraunhoferiosb.github.io/FROST-Server/settings/auth.html |
+| alwaysOrderbyId | bool | `true` |  |
 | auth.allowAnonymousRead | bool | `false` | f true, anonymous users are allowed to read (GET) data. |
 | auth.autoUpdateDatabase | bool | `true` | Automatically apply database updates. |
-| auth.enabled | bool | `false` | Enable/disable [FROST-Server Bash Authentication](https://fraunhoferiosb.github.io/FROST-Server/settings/auth.html) |
+| auth.db.auth.password | string | `"changeMe"` |  |
+| auth.db.auth.username | string | `"postgres"` |  |
+| auth.db.dbname | string | `"frost"` |  |
+| auth.db.driver | string | `"org.postgresql.Driver"` |  |
+| auth.db.host | string | `"frostdb"` |  |
+| auth.db.port | int | `5432` |  |
+| auth.enabled | bool | `false` | FROST-Server Auth settings https://fraunhoferiosb.github.io/FROST-Server/settings/auth.html Enable/disable [FROST-Server Bash Authentication](https://fraunhoferiosb.github.io/FROST-Server/settings/auth.html) |
 | auth.provider | string | `"de.fraunhofer.iosb.ilt.frostserver.auth.basic.BasicAuthProvider"` | The java class used to configure authentication/authorisation. |
 | auth.realmName | string | `"FROST-Server"` | The name of the realm that the browser displays when asking for username and password. |
 | autoscaling.enabled | bool | `false` | Enable/disable pod autoscaling, if disabled `replicaCount` is used to set number of pods. |
@@ -23,15 +28,15 @@ FROST-Server HTTP and MQTT service
 | component | string | `"http-mqtt"` |  |
 | defaultCount | bool | `false` |  |
 | defaultTop | int | `100` |  |
-| enabled | bool | `true` |  |
-| extraEnv | object | `{}` | Extra environment variables. Values need to be quoted. |
+| enabled | bool | `true` | Enable/disable FRSOT-Server |
+| extraEnv | object | `{}` | Extra environment variables. Watch out for unquoted strings! |
 | fullnameOverride | string | `"frostweb"` | Override fullname |
-| http | object | `{"cors":{"allowed_origins":"*","enabled":true}}` | FROST-Server HTTP settings https://fraunhoferiosb.github.io/FROST-Server/settings/settings.html#http-settings |
+| http.cors.allowed_origins | string | `"*"` |  |
+| http.cors.enabled | bool | `true` |  |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.repository | string | `"fraunhoferiosb/frost-server"` | Image repository |
 | image.tag | string | `""` | Overrides the image tag whose default is the chart appVersion. |
 | imagePullSecrets | list | `[]` | [Image pull secrets](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/) |
-| ingress | object | `{"annotations":null,"certManager":{"issuerEmail":"me@example.com","issuerName":"letsencrypt-staging","issuerType":"namespace"},"className":"nginx","domains":[],"enabled":true,"subpath":"frost"}` | Ingress configuration |
 | ingress.annotations | string | `nil` | Additional Ingress annotations |
 | ingress.certManager.issuerEmail | string | `"me@example.com"` | eMail address for ACME registration with Let's Encrypt. Only used for issuerType = namespace. |
 | ingress.certManager.issuerName | string | `"letsencrypt-staging"` | Name of the Issuer to use. For certManager.type = namespace `letsencrypt-staging`, `letsencrypt-prod` and `self-signed` are available. |
@@ -40,24 +45,49 @@ FROST-Server HTTP and MQTT service
 | ingress.domains | list | `[]` | List of [FQDNs](https://de.wikipedia.org/wiki/Fully-Qualified_Host_Name) for this Ingress. Note: All FQDNs will be used for Ingress hosts and TLS certificate. The global setting overwrites this setting. Note: The first domain in the list will be used as FROST-Server serviceRootURL and MQTT host. |
 | ingress.enabled | bool | `true` | Enable/disable ingress |
 | ingress.subpath | string | `"frost"` | Make FROST-Server available at a subpath. By default FROST will be available from [DOMAIN]/ Don't append or prepend :// or / |
-| livenessProbe | object | `{"enabled":true,"failureThreshold":20,"initialDelaySeconds":10,"periodSeconds":5,"probe":{"exec":{"command":["bash","-c","curl -f -s --show-error \"http://127.0.0.1:8080/FROST-Server/\""]}},"successThreshold":1,"terminationGracePeriodSeconds":null,"timeoutSeconds":1}` | [Liveness probe](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes) See the [API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#Probe) for details. |
-| livenessProbe.enabled | bool | `true` | Enable/disable liveness probe |
-| livenessProbe.probe | object | `{"exec":{"command":["bash","-c","curl -f -s --show-error \"http://127.0.0.1:8080/FROST-Server/\""]}}` | Configure [startup probe](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/) |
+| livenessProbe.enabled | bool | `true` | Enable/disable liveness probe [Liveness probe](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes) See the [API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#Probe) for details. Use `livenessProbe.probe: {}` to configure [livenessProbe probe](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/) |
+| livenessProbe.failureThreshold | int | `20` |  |
+| livenessProbe.initialDelaySeconds | int | `10` |  |
+| livenessProbe.periodSeconds | int | `5` |  |
+| livenessProbe.probe.exec.command[0] | string | `"bash"` |  |
+| livenessProbe.probe.exec.command[1] | string | `"-c"` |  |
+| livenessProbe.probe.exec.command[2] | string | `"curl -f -s --show-error \"http://127.0.0.1:8080/FROST-Server/\""` |  |
+| livenessProbe.successThreshold | int | `1` |  |
+| livenessProbe.terminationGracePeriodSeconds | string | `nil` |  |
+| livenessProbe.timeoutSeconds | int | `1` |  |
 | maxDataSize | string | `"25000000"` |  |
 | maxTop | int | `10000` |  |
-| mqtt | object | `{"enabled":true,"host":"0.0.0.0","qos":2}` | FROST-Server MQTT settings https://fraunhoferiosb.github.io/FROST-Server/settings/settings.html#mqtt-settings |
-| mqtt.enabled | bool | `true` | Enable/disable MQTT |
+| mqtt.enabled | bool | `true` |  |
+| mqtt.host | string | `"0.0.0.0"` |  |
 | mqtt.qos | int | `2` | MQTT QoS |
 | mqttService.port | int | `1883` | Service port for MQTT |
 | mqttService.type | string | `"ClusterIP"` | Type of service for MQTT |
 | nameOverride | string | `nil` | Override name |
 | nodeSelector | object | `{}` |  |
-| persistence | object | `{"autoUpdateDatabase":true,"countEstimateThreshold":10000,"countMode":"LIMIT_SAMPLE","db":{"auth":{"password":"changeMe","username":"postgres"},"dbname":"frost","driver":"org.postgresql.Driver","host":"frostdb","port":5432},"idGenerationMode":"ServerAndClientGenerated","queryTimeout":0,"slowQueryThreshold":200}` | FROST-Server Persistence settings https://fraunhoferiosb.github.io/FROST-Server/settings/settings.html#persistence-settings |
+| persistence.autoUpdateDatabase | bool | `true` |  |
+| persistence.countEstimateThreshold | int | `10000` |  |
+| persistence.countMode | string | `"LIMIT_SAMPLE"` |  |
+| persistence.db.auth.password | string | `"changeMe"` |  |
+| persistence.db.auth.username | string | `"postgres"` |  |
+| persistence.db.dbname | string | `"frost"` |  |
+| persistence.db.driver | string | `"org.postgresql.Driver"` |  |
+| persistence.db.host | string | `"frostdb"` |  |
+| persistence.db.port | int | `5432` |  |
+| persistence.idGenerationMode | string | `"ServerAndClientGenerated"` |  |
+| persistence.queryTimeout | int | `0` |  |
+| persistence.slowQueryThreshold | int | `200` |  |
 | podAnnotations | object | `{}` | Additional pod annotations |
 | podSecurityContext | object | `{}` |  |
-| readinessProbe | object | `{"enabled":true,"failureThreshold":5,"initialDelaySeconds":10,"periodSeconds":5,"probe":{"exec":{"command":["bash","-c","curl -f -s --show-error \"http://127.0.0.1:8080/FROST-Server/\""]}},"successThreshold":1,"terminationGracePeriodSeconds":null,"timeoutSeconds":1}` | [Readiness probe](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes) See the [API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#Probe) for details. |
-| readinessProbe.enabled | bool | `true` | Enable/disable readiness probe |
-| readinessProbe.probe | object | `{"exec":{"command":["bash","-c","curl -f -s --show-error \"http://127.0.0.1:8080/FROST-Server/\""]}}` | Configure [startup probe](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/) |
+| readinessProbe.enabled | bool | `true` | Enable/disable readiness probe [Readiness probe](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes) See the [API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#Probe) for details. Use `readinessProbe.probe: {}` to configure [readinessProbe probe](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/) |
+| readinessProbe.failureThreshold | int | `5` |  |
+| readinessProbe.initialDelaySeconds | int | `10` |  |
+| readinessProbe.periodSeconds | int | `5` |  |
+| readinessProbe.probe.exec.command[0] | string | `"bash"` |  |
+| readinessProbe.probe.exec.command[1] | string | `"-c"` |  |
+| readinessProbe.probe.exec.command[2] | string | `"curl -f -s --show-error \"http://127.0.0.1:8080/FROST-Server/\""` |  |
+| readinessProbe.successThreshold | int | `1` |  |
+| readinessProbe.terminationGracePeriodSeconds | string | `nil` |  |
+| readinessProbe.timeoutSeconds | int | `1` |  |
 | replicaCount | int | `1` | Number of replicas. Only used if autoscaling.enabled = false |
 | resources.limits.cpu | string | `"1000m"` |  |
 | resources.limits.memory | string | `"1Gi"` |  |
@@ -69,9 +99,16 @@ FROST-Server HTTP and MQTT service
 | serviceAccount.annotations | object | `{}` | Annotations to add to the service account |
 | serviceAccount.create | bool | `false` | Specifies whether a service account should be created |
 | serviceAccount.name | string | `""` | The name of the service account to use. If not set and create is true, a name is generated using the fullname template |
-| startupProbe | object | `{"enabled":true,"failureThreshold":5,"initialDelaySeconds":20,"periodSeconds":5,"probe":{"exec":{"command":["bash","-c","curl -f -s --show-error \"http://127.0.0.1:8080/FROST-Server/\""]}},"successThreshold":1,"terminationGracePeriodSeconds":null,"timeoutSeconds":1}` | [Startup probe](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes) See the [API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#Probe) for details. |
-| startupProbe.enabled | bool | `true` | Enable/disable startup probe |
-| startupProbe.probe | object | `{"exec":{"command":["bash","-c","curl -f -s --show-error \"http://127.0.0.1:8080/FROST-Server/\""]}}` | Configure [startup probe](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/) |
+| startupProbe.enabled | bool | `true` | Enable/disable startup probe [Startup probe](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes) See the [API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#Probe) for details. Use `startup.probe: {}` to configure [startupProbe probe](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/) |
+| startupProbe.failureThreshold | int | `5` |  |
+| startupProbe.initialDelaySeconds | int | `20` |  |
+| startupProbe.periodSeconds | int | `5` |  |
+| startupProbe.probe.exec.command[0] | string | `"bash"` |  |
+| startupProbe.probe.exec.command[1] | string | `"-c"` |  |
+| startupProbe.probe.exec.command[2] | string | `"curl -f -s --show-error \"http://127.0.0.1:8080/FROST-Server/\""` |  |
+| startupProbe.successThreshold | int | `1` |  |
+| startupProbe.terminationGracePeriodSeconds | string | `nil` |  |
+| startupProbe.timeoutSeconds | int | `1` |  |
 | tolerations | list | `[]` |  |
 
 ----------------------------------------------

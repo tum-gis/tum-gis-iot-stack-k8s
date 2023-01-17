@@ -4,8 +4,6 @@ nameOverride: ""
 fullnameOverride: ""
 
 global:
-  # -- Fully qualified domain name, used for all Ingress routes.
-  # Use localhost for local testing deployments.
   ingress:
     # -- Name of the [IngressClass](https://kubernetes.io/docs/concepts/services-networking/ingress/#ingress-class)
     # to use in Ingress routes.
@@ -28,16 +26,16 @@ global:
 
   db:
     # -- Database host, allows using external databases. Use DNS name of the `frostdb` service
-    # when using frostdb subchart.
+    # when using frostdb subchart. Can be overwritten by values specified in subcharts.
     host: frostdb
-    # -- Database port
+    # -- Database port. Can be overwritten by values specified in subcharts.
     port: 5432
-    # -- Database name
+    # -- Database name. Can be overwritten by values specified in subcharts.
     dbname: frost
     auth:
-      # -- Database username
+      # -- Database username. Can be overwritten by values specified in subcharts.
       username: postgres
-      # -- Database password
+      # -- Database password. Can be overwritten by values specified in subcharts.
       password: changeMe
 
 caddy:

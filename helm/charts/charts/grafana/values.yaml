@@ -61,7 +61,6 @@ autoscaling:
   targetCPUUtilizationPercentage: 80
   # targetMemoryUtilizationPercentage: 80
 
-# -- Ingress configuration
 ingress:
   # -- Enable/disable ingress
   enabled: true
@@ -97,13 +96,17 @@ install:
       https://github.com/briangann/grafana-gauge-panel/releases/download/v0.0.9/briangann-gauge-panel-0.0.9.zip;briangann-gauge-panel"
 
 http:
+  # -- Enable/disable Grafana GZIP encoding
   enableGzip: true
 
-# -- Grafana security settings
+
 security:
+  # -- Grafana admin username
   adminUsername: admin
+  # -- Grafana admin password
   adminPassword: changeMe
-  allowEmbedding: true
+  # -- Allow/disallow embedding of Grafana panels
+  allowEmbedding: false
 
 dateFormats:
   fullDate: "dd, DD.MM.YYYY HH:mm:ss"
@@ -142,10 +145,12 @@ database:
     password: changeMe
 
 
-# -- [Startup probe](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes)
-# See the [API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#Probe) for details.
 startupProbe:
   # -- Enable/disable startup probe
+  # [Startup probe](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes)
+  # See the [API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#Probe) for details.
+  # Use `startup.probe: {}` to configure
+  # [startupProbe probe](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/)
   enabled: true
   initialDelaySeconds: 10
   periodSeconds: 5
@@ -153,15 +158,16 @@ startupProbe:
   successThreshold: 1
   failureThreshold: 20
   terminationGracePeriodSeconds:
-  # -- Configure [startup probe](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/)
   probe:
     exec:
       command: [ bash, -c, 'wget -S "http://127.0.0.1:3000/api/health" |& grep "200 OK"' ]
 
-# -- [Liveness probe](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes)
-# See the [API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#Probe) for details.
 livenessProbe:
   # -- Enable/disable liveness probe
+  # [Liveness probe](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes)
+  # See the [API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#Probe) for details.
+  # Use `livenessProbe.probe: {}` to configure
+  # [livenessProbe probe](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/)
   enabled: true
   initialDelaySeconds: 10
   periodSeconds: 5
@@ -169,15 +175,16 @@ livenessProbe:
   successThreshold: 1
   failureThreshold: 5
   terminationGracePeriodSeconds:
-  # -- Configure [startup probe](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/)
   probe:
     exec:
       command: [ bash, -c, 'wget -S "http://127.0.0.1:3000/api/health" |& grep "200 OK"' ]
 
-# -- [Readiness probe](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes)
-# See the [API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#Probe) for details.
 readinessProbe:
   # -- Enable/disable readiness probe
+  # [Readiness probe](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes)
+  # See the [API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#Probe) for details.
+  # Use `readinessProbe.probe: {}` to configure
+  # [readinessProbe probe](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/)
   enabled: true
   initialDelaySeconds: 10
   periodSeconds: 5
@@ -185,7 +192,6 @@ readinessProbe:
   successThreshold: 1
   failureThreshold: 5
   terminationGracePeriodSeconds:
-  # -- Configure [startup probe](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/)
   probe:
     exec:
       command: [ bash, -c, 'wget -S "http://127.0.0.1:3000/api/health" |& grep "200 OK"' ]
