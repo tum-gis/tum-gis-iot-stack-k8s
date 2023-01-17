@@ -103,31 +103,59 @@ caddyfile: |-
     file_server
   }
 
-# -- [Liveness probe](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes)
+# -- [Startup probe](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes)
 # See the [API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#Probe) for details.
-livenessProbe:
+startupProbe:
+# -- Enable/disable startup probe
+  enabled: false
   initialDelaySeconds: 10
   periodSeconds: 5
   timeoutSeconds: 1
   successThreshold: 1
   failureThreshold: 5
-  httpGet:
-    path: /
-    port: http
-    scheme: HTTP
+  terminationGracePeriodSeconds:
+  # -- Configure [startup probe](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/)
+  probe:
+    httpGet:
+      path: /
+      port: http
+      scheme: HTTP
+
+# -- [Liveness probe](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes)
+# See the [API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#Probe) for details.
+livenessProbe:
+  # -- Enable/disable liveness probe
+  enabled: false
+  initialDelaySeconds: 10
+  periodSeconds: 5
+  timeoutSeconds: 1
+  successThreshold: 1
+  failureThreshold: 5
+  terminationGracePeriodSeconds:
+  # -- Configure [startup probe](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/)
+  probe:
+    httpGet:
+      path: /
+      port: http
+      scheme: HTTP
 
 # -- [Readiness probe](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes)
 # See the [API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#Probe) for details.
 readinessProbe:
+# -- Enable/disable readiness
+  enabled: false
   initialDelaySeconds: 10
   periodSeconds: 5
   timeoutSeconds: 1
   successThreshold: 1
   failureThreshold: 5
-  httpGet:
-    path: /
-    port: http
-    scheme: HTTP
+  terminationGracePeriodSeconds:
+  # -- Configure [startup probe](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/)
+  probe:
+    httpGet:
+      path: /
+      port: http
+      scheme: HTTP
 
 resources:
   limits:

@@ -1,6 +1,6 @@
 # caddy
 
-![Version: 0.2.0](https://img.shields.io/badge/Version-0.2.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2.6.2-alpine](https://img.shields.io/badge/AppVersion-2.6.2--alpine-informational?style=flat-square)
+![Version: 0.3.0](https://img.shields.io/badge/Version-0.3.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2.6.2-alpine](https://img.shields.io/badge/AppVersion-2.6.2--alpine-informational?style=flat-square)
 
 Caddy webserver
 
@@ -30,7 +30,9 @@ Caddy webserver
 | ingress.domains | list | `[]` | List of [FQDNs](https://de.wikipedia.org/wiki/Fully-Qualified_Host_Name) for this Ingress. Note: All FQDNs will be used for Ingress hosts and TLS certificate. |
 | ingress.enabled | bool | `true` | Enable/disable ingress |
 | ingress.subpath | string | `nil` | Make Caddy available at a subpath. By default Caddy will be available from [DOMAIN]/ Don't append or prepend :// or / |
-| livenessProbe | object | `{"failureThreshold":5,"httpGet":{"path":"/","port":"http","scheme":"HTTP"},"initialDelaySeconds":10,"periodSeconds":5,"successThreshold":1,"timeoutSeconds":1}` | [Liveness probe](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes) See the [API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#Probe) for details. |
+| livenessProbe | object | `{"enabled":false,"failureThreshold":5,"initialDelaySeconds":10,"periodSeconds":5,"probe":{"httpGet":{"path":"/","port":"http","scheme":"HTTP"}},"successThreshold":1,"terminationGracePeriodSeconds":null,"timeoutSeconds":1}` | [Liveness probe](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes) See the [API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#Probe) for details. |
+| livenessProbe.enabled | bool | `false` | Enable/disable liveness probe |
+| livenessProbe.probe | object | `{"httpGet":{"path":"/","port":"http","scheme":"HTTP"}}` | Configure [startup probe](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/) |
 | nameOverride | string | `nil` | Override name |
 | nodeSelector | object | `{}` |  |
 | persistence.data.accessModes | list | `["ReadOnlyMany"]` | Storage [access modes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes) |
@@ -40,7 +42,9 @@ Caddy webserver
 | persistence.storageClassName | string | `nil` | StorageClass to use, leave empty to use default StorageClass. |
 | podAnnotations | object | `{}` | Additional pod annotations |
 | podSecurityContext | object | `{}` |  |
-| readinessProbe | object | `{"failureThreshold":5,"httpGet":{"path":"/","port":"http","scheme":"HTTP"},"initialDelaySeconds":10,"periodSeconds":5,"successThreshold":1,"timeoutSeconds":1}` | [Readiness probe](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes) See the [API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#Probe) for details. |
+| readinessProbe | object | `{"enabled":false,"failureThreshold":5,"initialDelaySeconds":10,"periodSeconds":5,"probe":{"httpGet":{"path":"/","port":"http","scheme":"HTTP"}},"successThreshold":1,"terminationGracePeriodSeconds":null,"timeoutSeconds":1}` | [Readiness probe](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes) See the [API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#Probe) for details. |
+| readinessProbe.enabled | bool | `false` | Enable/disable readiness |
+| readinessProbe.probe | object | `{"httpGet":{"path":"/","port":"http","scheme":"HTTP"}}` | Configure [startup probe](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/) |
 | replicaCount | int | `1` | Number of replicas. Only used if autoscaling.enabled = false |
 | resources.limits.cpu | string | `"500m"` |  |
 | resources.limits.memory | string | `"500Mi"` |  |
@@ -52,6 +56,9 @@ Caddy webserver
 | serviceAccount.annotations | object | `{}` | Annotations to add to the service account |
 | serviceAccount.create | bool | `false` | Specifies whether a service account should be created |
 | serviceAccount.name | string | `""` | The name of the service account to use. If not set and create is true, a name is generated using the fullname template |
+| startupProbe | object | `{"enabled":false,"failureThreshold":5,"initialDelaySeconds":10,"periodSeconds":5,"probe":{"httpGet":{"path":"/","port":"http","scheme":"HTTP"}},"successThreshold":1,"terminationGracePeriodSeconds":null,"timeoutSeconds":1}` | [Startup probe](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes) See the [API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#Probe) for details. |
+| startupProbe.enabled | bool | `false` | Enable/disable startup probe |
+| startupProbe.probe | object | `{"httpGet":{"path":"/","port":"http","scheme":"HTTP"}}` | Configure [startup probe](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/) |
 | tolerations | list | `[]` |  |
 
 ----------------------------------------------
