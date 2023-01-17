@@ -58,6 +58,20 @@ frostdb:
 frostweb:
   enabled: true
 
+  mqtt:
+    # -- Enable/disable MQTT
+    enabled: true
+    # MQTT server host
+    host: 0.0.0.0
+    # -- MQTT QoS
+    qos: 2
+
+  mqttService:
+    # -- Type of service for MQTT
+    type: LoadBalancer
+    # -- Service port for MQTT
+    port: 1883
+
 # Grafana v9 configuration ----------------------------------------------------
 grafana:
   enabled: true

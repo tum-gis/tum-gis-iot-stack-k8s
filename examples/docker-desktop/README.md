@@ -40,7 +40,9 @@ This example installs the stack on a local cluster. This is especially useful fo
 
 3. After the chart has installed successfully, the services are available here:
 
-    * FROST-Server: https://localhost/frost
+    * FROST-Server:
+      * HTTP: https://localhost/frost
+      * MQTT: localhost:1883
     * Grafana: https://localhost/grafana
     * Node-Red: https://localhost/nodered
 
