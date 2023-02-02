@@ -15,7 +15,7 @@ maintainers:
     name: Bruno Willenborg
     url: https://www.asg.ed.tum.de/en/gis/our-team/staff/bruno-willenborg/
 
-version: 0.8.0
+version: 0.8.1
 appVersion: "0.0.1"
 
 dependencies:

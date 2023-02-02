@@ -12,3 +12,6 @@ plan.json
 
 # Temp
 /caddy
+
+# VScode
+.vscode/
