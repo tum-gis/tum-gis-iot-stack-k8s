@@ -143,6 +143,32 @@ database:
     username: postgres
     password: changeMe
 
+smtp:
+  # -- Enable/disable SMTP server,
+  # see [Grafana SMTP](https://grafana.com/docs/grafana/latest/setup-grafana/configure-grafana/#smtp)
+  # for more.
+  enabled: false
+  # -- SMTP Host with port,
+  # see [Grafana SMTP](https://grafana.com/docs/grafana/latest/setup-grafana/configure-grafana/#smtp)
+  # for more.
+  host: my.smtp.com:465
+  # -- SMTP username,
+  # see [Grafana SMTP](https://grafana.com/docs/grafana/latest/setup-grafana/configure-grafana/#smtp)
+  # for more.
+  user: username
+  # -- SMTP password,
+  # see [Grafana SMTP](https://grafana.com/docs/grafana/latest/setup-grafana/configure-grafana/#smtp)
+  # for more.
+  password: changeMe
+  # -- SMTP from email address,
+  # see [Grafana SMTP](https://grafana.com/docs/grafana/latest/setup-grafana/configure-grafana/#smtp)
+  # for more.
+  mailFrom: mailFrom@example.com
+  # -- Sender Name,
+  # see [Grafana SMTP](https://grafana.com/docs/grafana/latest/setup-grafana/configure-grafana/#smtp)
+  # for more.
+  nameFrom: "myGrafana instance"
+
 startupProbe:
   # -- Enable/disable startup probe
   # [Startup probe](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes)

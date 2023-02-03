@@ -1,6 +1,6 @@
 # grafana
 
-![Version: 0.6.2](https://img.shields.io/badge/Version-0.6.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 9.3.6](https://img.shields.io/badge/AppVersion-9.3.6-informational?style=flat-square)
+![Version: 0.6.3](https://img.shields.io/badge/Version-0.6.3-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 9.3.6](https://img.shields.io/badge/AppVersion-9.3.6-informational?style=flat-square)
 
 Grafana instance
 
@@ -87,6 +87,12 @@ Grafana instance
 | serviceAccount.annotations | object | `{}` | Annotations to add to the service account |
 | serviceAccount.create | bool | `false` | Specifies whether a service account should be created |
 | serviceAccount.name | string | `""` | The name of the service account to use. If not set and create is true, a name is generated using the fullname template |
+| smtp.enabled | bool | `false` | Enable/disable SMTP server, see [Grafana SMTP](https://grafana.com/docs/grafana/latest/setup-grafana/configure-grafana/#smtp) for more. |
+| smtp.host | string | `"my.smtp.com:465"` | SMTP Host with port, see [Grafana SMTP](https://grafana.com/docs/grafana/latest/setup-grafana/configure-grafana/#smtp) for more. |
+| smtp.mailFrom | string | `"mailFrom@example.com"` | SMTP from email address, see [Grafana SMTP](https://grafana.com/docs/grafana/latest/setup-grafana/configure-grafana/#smtp) for more. |
+| smtp.nameFrom | string | `"myGrafana instance"` | Sender Name, see [Grafana SMTP](https://grafana.com/docs/grafana/latest/setup-grafana/configure-grafana/#smtp) for more. |
+| smtp.password | string | `"changeMe"` | SMTP password, see [Grafana SMTP](https://grafana.com/docs/grafana/latest/setup-grafana/configure-grafana/#smtp) for more. |
+| smtp.user | string | `"username"` | SMTP username, see [Grafana SMTP](https://grafana.com/docs/grafana/latest/setup-grafana/configure-grafana/#smtp) for more. |
 | startupProbe.enabled | bool | `true` | Enable/disable startup probe [Startup probe](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes) See the [API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#Probe) for details. Use `startup.probe: {}` to configure [startupProbe probe](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/) |
 | startupProbe.failureThreshold | int | `20` |  |
 | startupProbe.initialDelaySeconds | int | `10` |  |
