@@ -99,7 +99,6 @@ http:
   # -- Enable/disable Grafana GZIP encoding
   enableGzip: true
 
-
 security:
   # -- Grafana admin username
   adminUsername: admin
@@ -143,7 +142,6 @@ database:
   auth:
     username: postgres
     password: changeMe
-
 
 startupProbe:
   # -- Enable/disable startup probe
