@@ -67,20 +67,12 @@ spec:
               value: {{ .Values.database.host | quote }}
             - name: PGPORT
               value: {{ .Values.database.port | quote }}
+            - name: PGDATABASE
+              value: template1
             - name: PGUSER
               value: {{ .Values.database.auth.username | quote }}
             - name: PGPASSWORD
               value: {{ .Values.database.auth.password | quote }}
-
-      #   - name: wait-for-psql
-      #     image: bwibo/wait-for-psql
-      #     args:
-      #       - "60"
-      #       - {{ .Values.database.host | quote }}
-      #       - {{ .Values.database.port | quote }}
-      #       - {{ .Values.database.dbname | quote }}
-      #       - {{ .Values.database.auth.username | quote }}
-      #       - {{ .Values.database.auth.password | squote }}
       {{ end }}
 
       containers:
