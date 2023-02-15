@@ -72,3 +72,7 @@ ingress-nginx:
   # -- Enable/disable [NGINX-Ingress](https://github.com/kubernetes/ingress-nginx).
   # This is only required, if there is no IncressController available in your cluster.
   enabled: false
+
+postgresql-ha:
+  # Enable/disable Bitnami PostgreSQL HA database backend
+  enabled: false
