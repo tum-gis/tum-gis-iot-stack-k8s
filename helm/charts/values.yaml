@@ -61,7 +61,7 @@ grafana:
 certIssuer:
   # -- Enable/disable [cert-manager](https://cert-manager.io/docs/) namespace Issuers.
   # Set according to other `ingress.XXX` settings. Disable if a `ClusterIssuer` is used.
-  enabled: false
+  enabled: true
 
 cert-manager:
   # -- Enable/disable [cert-manager](https://cert-manager.io/docs/). Only enable this if
@@ -74,5 +74,17 @@ ingress-nginx:
   enabled: false
 
 postgresql-ha:
-  # Enable/disable Bitnami PostgreSQL HA database backend
+  # -- Enable/disable Bitnami PostgreSQL HA database backend.
   enabled: false
+
+  postgresql:
+    extraVolumes:
+      - name: dshm
+        emptyDir:
+          medium: Memory
+          sizeLimit: 512Mi
+
+    initdbScripts:
+      01_installPostgis.sql: |
+        CREATE EXTENSION if not exists postgis;
+        CREATE EXTENSION if not exists postgis_raster;
