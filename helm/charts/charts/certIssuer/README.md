@@ -2,7 +2,19 @@
 
 ![Version: 0.4.1](https://img.shields.io/badge/Version-0.4.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.1.0](https://img.shields.io/badge/AppVersion-0.1.0-informational?style=flat-square)
 
-Helm chart to provide namespace Issuers for CertManager
+Helm chart to provide namespace Issuers for CertManager.
+
+**Homepage:** <https://github.com/tum-gis/tum-gis-iot-stack-k8s>
+
+## Maintainers
+
+| Name | Email | Url |
+| ---- | ------ | --- |
+| Bruno Willenborg | <b.willenborg@tum.de> | <https://www.asg.ed.tum.de/en/gis/our-team/staff/bruno-willenborg/> |
+
+## Source Code
+
+* <https://github.com/tum-gis/tum-gis-iot-stack-k8s/tree/main/helm/charts/charts/certIssuer>
 
 ## Values
 

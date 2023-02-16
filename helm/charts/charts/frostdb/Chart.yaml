@@ -1,6 +1,17 @@
 apiVersion: v2
 name: frostdb
-description: PostGIS database in a local volume for FROST-Server.
-type: application
+description: Basic chart for a PostgreSQL/PostGIS database.
+
+home: https://github.com/tum-gis/tum-gis-iot-stack-k8s
+sources:
+  - https://github.com/tum-gis/tum-gis-iot-stack-k8s/tree/main/helm/charts/charts/frostdb
+  - https://registry.hub.docker.com/r/postgis/postgis/
+  - https://github.com/postgis/docker-postgis
+
 version: 0.5.0
 appVersion: "14-3.3-alpine"
+
+maintainers:
+  - email: b.willenborg@tum.de
+    name: Bruno Willenborg
+    url: https://www.asg.ed.tum.de/en/gis/our-team/staff/bruno-willenborg/

@@ -2,7 +2,13 @@
 
 ![Version: 0.4.0](https://img.shields.io/badge/Version-0.4.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2.6.2-alpine](https://img.shields.io/badge/AppVersion-2.6.2--alpine-informational?style=flat-square)
 
-Caddy webserver
+Basic chart for Caddy webserver.
+
+## Maintainers
+
+| Name | Email | Url |
+| ---- | ------ | --- |
+| Bruno Willenborg | <b.willenborg@tum.de> | <https://www.asg.ed.tum.de/en/gis/our-team/staff/bruno-willenborg/> |
 
 ## Values
 

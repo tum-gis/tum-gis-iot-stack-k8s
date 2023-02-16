@@ -1,8 +1,22 @@
 # frostdb
 
-![Version: 0.5.0](https://img.shields.io/badge/Version-0.5.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 14-3.3-alpine](https://img.shields.io/badge/AppVersion-14--3.3--alpine-informational?style=flat-square)
+![Version: 0.5.0](https://img.shields.io/badge/Version-0.5.0-informational?style=flat-square) ![AppVersion: 14-3.3-alpine](https://img.shields.io/badge/AppVersion-14--3.3--alpine-informational?style=flat-square)
 
-PostGIS database in a local volume for FROST-Server.
+Basic chart for a PostgreSQL/PostGIS database.
+
+**Homepage:** <https://github.com/tum-gis/tum-gis-iot-stack-k8s>
+
+## Maintainers
+
+| Name | Email | Url |
+| ---- | ------ | --- |
+| Bruno Willenborg | <b.willenborg@tum.de> | <https://www.asg.ed.tum.de/en/gis/our-team/staff/bruno-willenborg/> |
+
+## Source Code
+
+* <https://github.com/tum-gis/tum-gis-iot-stack-k8s/tree/main/helm/charts/charts/frostdb>
+* <https://registry.hub.docker.com/r/postgis/postgis/>
+* <https://github.com/postgis/docker-postgis>
 
 ## Values
 

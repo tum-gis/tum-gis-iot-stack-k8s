@@ -1,6 +1,12 @@
 apiVersion: v2
 name: caddy
-description: Caddy webserver
+description: Basic chart for Caddy webserver.
 type: application
+
 version: 0.4.0
 appVersion: "2.6.2-alpine"
+
+maintainers:
+  - email: b.willenborg@tum.de
+    name: Bruno Willenborg
+    url: https://www.asg.ed.tum.de/en/gis/our-team/staff/bruno-willenborg/
