@@ -61,7 +61,7 @@ grafana:
 certIssuer:
   # -- Enable/disable [cert-manager](https://cert-manager.io/docs/) namespace Issuers.
   # Set according to other `ingress.XXX` settings. Disable if a `ClusterIssuer` is used.
-  enabled: false
+  enabled: true
 
 cert-manager:
   # -- Enable/disable [cert-manager](https://cert-manager.io/docs/). Only enable this if
@@ -72,3 +72,29 @@ ingress-nginx:
   # -- Enable/disable [NGINX-Ingress](https://github.com/kubernetes/ingress-nginx).
   # This is only required, if there is no IncressController available in your cluster.
   enabled: false
+
+postgresql-ha:
+  # -- Enable/disable Bitnami PostgreSQL HA database backend.
+  enabled: false
+
+  # @ignored
+  postgresql:
+    extraVolumes:
+      - name: dshm
+        emptyDir:
+          medium: Memory
+          sizeLimit: 512Mi
+
+    # @ignored
+    initdbScripts:
+      01_createExtensionPostGIS.sh: |
+        #!/bin/bash
+        set -e
+        echo "Initialize FROST-Server database..."
+        export PGPASSWORD=$POSTGRESQL_POSTGRES_PASSWORD
+        psql -v ON_ERROR_STOP=1 --dbname "$POSTGRESQL_DATABASE" <<-EOSQL
+          CREATE EXTENSION if not exists postgis;
+          CREATE EXTENSION if not exists postgis_raster;
+        EOSQL
+
+        echo "Initialize FROST-Server database...done!"

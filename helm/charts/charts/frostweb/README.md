@@ -1,8 +1,21 @@
 # frostweb
 
-![Version: 0.5.0](https://img.shields.io/badge/Version-0.5.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2.0.6](https://img.shields.io/badge/AppVersion-2.0.6-informational?style=flat-square)
+![Version: 0.6.0](https://img.shields.io/badge/Version-0.6.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2.1.0](https://img.shields.io/badge/AppVersion-2.1.0-informational?style=flat-square)
 
-FROST-Server HTTP and MQTT service
+FROST-Server HTTP and MQTT service.
+
+**Homepage:** <https://github.com/tum-gis/tum-gis-iot-stack-k8s>
+
+## Maintainers
+
+| Name | Email | Url |
+| ---- | ------ | --- |
+| Bruno Willenborg | <b.willenborg@tum.de> | <https://www.asg.ed.tum.de/en/gis/our-team/staff/bruno-willenborg/> |
+
+## Source Code
+
+* <https://github.com/tum-gis/tum-gis-iot-stack-k8s/tree/main/helm/charts/charts/frostweb>
+* <https://github.com/FraunhoferIOSB/FROST-Server>
 
 ## Values
 

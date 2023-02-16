@@ -1,6 +1,18 @@
 apiVersion: v2
 name: frostweb
-description: FROST-Server HTTP and MQTT service
+description: FROST-Server HTTP and MQTT service.
 type: application
-version: 0.5.0
-appVersion: "2.0.6"
+
+home: https://github.com/tum-gis/tum-gis-iot-stack-k8s
+sources:
+  - https://github.com/tum-gis/tum-gis-iot-stack-k8s/tree/main/helm/charts/charts/frostweb
+  - https://github.com/FraunhoferIOSB/FROST-Server
+
+
+version: 0.6.0
+appVersion: "2.1.0"
+
+maintainers:
+  - email: b.willenborg@tum.de
+    name: Bruno Willenborg
+    url: https://www.asg.ed.tum.de/en/gis/our-team/staff/bruno-willenborg/

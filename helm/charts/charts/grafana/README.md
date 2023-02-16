@@ -2,7 +2,20 @@
 
 ![Version: 0.6.3](https://img.shields.io/badge/Version-0.6.3-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 9.3.6](https://img.shields.io/badge/AppVersion-9.3.6-informational?style=flat-square)
 
-Grafana instance
+Bash chart for Grafana.
+
+**Homepage:** <https://github.com/tum-gis/tum-gis-iot-stack-k8s>
+
+## Maintainers
+
+| Name | Email | Url |
+| ---- | ------ | --- |
+| Bruno Willenborg | <b.willenborg@tum.de> | <https://www.asg.ed.tum.de/en/gis/our-team/staff/bruno-willenborg/> |
+
+## Source Code
+
+* <https://github.com/tum-gis/tum-gis-iot-stack-k8s/tree/main/helm/charts/charts/grafana>
+* <https://github.com/grafana/grafana>
 
 ## Values
 

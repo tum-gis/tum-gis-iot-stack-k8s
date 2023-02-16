@@ -1,6 +1,17 @@
 apiVersion: v2
 name: nodered
-description: Node-RED instance
+description: Basic chart for Node-RED.
 type: application
+
+home: https://github.com/tum-gis/tum-gis-iot-stack-k8s
+sources:
+  - https://github.com/tum-gis/tum-gis-iot-stack-k8s/tree/main/helm/charts/charts/nodered
+  - https://github.com/node-red/node-red
+
 version: 0.5.0
 appVersion: "3.0.2"
+
+maintainers:
+  - email: b.willenborg@tum.de
+    name: Bruno Willenborg
+    url: https://www.asg.ed.tum.de/en/gis/our-team/staff/bruno-willenborg/

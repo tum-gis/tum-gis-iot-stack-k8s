@@ -1,6 +1,17 @@
 apiVersion: v2
 name: grafana
-description: Grafana instance
+description: Bash chart for Grafana.
 type: application
+
+home: https://github.com/tum-gis/tum-gis-iot-stack-k8s
+sources:
+  - https://github.com/tum-gis/tum-gis-iot-stack-k8s/tree/main/helm/charts/charts/grafana
+  - https://github.com/grafana/grafana
+
 version: 0.6.3
 appVersion: "9.3.6"
+
+maintainers:
+  - email: b.willenborg@tum.de
+    name: Bruno Willenborg
+    url: https://www.asg.ed.tum.de/en/gis/our-team/staff/bruno-willenborg/
