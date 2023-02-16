@@ -1,6 +1,6 @@
 # tum-gis-iot-stack-k8s
 
-![Version: 0.8.2](https://img.shields.io/badge/Version-0.8.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.0.1](https://img.shields.io/badge/AppVersion-0.0.1-informational?style=flat-square)
+![Version: 0.9.0](https://img.shields.io/badge/Version-0.9.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.0.1](https://img.shields.io/badge/AppVersion-0.0.1-informational?style=flat-square)
 
 Helm Chart for the TUM-GI IoT stack.
 
@@ -28,7 +28,7 @@ Kubernetes: `>= 1.23.0`
 |  | frostweb | * |
 |  | grafana | * |
 |  | nodered | * |
-| https://charts.bitnami.com/bitnami | postgresql-ha(postgresql-ha) | >=9.4.11 |
+| https://charts.bitnami.com/bitnami | postgresql-ha(postgresql-ha) | >=10.0.0 |
 | https://charts.jetstack.io | cert-manager(cert-manager) | ~1.11.0 |
 | https://kubernetes.github.io/ingress-nginx | ingress-nginx(ingress-nginx) | ~4.4.0 |
 
