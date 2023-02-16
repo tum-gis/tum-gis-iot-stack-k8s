@@ -77,6 +77,7 @@ postgresql-ha:
   # -- Enable/disable Bitnami PostgreSQL HA database backend.
   enabled: false
 
+  # @ignored
   postgresql:
     extraVolumes:
       - name: dshm
@@ -84,7 +85,16 @@ postgresql-ha:
           medium: Memory
           sizeLimit: 512Mi
 
+    # @ignored
     initdbScripts:
-      01_installPostgis.sql: |
-        CREATE EXTENSION if not exists postgis;
-        CREATE EXTENSION if not exists postgis_raster;
+      01_createExtensionPostGIS.sh: |
+        #!/bin/bash
+        set -e
+        echo "Initialize FROST-Server database..."
+        export PGPASSWORD=$POSTGRESQL_POSTGRES_PASSWORD
+        psql -v ON_ERROR_STOP=1 --dbname "$POSTGRESQL_DATABASE" <<-EOSQL
+          CREATE EXTENSION if not exists postgis;
+          CREATE EXTENSION if not exists postgis_raster;
+        EOSQL
+
+        echo "Initialize FROST-Server database...done!"
