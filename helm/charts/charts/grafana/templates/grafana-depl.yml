@@ -93,7 +93,7 @@ spec:
                 name: {{ include "grafana.fullname" . }}
             {{- if .Values.smtp.enabled }}
             - secretRef:
-                name: {{ include "grafana.fullname"-smtp . }}
+                name: {{ include "grafana.fullname" . }}-smtp
             {{- end }}
 
           {{- if .Values.startupProbe.enabled }}
