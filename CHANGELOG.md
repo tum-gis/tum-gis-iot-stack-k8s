@@ -8,6 +8,22 @@ Versions are prefixed with `tum-gis-iot-stack-k8s-` due to usage of
 [chart-releaser-action](https://github.com/helm/chart-releaser-action).
 For releases `< 1.0.0` minor version step indicate breaking changes.
 
+## [Unreleased] - 2023-01-01
+
+### Added
+
+### Changed
+
+- Bump Grafana `9.3.6` --> `9.4.1`
+
+### Removed
+
+### Fixed
+
+### Security
+
+### Deprecated
+
 ## [tum-gis-iot-stack-k8s-0.9.1] - 2023-02-17
 
 ### Fixed
@@ -48,7 +64,7 @@ For releases `< 1.0.0` minor version step indicate breaking changes.
 
 - Versions before this release are development snapshots
 
-## [template] - 2023-01-01
+## [template] - YYYY-MM-DD
 
 ### Added
 
