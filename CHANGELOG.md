@@ -20,6 +20,8 @@ For releases `< 1.0.0` minor version step indicate breaking changes.
 
 - Support for high availability
   [PostgreSQL database backend](https://artifacthub.io/packages/helm/bitnami/postgresql-ha)
+  - **Note:** Switching to the new database backend require database migration e.g. via
+    using `pg_dump` and `pg_restore`.
 
 ### Changed
 
