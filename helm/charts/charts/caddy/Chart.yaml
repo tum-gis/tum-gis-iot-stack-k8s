@@ -3,8 +3,8 @@ name: caddy
 description: Basic chart for Caddy webserver.
 type: application
 
-version: 0.4.0
-appVersion: "2.6.2-alpine"
+version: 0.4.1
+appVersion: "2.6.4-alpine"
 
 maintainers:
   - email: b.willenborg@tum.de
