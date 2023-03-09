@@ -57,3 +57,13 @@ resource "azurerm_kubernetes_cluster_node_pool" "k8s-nodes-db" {
 
   tags = local.tags
 }
+
+# k8s database node pool ------------------------------------------------------
+resource "azurerm_kubernetes_cluster_node_pool" "k8s-nodes-small" {
+  name                  = "small"
+  kubernetes_cluster_id = azurerm_kubernetes_cluster.this.id
+  vm_size               = var.k8s_small_node_type
+  node_count            = var.k8s_small_node_count
+
+  tags = local.tags
+}
