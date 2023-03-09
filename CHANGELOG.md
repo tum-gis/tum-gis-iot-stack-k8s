@@ -8,21 +8,11 @@ Versions are prefixed with `tum-gis-iot-stack-k8s-` due to usage of
 [chart-releaser-action](https://github.com/helm/chart-releaser-action).
 For releases `< 1.0.0` minor version step indicate breaking changes.
 
-## [Unreleased] - 2023-01-01
-
-### Added
+## [tum-gis-iot-stack-k8s-0.9.2] - 2023-03-09
 
 ### Changed
 
-- Bump Grafana `9.3.6` --> `9.4.1`
-
-### Removed
-
-### Fixed
-
-### Security
-
-### Deprecated
+- Bump Grafana `9.3.6` --> `9.4.3`
 
 ## [tum-gis-iot-stack-k8s-0.9.1] - 2023-02-17
 
@@ -78,6 +68,7 @@ For releases `< 1.0.0` minor version step indicate breaking changes.
 
 ### Deprecated
 
+[tum-gis-iot-stack-k8s-0.9.2]: https://github.com/tum-gis/tum-gis-iot-stack-k8s/compare/tum-gis-iot-stack-k8s-0.9.1...tum-gis-iot-stack-k8s-0.9.2
 [tum-gis-iot-stack-k8s-0.9.1]: https://github.com/tum-gis/tum-gis-iot-stack-k8s/compare/tum-gis-iot-stack-k8s-0.9.0...tum-gis-iot-stack-k8s-0.9.1
 [tum-gis-iot-stack-k8s-0.9.0]: https://github.com/tum-gis/tum-gis-iot-stack-k8s/compare/tum-gis-iot-stack-k8s-0.8.2...tum-gis-iot-stack-k8s-0.9.0
 [tum-gis-iot-stack-k8s-0.8.2]: https://github.com/tum-gis/tum-gis-iot-stack-k8s/compare/tum-gis-iot-stack-k8s-0.8.1...tum-gis-iot-stack-k8s-0.8.2
