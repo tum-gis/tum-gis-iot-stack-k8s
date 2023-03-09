@@ -12,7 +12,7 @@ For releases `< 1.0.0` minor version step indicate breaking changes.
 
 ### Changed
 
-- Bump Caddy `2.6.2-alpine` --> `2.6.4-apline`
+- Bump Caddy `2.6.2-alpine` --> `2.6.4-alpine`
 
 ## [tum-gis-iot-stack-k8s-0.9.3] - 2023-03-09
 
