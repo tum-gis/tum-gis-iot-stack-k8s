@@ -12,7 +12,8 @@ For releases `< 1.0.0` minor version step indicate breaking changes.
 
 ### Added
 
-- Added support for citing this repo with a DOI provided by https://zenodo.org
+- Added support for citing this repo with a DOI provided by https://zenodo.org:
+  [![DOI](https://zenodo.org/badge/506671603.svg)](https://zenodo.org/badge/latestdoi/506671603)
 
 ## [tum-gis-iot-stack-k8s-0.9.4] - 2023-03-09
 
