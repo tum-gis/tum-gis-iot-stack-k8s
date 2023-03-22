@@ -1,17 +1,21 @@
 <h1 align="center">TUM-GIS IoT Stack for Kubernetes</h1>
 
 <p align="center">
-    <em>an application stack for managing, integrating, storing,
-and visualizing sensor data with open standards and tools based on <a title="Open Geospatial Consortium Homepage" href="https://www.ogc.org/standards/sensorthings">OGC SensorThingsAPI</a></em>
-    <br />
-    <br />
-    <a href="https://github.com/tum-gis/tum-gis-iot-stack-k8s/issues">Report Bug</a>
-    ·
-    <a href="https://github.com/tum-gis/tum-gis-iot-stack-k8s/issues">Request Feature</a>
-    <br />
-    <br />
-    <a href="https://github.com/tum-gis/tum-gis-iot-stack-k8s/releases" title="Latest release">
+  <em>an application stack for managing, integrating, storing,
+  and visualizing sensor data with open standards and tools based on<a title="Open Geospatial Consortium Homepage" href="https://www.ogc.org/standards/sensorthings">OGC SensorThingsAPI</a>
+  </em>
+  <br />
+  <br />
+  <a href="https://github.com/tum-gis/tum-gis-iot-stack-k8s/issues">Report Bug</a>
+  ·
+  <a href="https://github.com/tum-gis/tum-gis-iot-stack-k8s/issues">Request Feature</a>
+  <br />
+  <br />
+  <a href="https://github.com/tum-gis/tum-gis-iot-stack-k8s/releases" title="Latest release">
     <img src="https://img.shields.io/github/v/release/tum-gis/tum-gis-iot-stack-k8s?sort=semver">
+  </a>
+  <a href="https://doi.org/10.5281/zenodo.7759805">
+    <img src="https://zenodo.org/badge/DOI/10.5281/zenodo.7759805.svg" alt="DOI" />
   </a>
 </p>
 
@@ -49,6 +53,7 @@ For local testing check out the [examples](examples).
     - [Build Chart documentation](#build-chart-documentation)
   - [Contributors](#contributors)
 - [:mortar\_board: Research](#mortar_board-research)
+  - [Cite this repository](#cite-this-repository)
 - [:memo: License](#memo-license)
 - [:handshake: Thanks](#handshake-thanks)
 
@@ -171,6 +176,14 @@ docker run --rm --volume "$PWD/helm/charts:/helm-docs" -u $(id -u) jnorwood/helm
 
 This chart was developed for the course
 [Geo Sensor Networks and the Internet of Things](https://wiki.tum.de/display/geosensorweb).
+
+### Cite this repository
+
+To cite this repository, please use the DOI provided by [Zenodo](https://zenodo.org).
+If you want to reference a specific release version of the software, click the badge
+and navigate to the desired version on the page.
+
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.7759805.svg)](https://doi.org/10.5281/zenodo.7759805)
 
 ## :memo: License
 
