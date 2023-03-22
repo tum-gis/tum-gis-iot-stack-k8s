@@ -87,7 +87,7 @@ For releases `< 1.0.0` minor version step indicate breaking changes.
 
 ### Deprecated
 
-[tum-gis-iot-stack-k8s-0.9.4]: https://github.com/tum-gis/tum-gis-iot-stack-k8s/compare/tum-gis-iot-stack-k8s-0.9.4...tum-gis-iot-stack-k8s-0.9.5
+[tum-gis-iot-stack-k8s-0.9.5]: https://github.com/tum-gis/tum-gis-iot-stack-k8s/compare/tum-gis-iot-stack-k8s-0.9.4...tum-gis-iot-stack-k8s-0.9.5
 [tum-gis-iot-stack-k8s-0.9.4]: https://github.com/tum-gis/tum-gis-iot-stack-k8s/compare/tum-gis-iot-stack-k8s-0.9.3...tum-gis-iot-stack-k8s-0.9.4
 [tum-gis-iot-stack-k8s-0.9.3]: https://github.com/tum-gis/tum-gis-iot-stack-k8s/compare/tum-gis-iot-stack-k8s-0.9.2...tum-gis-iot-stack-k8s-0.9.3
 [tum-gis-iot-stack-k8s-0.9.2]: https://github.com/tum-gis/tum-gis-iot-stack-k8s/compare/tum-gis-iot-stack-k8s-0.9.1...tum-gis-iot-stack-k8s-0.9.2
