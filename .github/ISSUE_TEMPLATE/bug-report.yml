@@ -38,6 +38,17 @@ body:
       required: true
 
   - type: textarea
+    id: config
+    attributes:
+      label: Configuration
+      description: |
+        Please copy and paste you configuration YAML-file here.
+        This will be automatically formatted into code, so no need for backticks.
+      render: YAML
+    validations:
+      required: true
+
+  - type: textarea
     id: versions
     attributes:
       label: Versions and environment
@@ -50,18 +61,19 @@ body:
         ### Versions
 
         | Software | Version |
-        |--------|--------|
-        | Operating System | Windows 10 `x.x.x` |
-        | Version of the helm chart in this repo | `x.x.x` |
-        | `helm` version| `x.x.x` |
-        | `kubernetes` version of your cluster | `x.x.x` |
+        |----------------------------------------|---------------------|
+        | Operating System                       | Windows 10 `x.x.x`  |
+        | Version of the helm chart in this repo | `x.x.x`             |
+        | `helm` version                         | `x.x.x`             |
+        | `kubernetes` version of your cluster   | `x.x.x`             |
+        | other relevant software/tool/....      | `x.x.x`             |
 
         ### Environment
 
-        | Variable | Values |
-        |--------|--------|
-        | MY_ENV_VAR | 1234 |
-        | OTHER_VARIABLE | abc |
+        | Variable                         | Values                          |
+        |----------------------------------|---------------------------------|
+        | MY_ENV_VAR                       | 1234                            |
+        | OTHER_VARIABLE                   | abc                             |
 
     validations:
       required: true
@@ -69,7 +81,7 @@ body:
   - type: dropdown
     id: browsers
     attributes:
-      label: What browsers are you seeing the problem on?
+      label: If applicable, what browsers are you seeing the problem on?
       multiple: true
       options:
         - Firefox
@@ -85,3 +97,10 @@ body:
         Please copy and paste any relevant log output.
         This will be automatically formatted into code, so no need for backticks.
       render: Shell
+
+  - type: textarea
+    id: comments
+    attributes:
+      label: Additional information and comments
+      description: |
+        Please add any additional information or comment you find relevant regarding this issue here!
