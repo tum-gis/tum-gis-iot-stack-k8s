@@ -8,15 +8,17 @@ body:
   - type: markdown
     attributes:
       value: |
-        Thanks for taking the time to fill out this bug report!
-  - type: input
-    id: contact
-    attributes:
-      label: Contact Details
-      description: How can we get in touch with you if we need more info?
-      placeholder: ex. email@example.com
-    validations:
-      required: false
+        *Thanks for taking the time to fill out this bug report!*
+
+  # - type: input
+  #   id: contact
+  #   attributes:
+  #     label: Contact Details
+  #     description: How can we get in touch with you if we need more info?
+  #     placeholder: ex. email@example.com
+  #   validations:
+  #     required: false
+
   - type: textarea
     id: what-happened
     attributes:
@@ -26,6 +28,37 @@ body:
       value: "A bug happened!"
     validations:
       required: true
+
+  - type: textarea
+    id: how-to-reproduce
+    attributes:
+      label: Steps to reproduce
+      description: Tell us step-by-step how the bug can be reproduced!
+      placeholder: |
+        1. Deploy the Helm chart
+        2. See the logs using `kubectl get events`
+        3. ...
+      value: |
+        1.
+        2.
+        3.
+    validations:
+      required: true
+
+  - type: textarea
+    id: versions
+    attributes:
+      label: Versions and environment
+      description: Tell us what software version und environment are you using?
+      placeholder: |
+        * Version `tum-gis-iot-stack-k8s`: `x.x.x`
+      value: |
+        1.
+        2.
+        3.
+    validations:
+      required: true
+
   - type: dropdown
     id: version
     attributes:
@@ -34,6 +67,7 @@ body:
       options:
         - 1.0.2 (Default)
         - 1.0.3 (Edge)
+
     validations:
       required: true
   - type: dropdown
