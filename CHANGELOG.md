@@ -10,17 +10,11 @@ For releases `< 1.0.0` minor version step indicate breaking changes.
 
 ## [Unreleased] - YYYY-MM-DD
 
+## [tum-gis-iot-stack-k8s-0.9.6] - 2023-05-02
+
 ### Changed
 
-- Bump Grafana `9.4.3` --> `9.4.7`
-
-### Removed
-
-### Fixed
-
-### Security
-
-### Deprecated
+- Bump Grafana `9.4.3` --> `9.5.1`
 
 ## [tum-gis-iot-stack-k8s-0.9.6] - 2023-03-22
 
