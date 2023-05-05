@@ -110,6 +110,7 @@ The documentation for internal dependencies is located in their folders too:
 - [Basic PostgreSQL/PostGIS](helm/charts/charts/frostdb)
 - [Grafana](helm/charts/charts/grafana)
 - [Node-RED](helm/charts/charts/nodered)
+- [Caddy](helm/charts/charts/caddy)
 - [certIssuer](helm/charts/charts/certIssuer)
 
 External dependencies are documented here:
