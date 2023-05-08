@@ -30,7 +30,6 @@ For releases `< 1.0.0` minor version step indicate breaking changes.
 
 - Helm releaser now only runs on chart changes
 
-
 ## [tum-gis-iot-stack-k8s-0.9.6] - 2023-03-22
 
 ### Fixed
