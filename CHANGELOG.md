@@ -12,6 +12,10 @@ For releases `< 1.0.0` minor version step indicate breaking changes.
 
 ## [tum-gis-iot-stack-k8s-0.9.8] - 2023-05-08
 
+### Added
+
+- Github issue form
+
 ### Changed
 
 - Bump FROST-Server `2.1.1` --> `2.1.2`
