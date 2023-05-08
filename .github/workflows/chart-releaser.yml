@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - helm/**
+      - charts/tum-gis-iot-stack-k8s/**
 
 jobs:
   release:
