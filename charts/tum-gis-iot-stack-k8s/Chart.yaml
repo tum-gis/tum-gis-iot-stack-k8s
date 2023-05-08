@@ -15,8 +15,8 @@ maintainers:
     name: Bruno Willenborg
     url: https://www.asg.ed.tum.de/en/gis/our-team/staff/bruno-willenborg/
 
-version: 0.9.7
-appVersion: "2.1.1"
+version: 0.9.8
+appVersion: "2.1.2"
 
 dependencies:
   - name: frostweb

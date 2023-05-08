@@ -9,8 +9,8 @@ sources:
   - https://github.com/FraunhoferIOSB/FROST-Server
 
 
-version: 0.6.1
-appVersion: "2.1.1"
+version: 0.6.2
+appVersion: "2.1.2"
 
 maintainers:
   - email: b.willenborg@tum.de
