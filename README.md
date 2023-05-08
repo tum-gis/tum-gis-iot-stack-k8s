@@ -102,16 +102,16 @@ To get this up an running in seconds, check out the [examples](examples). You wi
 ## :page_with_curl: Documentation
 
 The documentation of the chart is located in the chart directory:
-[helm/charts](helm/charts)
+[charts/tum-gis-iot-stack-k8s](charts/tum-gis-iot-stack-k8s)
 
 The documentation for internal dependencies is located in their folders too:
 
-- [FROST-Server](helm/charts/charts/frostweb)
-- [Basic PostgreSQL/PostGIS](helm/charts/charts/frostdb)
-- [Grafana](helm/charts/charts/grafana)
-- [Node-RED](helm/charts/charts/nodered)
-- [Caddy](helm/charts/charts/caddy)
-- [certIssuer](helm/charts/charts/certIssuer)
+- [FROST-Server](charts/tum-gis-iot-stack-k8s/charts/frostweb)
+- [Basic PostgreSQL/PostGIS](charts/tum-gis-iot-stack-k8s/charts/frostdb)
+- [Grafana](charts/tum-gis-iot-stack-k8s/charts/grafana)
+- [Node-RED](charts/tum-gis-iot-stack-k8s/charts/nodered)
+- [Caddy](charts/tum-gis-iot-stack-k8s/charts/caddy)
+- [certIssuer](charts/tum-gis-iot-stack-k8s/charts/certIssuer)
 
 External dependencies are documented here:
 
@@ -132,11 +132,11 @@ External dependencies are documented here:
    helm repo update
    ```
 
-3. Adapt settings according to your needs e.g. in [values.yml](helm/charts/values.yaml)
+3. Adapt settings according to your needs e.g. in [values.yml](charts/tum-gis-iot-stack-k8s/values.yaml)
    or create a local `values.yml` to overwrite settings.
    Examples e.g. for a local testing deployment are are available in
    [examples](examples).
-   [values.yml](helm/charts/values.yaml) is documented in [helm/charts](helm/charts).
+   [values.yml](charts/tum-gis-iot-stack-k8s/values.yaml) is documented in [charts/tum-gis-iot-stack-k8s](charts/tum-gis-iot-stack-k8s).
 
 4. Install stack
 
@@ -156,7 +156,7 @@ Bug fixes, issue reports and contributions are greatly appreciated.
 #### Build Chart documentation
 
 The documentation of this chart is located in this repository in the
-[helm/charts](helm/charts) folder and consists of Markdown files,
+[charts/tum-gis-iot-stack-k8s](charts/tum-gis-iot-stack-k8s) folder and consists of Markdown files,
 that are generated using
 [norwoodj/helm-docs](https://github.com/norwoodj/helm-docs).
 To keep the documentation in sync with the source files, it is recommended
@@ -168,7 +168,7 @@ using [norwoodj/helm-docs](https://github.com/norwoodj/helm-docs)
 run this from the repo root.
 
 ```shell
-docker run --rm --volume "$PWD/helm/charts:/helm-docs" -u $(id -u) jnorwood/helm-docs:latest
+docker run --rm --volume "$PWD/charts/tum-gis-iot-stack-k8s:/helm-docs" -u $(id -u) jnorwood/helm-docs:latest
 ```
 
 ### Contributors
