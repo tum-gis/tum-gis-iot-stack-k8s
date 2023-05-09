@@ -1,6 +1,6 @@
 # frostweb
 
-![Version: 0.6.2](https://img.shields.io/badge/Version-0.6.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2.1.2](https://img.shields.io/badge/AppVersion-2.1.2-informational?style=flat-square)
+![Version: 0.6.3](https://img.shields.io/badge/Version-0.6.3-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2.1.2](https://img.shields.io/badge/AppVersion-2.1.2-informational?style=flat-square)
 
 FROST-Server HTTP and MQTT service.
 
@@ -22,7 +22,7 @@ FROST-Server HTTP and MQTT service.
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | affinity | object | `{}` |  |
-| alwaysOrderbyId | bool | `true` |  |
+| alwaysOrderbyId | bool | `false` |  |
 | auth.allowAnonymousRead | bool | `false` | f true, anonymous users are allowed to read (GET) data. |
 | auth.autoUpdateDatabase | bool | `true` | Automatically apply database updates. |
 | auth.db.auth.password | string | `"changeMe"` |  |
@@ -68,6 +68,7 @@ FROST-Server HTTP and MQTT service.
 | livenessProbe.successThreshold | int | `1` |  |
 | livenessProbe.terminationGracePeriodSeconds | string | `nil` |  |
 | livenessProbe.timeoutSeconds | int | `1` |  |
+| logSensitiveData | bool | `false` |  |
 | maxDataSize | string | `"25000000"` |  |
 | maxTop | int | `10000` |  |
 | mqtt.enabled | bool | `true` |  |
@@ -86,7 +87,7 @@ FROST-Server HTTP and MQTT service.
 | persistence.db.driver | string | `"org.postgresql.Driver"` |  |
 | persistence.db.host | string | `"frostdb"` |  |
 | persistence.db.port | int | `5432` |  |
-| persistence.idGenerationMode | string | `"ServerAndClientGenerated"` |  |
+| persistence.idGenerationMode | string | `"ServerGeneratedOnly"` |  |
 | persistence.queryTimeout | int | `0` |  |
 | persistence.slowQueryThreshold | int | `200` |  |
 | podAnnotations | object | `{}` | Additional pod annotations |
