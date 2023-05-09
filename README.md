@@ -12,7 +12,7 @@
   <br />
   <br />
   <a href="https://github.com/tum-gis/tum-gis-iot-stack-k8s/releases" title="Latest release">
-    <img src="https://img.shields.io/github/v/release/tum-gis/tum-gis-iot-stack-k8s?sort=semver">
+    <img src="https://img.shields.io/github/v/release/tum-gis/tum-gis-iot-stack-k8s">
   </a>
     <a href="https://github.com/tum-gis/tum-gis-iot-stack-k8s/blob/main/CHANGELOG.md">
     <img alt="GitHub Workflow Status" src="https://img.shields.io/github/actions/workflow/status/tum-gis/tum-gis-iot-stack-k8s/chart-releaser.yml?label=Helm%20release&logo=helm">
