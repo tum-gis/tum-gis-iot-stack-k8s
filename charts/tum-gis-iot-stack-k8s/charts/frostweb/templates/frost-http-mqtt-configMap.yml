@@ -21,6 +21,7 @@ data:
   maxDataSize: {{ .Values.maxDataSize | quote }}
   defaultCount: {{ .Values.defaultCount | quote }}
   logSensitiveData: {{ .Values.logSensitiveData | quote }}
+  queueLoggingInterval: {{ .Values.queueLoggingInterval | quote }}
 
   # Persistence settings
   persistence_db_driver: {{ .Values.persistence.db.driver | quote }}
@@ -36,6 +37,9 @@ data:
   mqtt_enabled: {{ .Values.mqtt.enabled | quote }}
   mqtt_Host: {{ .Values.mqtt.host | quote }}
   mqtt_QoS: {{ .Values.mqtt.qos | quote }}
+
+  # Plugin settings
+  plugins_openApi_enable: {{ .Values.plugins.openApi.enable | quote }}
 
   # Auth settings
   {{ if .Values.auth.enabled -}}

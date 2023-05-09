@@ -10,6 +10,12 @@ For releases `< 1.0.0` minor version step indicate breaking changes.
 
 ## [Unreleased] - YYYY-MM-DD
 
+## [tum-gis-iot-stack-k8s-0.9.10] - 2023-05-09
+
+### Added
+
+- Exposed some more FROST-Sever settings in `values.yml`
+
 ## [tum-gis-iot-stack-k8s-0.9.9] - 2023-05-09
 
 ### Changed
@@ -127,6 +133,7 @@ For releases `< 1.0.0` minor version step indicate breaking changes.
 ### Deprecated
 
 [Unreleased]: https://github.com/tum-gis/tum-gis-iot-stack-k8s/compare/tum-gis-iot-stack-k8s-0.9.8...HEAD
+[tum-gis-iot-stack-k8s-0.9.10]: https://github.com/tum-gis/tum-gis-iot-stack-k8s/compare/tum-gis-iot-stack-k8s-0.9.9...tum-gis-iot-stack-k8s-0.9.10
 [tum-gis-iot-stack-k8s-0.9.9]: https://github.com/tum-gis/tum-gis-iot-stack-k8s/compare/tum-gis-iot-stack-k8s-0.9.8...tum-gis-iot-stack-k8s-0.9.9
 [tum-gis-iot-stack-k8s-0.9.8]: https://github.com/tum-gis/tum-gis-iot-stack-k8s/compare/tum-gis-iot-stack-k8s-0.9.7...tum-gis-iot-stack-k8s-0.9.8
 [tum-gis-iot-stack-k8s-0.9.7]: https://github.com/tum-gis/tum-gis-iot-stack-k8s/compare/tum-gis-iot-stack-k8s-0.9.6...tum-gis-iot-stack-k8s-0.9.7

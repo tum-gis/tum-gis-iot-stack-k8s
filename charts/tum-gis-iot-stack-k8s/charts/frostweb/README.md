@@ -1,6 +1,6 @@
 # frostweb
 
-![Version: 0.6.3](https://img.shields.io/badge/Version-0.6.3-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2.1.2](https://img.shields.io/badge/AppVersion-2.1.2-informational?style=flat-square)
+![Version: 0.6.4](https://img.shields.io/badge/Version-0.6.4-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2.1.2](https://img.shields.io/badge/AppVersion-2.1.2-informational?style=flat-square)
 
 FROST-Server HTTP and MQTT service.
 
@@ -90,8 +90,10 @@ FROST-Server HTTP and MQTT service.
 | persistence.idGenerationMode | string | `"ServerGeneratedOnly"` |  |
 | persistence.queryTimeout | int | `0` |  |
 | persistence.slowQueryThreshold | int | `200` |  |
+| plugins.openApi.enable | bool | `false` | Enable/disable OpenAPI endpoint, see https://fraunhoferiosb.github.io/FROST-Server/settings/plugins.html |
 | podAnnotations | object | `{}` | Additional pod annotations |
 | podSecurityContext | object | `{}` |  |
+| queueLoggingInterval | int | `0` |  |
 | readinessProbe.enabled | bool | `true` | Enable/disable readiness probe [Readiness probe](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes) See the [API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#Probe) for details. Use `readinessProbe.probe: {}` to configure [readinessProbe probe](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/) |
 | readinessProbe.failureThreshold | int | `5` |  |
 | readinessProbe.initialDelaySeconds | int | `10` |  |
