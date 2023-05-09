@@ -19,6 +19,8 @@ data:
   maxTop: {{ .Values.maxTop | quote }}
   defaultTop: {{ .Values.defaultTop | quote }}
   maxDataSize: {{ .Values.maxDataSize | quote }}
+  defaultCount: {{ .Values.defaultCount | quote }}
+  logSensitiveData: {{ .Values.logSensitiveData | quote }}
 
   # Persistence settings
   persistence_db_driver: {{ .Values.persistence.db.driver | quote }}

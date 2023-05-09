@@ -10,6 +10,16 @@ For releases `< 1.0.0` minor version step indicate breaking changes.
 
 ## [Unreleased] - YYYY-MM-DD
 
+## [tum-gis-iot-stack-k8s-0.9.9] - 2023-05-09
+
+### Changed
+
+- Some FROST-Server default settings
+
+### Fixed
+
+- FROST-Server `defaultCount` not set due to missing variable in template
+
 ## [tum-gis-iot-stack-k8s-0.9.8] - 2023-05-08
 
 ### Added
@@ -117,6 +127,7 @@ For releases `< 1.0.0` minor version step indicate breaking changes.
 ### Deprecated
 
 [Unreleased]: https://github.com/tum-gis/tum-gis-iot-stack-k8s/compare/tum-gis-iot-stack-k8s-0.9.8...HEAD
+[tum-gis-iot-stack-k8s-0.9.9]: https://github.com/tum-gis/tum-gis-iot-stack-k8s/compare/tum-gis-iot-stack-k8s-0.9.8...tum-gis-iot-stack-k8s-0.9.9
 [tum-gis-iot-stack-k8s-0.9.8]: https://github.com/tum-gis/tum-gis-iot-stack-k8s/compare/tum-gis-iot-stack-k8s-0.9.7...tum-gis-iot-stack-k8s-0.9.8
 [tum-gis-iot-stack-k8s-0.9.7]: https://github.com/tum-gis/tum-gis-iot-stack-k8s/compare/tum-gis-iot-stack-k8s-0.9.6...tum-gis-iot-stack-k8s-0.9.7
 [tum-gis-iot-stack-k8s-0.9.6]: https://github.com/tum-gis/tum-gis-iot-stack-k8s/compare/tum-gis-iot-stack-k8s-0.9.5...tum-gis-iot-stack-k8s-0.9.6

@@ -106,16 +106,17 @@ persistence:
   queryTimeout: 0
   countMode: "LIMIT_SAMPLE"
   countEstimateThreshold: 10000
-  idGenerationMode: ServerAndClientGenerated
+  idGenerationMode: ServerGeneratedOnly
   slowQueryThreshold: 200
 
 # FROST-Server General settings
 # https://fraunhoferiosb.github.io/FROST-Server/settings/settings.html#general-settings
-alwaysOrderbyId: true
+alwaysOrderbyId: false
 maxTop: 10000
 defaultTop: 100
 defaultCount: false
 maxDataSize: "25000000"
+logSensitiveData: false
 
 # FROST-Server MQTT settings
 # https://fraunhoferiosb.github.io/FROST-Server/settings/settings.html#mqtt-settings
