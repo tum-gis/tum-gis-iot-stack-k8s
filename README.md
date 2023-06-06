@@ -6,9 +6,9 @@
   </em>
   <br />
   <br />
-  <a href="https://github.com/tum-gis/tum-gis-iot-stack-k8s/issues">Report Bug</a>
+  <a href="https://github.com/tum-gis/tum-gis-iot-stack-k8s/issues/new/choose">Report bug</a>
   ·
-  <a href="https://github.com/tum-gis/tum-gis-iot-stack-k8s/issues">Request Feature</a>
+  <a href="https://github.com/tum-gis/tum-gis-iot-stack-k8s/issues/new/choose">Request feature</a>
   <br />
   <br />
   <a href="https://github.com/tum-gis/tum-gis-iot-stack-k8s/releases" title="Latest release">
