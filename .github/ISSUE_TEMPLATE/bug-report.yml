@@ -14,9 +14,11 @@ body:
     id: what-happened
     attributes:
       label: What happened?
-      description: Also tell us, what you did expect to happen?
+      description: |-
+        Describe the problem you are facing. Also tell us, what you did expect to happen?
+        If applicable, add a screenshot.
       placeholder: Tell us what you see!
-      value: "A bug happened!"
+      value: "A bug happened! I expected this to be like ..."
     validations:
       required: true
 
@@ -37,8 +39,7 @@ body:
     attributes:
       label: Configuration
       description: |-
-        Please copy and paste you configuration YAML-file (`values.yml`) here.
-        **Make sure to strip sensitive information.**
+        Please copy and paste you configuration YAML-file (`values.yml` for ``helm``) here. **Make sure to strip sensitive information.**
         This will be automatically formatted into code, so no need for backticks.
       render: YAML
     validations:
