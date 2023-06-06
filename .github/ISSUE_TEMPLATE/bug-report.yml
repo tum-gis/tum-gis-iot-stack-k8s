@@ -1,9 +1,9 @@
 name: Bug Report
 description: File a bug report
 title: "[Bug]: "
-labels: ["bug", "triage"]
+labels: ["state: triage"]
 assignees:
-  - bwibo
+  - BWibo
 body:
   - type: markdown
     attributes:
