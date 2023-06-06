@@ -14,7 +14,7 @@ body:
     id: what-happened
     attributes:
       label: What happened?
-      description: Also tell us, what did you expect to happen?
+      description: Also tell us, what you did expect to happen?
       placeholder: Tell us what you see!
       value: "A bug happened!"
     validations:
@@ -37,7 +37,8 @@ body:
     attributes:
       label: Configuration
       description: |-
-        Please copy and paste you configuration YAML-file here.
+        Please copy and paste you configuration YAML-file (`values.yml`) here.
+        **Make sure to strip sensitive information.**
         This will be automatically formatted into code, so no need for backticks.
       render: YAML
     validations:
@@ -81,7 +82,7 @@ body:
     attributes:
       label: Relevant log output
       description: |
-        Please copy and paste any relevant log output.
+        Please copy and paste any relevant log output (Browser logs, console logs, ...).
         This will be automatically formatted into code, so no need for backticks.
       render: Shell
 
