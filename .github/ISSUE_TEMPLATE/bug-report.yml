@@ -93,3 +93,10 @@ body:
       label: Additional information and comments
       description: |
         Please add any additional information or comment you find relevant regarding this issue here!
+
+  - type: input
+    id: test
+    attributes:
+      label: Additional information and comments
+      description: |
+        Testinput
