@@ -16,7 +16,7 @@ body:
       label: What happened?
       description: |-
         Describe the problem you are facing. Also tell us, what you did expect to happen?
-        If applicable, add a screenshot.
+        If applicable, add a screenshot (Drag & drop, see below).
       placeholder: Tell us what you see!
       value: "A bug happened! I expected this to be like ..."
     validations:
@@ -93,10 +93,3 @@ body:
       label: Additional information and comments
       description: |
         Please add any additional information or comment you find relevant regarding this issue here!
-
-  - type: input
-    id: test
-    attributes:
-      label: Additional information and comments
-      description: |
-        Testinput
