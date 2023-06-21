@@ -44,6 +44,11 @@ The default username and password for all services is: `user: admin`, `pwd: chan
 
 For local testing check out the [examples](examples).
 
+> **Note:** To try out
+> `alpha`/`beta` [releases](https://github.com/tum-gis/tum-gis-iot-stack-k8s/releases),
+> add the [`--devel`](https://helm.sh/docs/helm/helm_install/#options)
+> option to the `helm install` command.
+
 ## :book: Table of content
 
 - [:zzz: TL;DR](#zzz-tldr)
