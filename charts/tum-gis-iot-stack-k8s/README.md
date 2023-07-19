@@ -1,8 +1,8 @@
 # tum-gis-iot-stack-k8s
 
-![Version: 0.10.0](https://img.shields.io/badge/Version-0.10.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2.1.4](https://img.shields.io/badge/AppVersion-2.1.4-informational?style=flat-square)
+![Version: 0.10.1](https://img.shields.io/badge/Version-0.10.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2.1.4](https://img.shields.io/badge/AppVersion-2.1.4-informational?style=flat-square)
 
-Helm Chart for the TUM-GI IoT stack.
+Helm Chart for the TUM-GI IoT stack. See [CKANGELOG](https://github.com/tum-gis/tum-gis-iot-stack-k8s/blob/main/CHANGELOG.md) for changes.
 
 **Homepage:** <https://github.com/tum-gis/tum-gis-iot-stack-k8s>
 

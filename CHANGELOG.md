@@ -8,6 +8,12 @@ Versions are prefixed with `tum-gis-iot-stack-k8s-` due to usage of
 [chart-releaser-action](https://github.com/helm/chart-releaser-action).
 For releases `< 1.0.0` minor version step indicate breaking changes.
 
+## [tum-gis-iot-stack-k8s-0.10.1] - 2023-07-19
+
+### Changed
+
+- Link `CHANGELOG.md` in release notes.
+
 ## [tum-gis-iot-stack-k8s-0.10.0] - 2023-07-19
 
 ### Added
@@ -132,6 +138,8 @@ For releases `< 1.0.0` minor version step indicate breaking changes.
 
 ## [template] - YYYY-MM-DD
 
+### Breaking changes
+
 ### Added
 
 ### Changed
@@ -144,9 +152,10 @@ For releases `< 1.0.0` minor version step indicate breaking changes.
 
 ### Deprecated
 
-### Breaking changes
+### Known issues
 
-[Unreleased]: https://github.com/tum-gis/tum-gis-iot-stack-k8s/compare/tum-gis-iot-stack-k8s-0.10.0...HEAD
+[Unreleased]: https://github.com/tum-gis/tum-gis-iot-stack-k8s/compare/tum-gis-iot-stack-k8s-0.10.1...HEAD
+[tum-gis-iot-stack-k8s-0.10.1]: https://github.com/tum-gis/tum-gis-iot-stack-k8s/compare/tum-gis-iot-stack-k8s-0.10.0...tum-gis-iot-stack-k8s-0.10.1
 [tum-gis-iot-stack-k8s-0.10.0]: https://github.com/tum-gis/tum-gis-iot-stack-k8s/compare/tum-gis-iot-stack-k8s-0.9.10...tum-gis-iot-stack-k8s-0.10.0
 [tum-gis-iot-stack-k8s-0.9.10]: https://github.com/tum-gis/tum-gis-iot-stack-k8s/compare/tum-gis-iot-stack-k8s-0.9.9...tum-gis-iot-stack-k8s-0.9.10
 [tum-gis-iot-stack-k8s-0.9.9]: https://github.com/tum-gis/tum-gis-iot-stack-k8s/compare/tum-gis-iot-stack-k8s-0.9.8...tum-gis-iot-stack-k8s-0.9.9

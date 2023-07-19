@@ -1,9 +1,10 @@
 apiVersion: v2
 
 name: tum-gis-iot-stack-k8s
-description: Helm Chart for the TUM-GI IoT stack.
+description: >
+  Helm Chart for the TUM-GI IoT stack.
+  See [CKANGELOG](https://github.com/tum-gis/tum-gis-iot-stack-k8s/blob/main/CHANGELOG.md) for changes.
 type: application
-
 home: https://github.com/tum-gis/tum-gis-iot-stack-k8s
 sources:
   - https://github.com/tum-gis/tum-gis-iot-stack-k8s
@@ -15,7 +16,7 @@ maintainers:
     name: Bruno Willenborg
     url: https://www.asg.ed.tum.de/en/gis/our-team/staff/bruno-willenborg/
 
-version: 0.10.0
+version: 0.10.1
 appVersion: "2.1.4"
 
 dependencies:
