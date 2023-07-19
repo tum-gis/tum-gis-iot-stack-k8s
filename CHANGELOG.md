@@ -14,6 +14,10 @@ For releases `< 1.0.0` minor version step indicate breaking changes.
 
 - Added Grafana `featureToggles.enable` option. `PublicDashboards` feature is now enabled by default.
 
+### Changed
+
+- Bump FROST-Server `2.1.2` --> `2.1.4`
+
 ### Breaking changes
 
 - Bump Grafana `9.5.1` --> `10.0.2`
