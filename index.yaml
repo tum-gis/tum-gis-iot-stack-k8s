@@ -2,6 +2,64 @@ apiVersion: v1
 entries:
   tum-gis-iot-stack-k8s:
   - apiVersion: v2
+    appVersion: 2.1.4
+    created: "2023-07-19T13:17:51.549799074Z"
+    dependencies:
+    - condition: frostweb.enabled
+      name: frostweb
+      repository: ""
+      version: '*'
+    - condition: frostdb.enabled
+      name: frostdb
+      repository: ""
+      version: '*'
+    - condition: grafana.enabled
+      name: grafana
+      repository: ""
+      version: '*'
+    - condition: nodered.enabled
+      name: nodered
+      repository: ""
+      version: '*'
+    - condition: certIssuer.enabled
+      name: certIssuer
+      repository: ""
+      version: '*'
+    - condition: caddy.enabled
+      name: caddy
+      repository: ""
+      version: '*'
+    - alias: ingress-nginx
+      condition: ingress-nginx.enabled
+      name: ingress-nginx
+      repository: https://kubernetes.github.io/ingress-nginx
+      version: ~4.4.0
+    - alias: cert-manager
+      condition: cert-manager.enabled
+      name: cert-manager
+      repository: https://charts.jetstack.io
+      version: ~1.11.0
+    - alias: postgresql-ha
+      condition: postgresql-ha.enabled
+      name: postgresql-ha
+      repository: https://charts.bitnami.com/bitnami
+      version: '>=10.0.0'
+    description: Helm Chart for the TUM-GI IoT stack.
+    digest: 860df92e9e57993f33524e65350984c39a416e97193216465537272a833c32a0
+    home: https://github.com/tum-gis/tum-gis-iot-stack-k8s
+    kubeVersion: '>= 1.23.0'
+    maintainers:
+    - email: b.willenborg@tum.de
+      name: Bruno Willenborg
+      url: https://www.asg.ed.tum.de/en/gis/our-team/staff/bruno-willenborg/
+    name: tum-gis-iot-stack-k8s
+    sources:
+    - https://github.com/tum-gis/tum-gis-iot-stack-k8s
+    type: application
+    urls:
+    - https://github.com/tum-gis/tum-gis-iot-stack-k8s/releases/download/tum-gis-iot-stack-k8s-0.10.0/tum-gis-iot-stack-k8s-0.10.0.tgz
+    version: 0.10.0
+  - apiVersion: v2
     appVersion: 2.1.2
     created: "2023-05-09T08:50:37.870685821Z"
     dependencies:
@@ -2416,4 +2474,4 @@ entries:
     urls:
     - https://github.com/tum-gis/tum-gis-iot-stack-k8s/releases/download/tum-gis-iot-stack-k8s-0.1.0/tum-gis-iot-stack-k8s-0.1.0.tgz
     version: 0.1.0
-generated: "2023-05-09T08:50:37.871085235Z"
+generated: "2023-07-19T13:17:51.550381477Z"
