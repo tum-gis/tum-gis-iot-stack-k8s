@@ -8,7 +8,15 @@ Versions are prefixed with `tum-gis-iot-stack-k8s-` due to usage of
 [chart-releaser-action](https://github.com/helm/chart-releaser-action).
 For releases `< 1.0.0` minor version step indicate breaking changes.
 
-## [Unreleased] - YYYY-MM-DD
+## [tum-gis-iot-stack-k8s-0.10.0] - 2023-07-19
+
+### Added
+
+- Added Grafana `featureToggles.enable` option. `PublicDashboards` feature is now enabled by default.
+
+### Breaking changes
+
+- Bump Grafana `9.5.1` --> `10.0.2`
 
 ## [tum-gis-iot-stack-k8s-0.9.10] - 2023-05-09
 
@@ -132,7 +140,10 @@ For releases `< 1.0.0` minor version step indicate breaking changes.
 
 ### Deprecated
 
-[Unreleased]: https://github.com/tum-gis/tum-gis-iot-stack-k8s/compare/tum-gis-iot-stack-k8s-0.9.10...HEAD
+### Breaking changes
+
+[Unreleased]: https://github.com/tum-gis/tum-gis-iot-stack-k8s/compare/tum-gis-iot-stack-k8s-0.10.0...HEAD
+[tum-gis-iot-stack-k8s-0.10.0]: https://github.com/tum-gis/tum-gis-iot-stack-k8s/compare/tum-gis-iot-stack-k8s-0.9.10...tum-gis-iot-stack-k8s-0.10.0
 [tum-gis-iot-stack-k8s-0.9.10]: https://github.com/tum-gis/tum-gis-iot-stack-k8s/compare/tum-gis-iot-stack-k8s-0.9.9...tum-gis-iot-stack-k8s-0.9.10
 [tum-gis-iot-stack-k8s-0.9.9]: https://github.com/tum-gis/tum-gis-iot-stack-k8s/compare/tum-gis-iot-stack-k8s-0.9.8...tum-gis-iot-stack-k8s-0.9.9
 [tum-gis-iot-stack-k8s-0.9.8]: https://github.com/tum-gis/tum-gis-iot-stack-k8s/compare/tum-gis-iot-stack-k8s-0.9.7...tum-gis-iot-stack-k8s-0.9.8

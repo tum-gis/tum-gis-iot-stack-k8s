@@ -1,6 +1,6 @@
 # grafana
 
-![Version: 0.6.8](https://img.shields.io/badge/Version-0.6.8-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 9.5.1](https://img.shields.io/badge/AppVersion-9.5.1-informational?style=flat-square)
+![Version: 0.7.0](https://img.shields.io/badge/Version-0.7.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 10.0.2](https://img.shields.io/badge/AppVersion-10.0.2-informational?style=flat-square)
 
 Bash chart for Grafana.
 
@@ -42,6 +42,7 @@ Bash chart for Grafana.
 | dateFormats.interval.month | string | `"YYYY.MM"` |  |
 | enabled | bool | `true` |  |
 | extraEnv | object | `{}` | Extra environment variables |
+| featureToggles.enable | string | `"publicDashboards"` | Space separated list of [features](https://grafana.com/docs/grafana/latest/setup-grafana/configure-grafana/feature-toggles/) to enable. See [docs](https://grafana.com/docs/grafana/latest/setup-grafana/configure-grafana/#feature_toggles) for more. |
 | fullnameOverride | string | `"grafana"` | Override fullname |
 | http.enableGzip | bool | `true` | Enable/disable Grafana GZIP encoding |
 | image.pullPolicy | string | `"IfNotPresent"` |  |

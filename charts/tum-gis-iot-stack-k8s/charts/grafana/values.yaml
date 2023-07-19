@@ -107,6 +107,11 @@ security:
   # -- Allow/disallow embedding of Grafana panels
   allowEmbedding: false
 
+featureToggles:
+  # -- Space separated list of [features](https://grafana.com/docs/grafana/latest/setup-grafana/configure-grafana/feature-toggles/) to enable.
+  # See [docs](https://grafana.com/docs/grafana/latest/setup-grafana/configure-grafana/#feature_toggles) for more.
+  enable: "publicDashboards"
+
 dateFormats:
   fullDate: "dd, DD.MM.YYYY HH:mm:ss"
   interval:
