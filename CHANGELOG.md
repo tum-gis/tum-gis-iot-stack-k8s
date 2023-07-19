@@ -12,7 +12,7 @@ For releases `< 1.0.0` minor version step indicate breaking changes.
 
 ### Added
 
-- Added Grafana `featureToggles.enable` option. `PublicDashboards` feature is now enabled by default.
+- Added Grafana `featureToggles.enable` option. `publicDashboards` feature is now enabled by default.
 
 ### Changed
 
