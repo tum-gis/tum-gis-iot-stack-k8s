@@ -2,7 +2,7 @@
 
 <p align="center">
   <em>an application stack for managing, integrating, storing,
-  and visualizing sensor data with open standards and tools based on<a title="Open Geospatial Consortium Homepage" href="https://www.ogc.org/standards/sensorthings">OGC SensorThingsAPI</a>
+  and visualizing sensor data with open standards and tools based on <a title="Open Geospatial Consortium Homepage" href="https://www.ogc.org/standards/sensorthings">OGC SensorThingsAPI</a>
   </em>
   <br />
   <br />
