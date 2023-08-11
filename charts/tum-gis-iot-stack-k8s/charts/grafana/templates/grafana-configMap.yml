@@ -21,12 +21,12 @@ data:
   GF_DATE_FORMATS_INTERVAL_HOUR: {{ .Values.dateFormats.interval.hour | quote }}
   GF_DATE_FORMATS_INTERVAL_MINUTE: {{ .Values.dateFormats.interval.minute | quote }}
   GF_SECURITY_ALLOW_EMBEDDING: {{ .Values.security.allowEmbedding | quote }}
-  {{ if .Values.database.enabled -}}
+  {{- if .Values.database.enabled }}
   GF_DATABASE_TYPE: {{ .Values.database.type | quote }}
   GF_DATABASE_HOST: "{{ .Values.database.host }}:{{ .Values.database.port }}"
   GF_DATABASE_NAME: {{ .Values.database.dbname | quote }}
   GF_DATABASE_SSL_MODE: {{ .Values.database.sslmode | quote }}
-  {{- end -}}
+  {{ end -}}
   GF_FEATURE_TOGGLES_ENABLE: {{ .Values.featureToggles.enable | quote }}
   {{- with .Values.extraEnv }}
     {{- toYaml . | nindent 2 }}

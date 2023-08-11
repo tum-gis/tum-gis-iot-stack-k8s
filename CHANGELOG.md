@@ -22,6 +22,7 @@ For releases `< 1.0.0` minor version step indicate breaking changes.
 
 - Fixed SMTP settings change did not trigger pod recreation
 - Fixed SMTP settings secret
+- Fixed settings config map error when `grafana.featureToggles.enable` set
 
 ### Security
 
