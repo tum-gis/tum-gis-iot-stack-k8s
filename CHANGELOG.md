@@ -8,6 +8,26 @@ Versions are prefixed with `tum-gis-iot-stack-k8s-` due to usage of
 [chart-releaser-action](https://github.com/helm/chart-releaser-action).
 For releases `< 1.0.0` minor version step indicate breaking changes.
 
+## [Unreleased] - 2023-08-11
+
+### Breaking changes
+
+### Added
+
+### Changed
+
+### Removed
+
+### Fixed
+
+- Fixed SMTP settings change did not trigger pod recreation
+
+### Security
+
+### Deprecated
+
+### Known issues
+
 ## [tum-gis-iot-stack-k8s-0.10.1] - 2023-07-19
 
 ### Changed
