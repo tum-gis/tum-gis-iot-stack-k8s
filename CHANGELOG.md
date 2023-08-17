@@ -8,28 +8,21 @@ Versions are prefixed with `tum-gis-iot-stack-k8s-` due to usage of
 [chart-releaser-action](https://github.com/helm/chart-releaser-action).
 For releases `< 1.0.0` minor version step indicate breaking changes.
 
-## [Unreleased] - 2023-08-11
+## [tum-gis-iot-stack-k8s-0.10.2] - 2023-08-17
 
-### Breaking changes
+## Changed
 
-### Added
-
-### Changed
-
-### Removed
+- Bump Grafana `10.0.2` --> `10.0.3`
 
 ### Fixed
+
 
 - Fixed SMTP settings change did not trigger pod recreation
 - Fixed SMTP settings secret
 - Fixed settings config map error when `grafana.featureToggles.enable` set
 - Fixed wrong labels set on Grafana Ingress
-
-### Security
-
-### Deprecated
-
-### Known issues
+- Fixed Grafana >= v10 redirect loop when serving Grafana from subpath
+- Update Grafana plugins
 
 ## [tum-gis-iot-stack-k8s-0.10.1] - 2023-07-19
 
@@ -177,7 +170,8 @@ For releases `< 1.0.0` minor version step indicate breaking changes.
 
 ### Known issues
 
-[Unreleased]: https://github.com/tum-gis/tum-gis-iot-stack-k8s/compare/tum-gis-iot-stack-k8s-0.10.1...HEAD
+[Unreleased]: https://github.com/tum-gis/tum-gis-iot-stack-k8s/compare/tum-gis-iot-stack-k8s-0.10.2...HEAD
+[tum-gis-iot-stack-k8s-0.10.2]: https://github.com/tum-gis/tum-gis-iot-stack-k8s/compare/tum-gis-iot-stack-k8s-0.10.1...tum-gis-iot-stack-k8s-0.10.2
 [tum-gis-iot-stack-k8s-0.10.1]: https://github.com/tum-gis/tum-gis-iot-stack-k8s/compare/tum-gis-iot-stack-k8s-0.10.0...tum-gis-iot-stack-k8s-0.10.1
 [tum-gis-iot-stack-k8s-0.10.0]: https://github.com/tum-gis/tum-gis-iot-stack-k8s/compare/tum-gis-iot-stack-k8s-0.9.10...tum-gis-iot-stack-k8s-0.10.0
 [tum-gis-iot-stack-k8s-0.9.10]: https://github.com/tum-gis/tum-gis-iot-stack-k8s/compare/tum-gis-iot-stack-k8s-0.9.9...tum-gis-iot-stack-k8s-0.9.10
