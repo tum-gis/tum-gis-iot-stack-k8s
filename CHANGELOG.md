@@ -152,6 +152,24 @@ For releases `< 1.0.0` minor version step indicate breaking changes.
 
 - Versions before this release are development snapshots
 
+## [Unreleased] - YYYY-MM-DD
+
+### Breaking changes
+
+### Added
+
+### Changed
+
+### Removed
+
+### Fixed
+
+### Security
+
+### Deprecated
+
+### Known issues
+
 ## [template] - YYYY-MM-DD
 
 ### Breaking changes
