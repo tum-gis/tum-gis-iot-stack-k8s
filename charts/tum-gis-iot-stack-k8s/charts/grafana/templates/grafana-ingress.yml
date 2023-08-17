@@ -13,7 +13,7 @@ metadata:
   name: {{ include "grafana.fullname" . }}
   namespace: {{ .Release.Namespace | quote }}
   labels:
-    {{- include "frostweb.labels" . | nindent 4 }}
+    {{- include "grafana.labels" . | nindent 4 }}
     app.kubernetes.io/part-of: tum-gis-iot-stack-k8s
     app.kubernetes.io/component: {{ .Values.component }}
   annotations:
