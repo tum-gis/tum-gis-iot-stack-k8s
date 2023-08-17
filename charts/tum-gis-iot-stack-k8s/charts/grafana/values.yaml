@@ -70,7 +70,7 @@ ingress:
   # -- List of [FQDNs](https://de.wikipedia.org/wiki/Fully-Qualified_Host_Name) for this Ingress.
   # Note: All FQDNs will be used for Ingress hosts and TLS certificate.
   # The global setting overwrites this setting. Note: The first domain in the list will be used
-  # as FROST-Server serviceRootURL and MQTT host.
+  # as Grafana service root url.
   domains: []
   # -- Additional Ingress annotations
   annotations:
