@@ -89,10 +89,9 @@ ingress:
 install:
   # -- Grafana plugins to install
   plugins: "grafana-clock-panel,grafana-simple-json-datasource,
-      grafana-worldmap-panel,marcusolsson-json-datasource,
-      snuids-trafficlights-panel,citilogics-geoloop-panel,
-      iosb-sensorthings-datasource,yesoreyeram-boomtheme-panel,
-      snuids-svg-panel,
+      ,marcusolsson-json-datasource,snuids-svg-panel,
+      snuids-trafficlights-panel,citilogics-geoloop-panel,marcusolsson-hourly-heatmap-panel,
+      iosb-sensorthings-datasource,yesoreyeram-boomtheme-panel,fatcloud-windrose-panel,
       https://github.com/briangann/grafana-gauge-panel/releases/download/v0.0.9/briangann-gauge-panel-0.0.9.zip;briangann-gauge-panel"
 
 http:
