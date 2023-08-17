@@ -1,6 +1,6 @@
 # grafana
 
-![Version: 0.7.0](https://img.shields.io/badge/Version-0.7.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 10.0.2](https://img.shields.io/badge/AppVersion-10.0.2-informational?style=flat-square)
+![Version: 0.7.1](https://img.shields.io/badge/Version-0.7.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 10.0.3](https://img.shields.io/badge/AppVersion-10.0.3-informational?style=flat-square)
 
 Bash chart for Grafana.
 
@@ -54,10 +54,10 @@ Bash chart for Grafana.
 | ingress.certManager.issuerName | string | `"letsencrypt-staging"` | Name of the Issuer to use. For certManager.type = namespace `letsencrypt-staging`, `letsencrypt-prod` and `self-signed` are available. |
 | ingress.certManager.issuerType | string | `"namespace"` | Type of [cert-manager](https://cert-manager.io/docs/) Issuer: Use either "namespace" or "cluster". |
 | ingress.className | string | `"nginx"` | Name of the [IngressClass](https://kubernetes.io/docs/concepts/services-networking/ingress/#ingress-class) to use in Ingress routes. |
-| ingress.domains | list | `[]` | List of [FQDNs](https://de.wikipedia.org/wiki/Fully-Qualified_Host_Name) for this Ingress. Note: All FQDNs will be used for Ingress hosts and TLS certificate. The global setting overwrites this setting. Note: The first domain in the list will be used as FROST-Server serviceRootURL and MQTT host. |
+| ingress.domains | list | `[]` | List of [FQDNs](https://de.wikipedia.org/wiki/Fully-Qualified_Host_Name) for this Ingress. Note: All FQDNs will be used for Ingress hosts and TLS certificate. The global setting overwrites this setting. Note: The first domain in the list will be used as Grafana service root url. |
 | ingress.enabled | bool | `true` | Enable/disable ingress |
 | ingress.subpath | string | `"grafana"` | Make Grafana available at a subpath. By default Grafana will be available from [DOMAIN]/ Don't append or prepend :// or / |
-| install.plugins | string | `"grafana-clock-panel,grafana-simple-json-datasource, grafana-worldmap-panel,marcusolsson-json-datasource, snuids-trafficlights-panel,citilogics-geoloop-panel, iosb-sensorthings-datasource,yesoreyeram-boomtheme-panel, snuids-svg-panel, https://github.com/briangann/grafana-gauge-panel/releases/download/v0.0.9/briangann-gauge-panel-0.0.9.zip;briangann-gauge-panel"` | Grafana plugins to install |
+| install.plugins | string | `"grafana-clock-panel,grafana-simple-json-datasource, marcusolsson-json-datasource,snuids-svg-panel, snuids-trafficlights-panel,citilogics-geoloop-panel,marcusolsson-hourly-heatmap-panel, iosb-sensorthings-datasource,yesoreyeram-boomtheme-panel,fatcloud-windrose-panel, https://github.com/briangann/grafana-gauge-panel/releases/download/v0.0.9/briangann-gauge-panel-0.0.9.zip;briangann-gauge-panel"` | Grafana plugins to install |
 | livenessProbe.enabled | bool | `true` | Enable/disable liveness probe [Liveness probe](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes) See the [API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#Probe) for details. Use `livenessProbe.probe: {}` to configure [livenessProbe probe](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/) |
 | livenessProbe.failureThreshold | int | `5` |  |
 | livenessProbe.initialDelaySeconds | int | `10` |  |

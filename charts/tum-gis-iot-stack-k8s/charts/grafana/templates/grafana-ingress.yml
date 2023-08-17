@@ -13,7 +13,7 @@ metadata:
   name: {{ include "grafana.fullname" . }}
   namespace: {{ .Release.Namespace | quote }}
   labels:
-    {{- include "frostweb.labels" . | nindent 4 }}
+    {{- include "grafana.labels" . | nindent 4 }}
     app.kubernetes.io/part-of: tum-gis-iot-stack-k8s
     app.kubernetes.io/component: {{ .Values.component }}
   annotations:
@@ -24,11 +24,6 @@ metadata:
     {{- if (and (not (empty (coalesce .Values.global.ingress.certManager.issuerName .Values.ingress.certManager.issuerName )))
     (eq (coalesce .Values.global.ingress.certManager.issuerType .Values.ingress.certManager.issuerType) "namespace")) }}
     cert-manager.io/issuer: {{ .Values.global.ingress.certManager.issuerName | default .Values.ingress.certManager.issuerName | quote }}
-    {{- end }}
-    {{ if $subpath -}}
-    nginx.ingress.kubernetes.io/rewrite-target: "/$2"
-    {{- else -}}
-    nginx.ingress.kubernetes.io/rewrite-target: "/$1"
     {{- end }}
     {{- with .Values.ingress.annotations }}
     {{- toYaml . | nindent 4 }}

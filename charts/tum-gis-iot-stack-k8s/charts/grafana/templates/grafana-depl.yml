@@ -24,6 +24,7 @@ spec:
       {{- end }}
         checksum/configmap: {{ include (print $.Template.BasePath "/grafana-configMap.yml") . | sha256sum }}
         checksum/secret: {{ include (print $.Template.BasePath "/grafana-secret.yml") . | sha256sum }}
+        checksum/secret-smtp: {{ include (print $.Template.BasePath "/grafana-secret-smtp.yml") . | sha256sum }}
       labels:
         {{- include "grafana.selectorLabels" . | nindent 8 }}
         app.kubernetes.io/component: {{ .Values.component }}
