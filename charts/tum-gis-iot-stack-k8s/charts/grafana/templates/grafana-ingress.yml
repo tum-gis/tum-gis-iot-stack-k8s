@@ -50,7 +50,7 @@ spec:
       {{- if not $subpath }}
       - path: /(.*)
       {{- end }}
-        pathType: Prefix
+        pathType: ImplementationSpecific
         backend:
           service:
             name: {{ $fullName }}

@@ -27,8 +27,6 @@ metadata:
     {{- end }}
     {{ if $subpath -}}
     nginx.ingress.kubernetes.io/rewrite-target: "/FROST-Server/$2"
-    nginx.ingress.kubernetes.io/configuration-snippet: |
-      rewrite ^/{{ $subpath }}$ /{{ $subpath }}/ redirect;
     {{- else -}}
     nginx.ingress.kubernetes.io/rewrite-target: "/FROST-Server/$1"
     {{- end }}
@@ -57,7 +55,7 @@ spec:
       {{- if not $subpath }}
       - path: /(.*)
       {{- end }}
-        pathType: Prefix
+        pathType: ImplementationSpecific
         backend:
           service:
             name: {{ $fullName }}
