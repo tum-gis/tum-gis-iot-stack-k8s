@@ -8,8 +8,8 @@ sources:
   - https://github.com/tum-gis/tum-gis-iot-stack-k8s/tree/main/helm/charts/charts/grafana
   - https://github.com/grafana/grafana
 
-version: 0.7.1
-appVersion: "10.0.3"
+version: 0.8.0
+appVersion: "10.2.4"
 
 maintainers:
   - email: b.willenborg@tum.de
