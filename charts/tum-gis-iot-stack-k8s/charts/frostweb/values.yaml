@@ -1,4 +1,4 @@
-# -- Enable/disable FRSOT-Server
+# -- Enable/disable FROST-Server
 enabled: true
 component: http-mqtt
 
