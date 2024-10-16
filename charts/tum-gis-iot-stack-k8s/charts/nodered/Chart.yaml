@@ -8,8 +8,8 @@ sources:
   - https://github.com/tum-gis/tum-gis-iot-stack-k8s/tree/main/helm/charts/charts/nodered
   - https://github.com/node-red/node-red
 
-version: 0.5.0
-appVersion: "3.0.2"
+version: 0.6.0
+appVersion: "4.0.5"
 
 maintainers:
   - email: b.willenborg@tum.de
