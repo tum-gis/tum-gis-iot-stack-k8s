@@ -8,6 +8,32 @@ Versions are prefixed with `tum-gis-iot-stack-k8s-` due to usage of
 [chart-releaser-action](https://github.com/helm/chart-releaser-action).
 For releases `< 1.0.0` minor version step indicate breaking changes.
 
+## [Unreleased] - 2024-10-15
+
+### Breaking changes
+
+### Added
+
+### Changed
+
+- Bump Caddy `2.6.4-alpine` --> `2.8.4-alpine`
+- Bump FROST-Server `2.1.4` --> `2.4.2`
+- Bump Grafana `10.2.4` --> `11.2.2`
+- Bump Node-RED `3.0.2` --> `4.0.5`
+- PostgresSQL/PostGIS `14-3.3-alpine` --> `16-3.4-alpine`
+
+### Removed
+
+### Fixed
+
+- Use ``ImplementationSpecific`` instead of ``Prerfix`` for Ingress ``pathType``
+
+### Security
+
+### Deprecated
+
+### Known issues
+
 ## [tum-gis-iot-stack-k8s-0.10.2] - 2023-08-17
 
 ## Changed
@@ -15,7 +41,6 @@ For releases `< 1.0.0` minor version step indicate breaking changes.
 - Bump Grafana `10.0.2` --> `10.0.3`
 
 ### Fixed
-
 
 - Fixed SMTP settings change did not trigger pod recreation
 - Fixed SMTP settings secret
