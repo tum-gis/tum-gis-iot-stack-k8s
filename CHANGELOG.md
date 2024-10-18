@@ -8,6 +8,12 @@ Versions are prefixed with `tum-gis-iot-stack-k8s-` due to usage of
 [chart-releaser-action](https://github.com/helm/chart-releaser-action).
 For releases `< 1.0.0` minor version step indicate breaking changes.
 
+## [tum-gis-iot-stack-k8s-0.11.0-beta3] - 2024-10-18
+
+### Fixed
+
+- Fixed beta chart releaser workflow
+
 ## [tum-gis-iot-stack-k8s-0.11.0-beta2] - 2024-10-18
 
 ### Changed
@@ -224,6 +230,7 @@ For releases `< 1.0.0` minor version step indicate breaking changes.
 
 [Unreleased]: https://github.com/tum-gis/tum-gis-iot-stack-k8s/compare/tum-gis-iot-stack-k8s-0.10.2...HEAD
 
+[tum-gis-iot-stack-k8s-0.11.0-beta3]: https://github.com/tum-gis/tum-gis-iot-stack-k8s/compare/tum-gis-iot-stack-k8s-0.11.0-beta2...tum-gis-iot-stack-k8s-0.11.0-beta3
 [tum-gis-iot-stack-k8s-0.11.0-beta2]: https://github.com/tum-gis/tum-gis-iot-stack-k8s/compare/tum-gis-iot-stack-k8s-0.11.0-beta1...tum-gis-iot-stack-k8s-0.11.0-beta2
 [tum-gis-iot-stack-k8s-0.11.0-beta1]: https://github.com/tum-gis/tum-gis-iot-stack-k8s/compare/tum-gis-iot-stack-k8s-0.10.1...tum-gis-iot-stack-k8s-0.11.0-beta1
 [tum-gis-iot-stack-k8s-0.10.2]: https://github.com/tum-gis/tum-gis-iot-stack-k8s/compare/tum-gis-iot-stack-k8s-0.10.1...tum-gis-iot-stack-k8s-0.10.2
