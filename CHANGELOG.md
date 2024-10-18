@@ -8,7 +8,7 @@ Versions are prefixed with `tum-gis-iot-stack-k8s-` due to usage of
 [chart-releaser-action](https://github.com/helm/chart-releaser-action).
 For releases `< 1.0.0` minor version step indicate breaking changes.
 
-## [Unreleased] - 2024-10-15
+## [tum-gis-iot-stack-k8s-0.11.0-beta1] - 2024-10-18
 
 ### Breaking changes
 
@@ -26,7 +26,7 @@ For releases `< 1.0.0` minor version step indicate breaking changes.
 
 ### Fixed
 
-- Use ``ImplementationSpecific`` instead of ``Prerfix`` for Ingress ``pathType``
+- Use ``ImplementationSpecific`` instead of ``Prefix`` for Ingress ``pathType``
 
 ### Security
 
