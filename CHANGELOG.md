@@ -14,6 +14,9 @@ For releases `< 1.0.0` minor version step indicate breaking changes.
 
 ### Added
 
+- Separate release and beta release chart releaser workflows.
+- Update Helm docs version
+
 ### Changed
 
 - Bump Caddy `2.6.4-alpine` --> `2.8.4-alpine`
